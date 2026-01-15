@@ -4,7 +4,7 @@ A modern, elegant personal portfolio website showcasing my work as a radiologist
 
 ## 🌐 Live Site
 
-Coming soon at [mohamedhammad.com](https://mohamedhammad.com)
+[mohamedhammad.com](https://mohamedhammad.com)
 
 ## ✨ Features
 
