@@ -47,4 +47,4 @@ npm run build
 
 ## 📄 License
 
-© 2025 Mohamed Amin Hammad. All rights reserved.
+© 2026 Mohamed Amin Hammad. All rights reserved.
