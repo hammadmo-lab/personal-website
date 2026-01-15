@@ -1,20 +1,50 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Dr. Mohamed Amin Hammad - Personal Website
 
-# Run and deploy your AI Studio app
+A modern, elegant personal portfolio website showcasing my work as a radiologist, software creator, author, and world traveler.
 
-This contains everything you need to run your app locally.
+## 🌐 Live Site
 
-View your app in AI Studio: https://ai.studio/apps/drive/1zYsbRzPx6-xvUDeDowG_0R9pEBjScCa-
+Coming soon at [mohamedhammad.com](https://mohamedhammad.com)
 
-## Run Locally
+## ✨ Features
 
-**Prerequisites:**  Node.js
+- **Responsive Design** - Beautiful on all devices
+- **Modern Stack** - Built with React, TypeScript, Vite & Tailwind CSS v4
+- **Smooth Animations** - Subtle, professional micro-interactions
+- **Fast Performance** - Optimized for speed
 
+## 🚀 Sections
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- **Home** - Hero introduction
+- **About** - My story and background
+- **Radly App** - AI-powered radiology assistant (iOS app)
+- **Travel** - Passport Trails blog and countries explored
+- **Books** - Published works on psychology and personality
+- **Contact** - Email and social media links
+
+## 🛠️ Run Locally
+
+**Prerequisites:** Node.js 18+
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## 📦 Tech Stack
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS v4
+- Heroicons
+
+## 📄 License
+
+© 2025 Mohamed Amin Hammad. All rights reserved.
