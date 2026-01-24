@@ -4,61 +4,61 @@
 
   <!-- Main Website (Single Page Application) -->
   <url>
-    <loc>https://hammadmo.com/</loc>
+    <loc>https://mohamedhammad.com/</loc>
     <lastmod>2026-01-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
 
     <!-- Hero / Home Section Images -->
     <image:image>
-      <image:loc>https://hammadmo.com/assets/hero-portrait.jpg</image:loc>
+      <image:loc>https://mohamedhammad.com/assets/hero-portrait.jpg</image:loc>
       <image:title>Dr. Mohamed Amin Hammad</image:title>
       <image:caption>Dr. Mohamed Amin Hammad - Radiologist, Founder & Explorer</image:caption>
     </image:image>
 
     <!-- About Section Images -->
     <image:image>
-      <image:loc>https://hammadmo.com/assets/about-professional.jpg</image:loc>
+      <image:loc>https://mohamedhammad.com/assets/about-professional.jpg</image:loc>
       <image:title>Dr. Hammad at Radiology Desk</image:title>
       <image:caption>Consultant Radiologist at work</image:caption>
     </image:image>
 
     <!-- Logo -->
     <image:image>
-      <image:loc>https://hammadmo.com/logo.png</image:loc>
+      <image:loc>https://mohamedhammad.com/logo.png</image:loc>
       <image:title>Mohamed Hammad Logo</image:title>
     </image:image>
 
     <!-- Radly App Images -->
     <image:image>
-      <image:loc>https://hammadmo.com/radly-illustration.jpg</image:loc>
+      <image:loc>https://mohamedhammad.com/radly-illustration.jpg</image:loc>
       <image:title>Radly AI Platform</image:title>
       <image:caption>AI-powered radiology platform illustration</image:caption>
     </image:image>
 
     <!-- Travel Images -->
     <image:image>
-      <image:loc>https://hammadmo.com/travel-collage.jpg</image:loc>
+      <image:loc>https://mohamedhammad.com/travel-collage.jpg</image:loc>
       <image:title>Travel Moments</image:title>
       <image:caption>Travel photography from 100+ countries visited</image:caption>
     </image:image>
 
     <!-- Book Cover Images -->
     <image:image>
-      <image:loc>https://hammadmo.com/unraveling-infj-enigma.jpg</image:loc>
+      <image:loc>https://mohamedhammad.com/unraveling-infj-enigma.jpg</image:loc>
       <image:title>Unraveling the INFJ Enigma Book Cover</image:title>
       <image:caption>Book by Dr. Mohamed Amin Hammad</image:caption>
     </image:image>
 
     <image:image>
-      <image:loc>https://hammadmo.com/finding-your-soulmate.jpg</image:loc>
+      <image:loc>https://mohamedhammad.com/finding-your-soulmate.jpg</image:loc>
       <image:title>Finding Your Soulmate Book Cover</image:title>
       <image:caption>Book by Dr. Mohamed Amin Hammad</image:caption>
     </image:image>
 
     <!-- Gallery Images -->
     <image:image>
-      <image:loc>https://hammadmo.com/assets/gallery-columns.jpg</image:loc>
+      <image:loc>https://mohamedhammad.com/assets/gallery-columns.jpg</image:loc>
       <image:title>Architectural Photography</image:title>
       <image:caption>Photography from Dr. Hammad's gallery collection</image:caption>
     </image:image>

@@ -1,11 +1,11 @@
-# Robots.txt for hammadmo.com
+# Robots.txt for mohamedhammad.com
 # Allow all search engines to crawl the site
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://hammadmo.com/sitemap.xml
+Sitemap: https://mohamedhammad.com/sitemap.xml
 
 # Crawl-delay (optional, helps manage server load)
 Crawl-delay: 1
