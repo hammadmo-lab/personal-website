@@ -13,7 +13,7 @@
     <image:image>
       <image:loc>https://mohamedhammad.com/assets/hero-portrait.jpg</image:loc>
       <image:title>Dr. Mohamed Amin Hammad</image:title>
-      <image:caption>Dr. Mohamed Amin Hammad - Radiologist, Founder & Explorer</image:caption>
+      <image:caption>Dr. Mohamed Amin Hammad - Radiologist, Founder &amp; Explorer</image:caption>
     </image:image>
 
     <!-- About Section Images -->
