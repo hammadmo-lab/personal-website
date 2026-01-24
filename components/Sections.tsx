@@ -16,13 +16,28 @@ const ASSETS = {
   // Radly app screenshot
   radlyApp: "/radly-illustration.jpg",
 
-  // Gallery images
+  // Gallery images with descriptive alt text
   gallery: [
-    new URL('../assets/gallery-columns.jpg', import.meta.url).href,
-    "https://placehold.co/800x800/e7e5e4/44403c?text=Gallery+2",
-    "https://placehold.co/600x400/e7e5e4/44403c?text=Gallery+3",
-    "https://placehold.co/600x800/e7e5e4/44403c?text=Gallery+4",
-    "https://placehold.co/600x600/e7e5e4/44403c?text=Gallery+5"
+    {
+      src: new URL('../assets/gallery-columns.jpg', import.meta.url).href,
+      alt: "Architectural columns - Dr. Hammad's photography collection"
+    },
+    {
+      src: "https://placehold.co/800x800/e7e5e4/44403c?text=Gallery+2",
+      alt: "Travel photography from Dr. Hammad's world adventures"
+    },
+    {
+      src: "https://placehold.co/600x400/e7e5e4/44403c?text=Gallery+3",
+      alt: "Cultural exploration moments captured during international travels"
+    },
+    {
+      src: "https://placehold.co/600x800/e7e5e4/44403c?text=Gallery+4",
+      alt: "Scenic landscapes from 100+ countries visited"
+    },
+    {
+      src: "https://placehold.co/600x600/e7e5e4/44403c?text=Gallery+5",
+      alt: "Personal photography collection by Dr. Mohamed Amin Hammad"
+    }
   ]
 };
 
@@ -524,15 +539,15 @@ export const Gallery = () => (
 
         {/* Masonry Grid for Mixed Aspect Ratios */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-          {ASSETS.gallery.map((src, idx) => (
+          {ASSETS.gallery.map((image, idx) => (
             <div
               key={idx}
               className="break-inside-avoid relative group overflow-hidden rounded-sm cursor-zoom-in animate-fade-in-up"
               style={{ animationDelay: `${idx * 150}ms` }}
             >
               <img
-                src={src}
-                alt={`Gallery image ${idx + 1}`}
+                src={image.src}
+                alt={image.alt}
                 className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500"></div>
