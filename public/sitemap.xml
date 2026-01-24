@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://hammadmo.com/</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://hammadmo.com/assets/hero-portrait.jpg</image:loc>
+      <image:title>Dr. Mohamed Amin Hammad</image:title>
+      <image:caption>Dr. Mohamed Amin Hammad - Explorer</image:caption>
+    </image:image>
+  </url>
+
+  <!-- About Section -->
+  <url>
+    <loc>https://hammadmo.com/#about</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://hammadmo.com/assets/about-professional.jpg</image:loc>
+      <image:title>Dr. Hammad at Radiology Desk</image:title>
+    </image:image>
+  </url>
+
+  <!-- Radly App Section -->
+  <url>
+    <loc>https://hammadmo.com/#radly</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://hammadmo.com/radly-illustration.jpg</image:loc>
+      <image:title>Radly AI Platform</image:title>
+    </image:image>
+  </url>
+
+  <!-- Travel/Passport Trails Section -->
+  <url>
+    <loc>https://hammadmo.com/#travel</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://hammadmo.com/travel-collage.jpg</image:loc>
+      <image:title>Travel Moments</image:title>
+    </image:image>
+  </url>
+
+  <!-- Books Section -->
+  <url>
+    <loc>https://hammadmo.com/#books</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://hammadmo.com/unraveling-infj-enigma.jpg</image:loc>
+      <image:title>Unraveling the INFJ Enigma</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://hammadmo.com/finding-your-soulmate.jpg</image:loc>
+      <image:title>Finding Your Soulmate</image:title>
+    </image:image>
+  </url>
+
+  <!-- Gallery Section -->
+  <url>
+    <loc>https://hammadmo.com/#gallery</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contact Section -->
+  <url>
+    <loc>https://hammadmo.com/#contact</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- External Properties -->
+  <url>
+    <loc>https://radly.app</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
