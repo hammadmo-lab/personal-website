@@ -1,4 +1,0 @@
-# Cloudflare Pages SPA fallback
-# Only redirect if file doesn't exist
-/*    /index.html   404
-
