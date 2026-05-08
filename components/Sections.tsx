@@ -234,15 +234,20 @@ export const Radly = () => (
                   className="h-12"
                 />
               </a>
-              <div className="flex items-center gap-3 h-12 px-5 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/30 rounded-xl backdrop-blur-sm">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.radly.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 h-12 px-5 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/30 rounded-xl backdrop-blur-sm transition-transform hover:scale-105 hover:-translate-y-1 duration-300"
+              >
                 <svg className="w-7 h-7 text-emerald-400" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.523 2c.316 0 .573.256.573.573v18.854a.573.573 0 01-.573.573H6.477a.573.573 0 01-.573-.573V2.573c0-.317.256-.573.573-.573h11.046zM12 18.5a1 1 0 100 2 1 1 0 000-2zm4-14H8v12h8v-12z" />
                 </svg>
                 <div>
                   <p className="text-xs text-emerald-400 uppercase tracking-wider font-semibold">Android</p>
-                  <p className="text-sm text-white font-medium">Coming Soon</p>
+                  <p className="text-sm text-white font-medium">Get it on Google Play</p>
                 </div>
-              </div>
+              </a>
             </div>
             <a
               href="https://radly.app"
@@ -312,7 +317,40 @@ export const Travel = () => (
               From the frozen landscapes of Iceland to the ancient souks of the Middle East, I've spent years
               exploring the intersection of culture, history, and human connection.
             </p>
-            <ButtonPrimary href="https://passporttrails.com">Read the Travel Blog</ButtonPrimary>
+            <div className="space-y-5">
+              <ButtonPrimary href="https://passporttrails.com">Read the Travel Blog</ButtonPrimary>
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-stone-500 mb-3">Get the Passport Trails app</p>
+                <div className="flex flex-wrap gap-3 items-center">
+                  <a
+                    href="https://apps.apple.com/us/app/passport-trails/id6761397513"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block transition-transform hover:scale-105 hover:-translate-y-1 duration-300"
+                  >
+                    <img
+                      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                      alt="Download Passport Trails on the App Store"
+                      className="h-11"
+                    />
+                  </a>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.passporttrails.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 h-11 px-4 bg-white border border-stone-200 rounded-lg shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-stone-300 duration-300"
+                  >
+                    <svg className="w-6 h-6 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17.523 2c.316 0 .573.256.573.573v18.854a.573.573 0 01-.573.573H6.477a.573.573 0 01-.573-.573V2.573c0-.317.256-.573.573-.573h11.046zM12 18.5a1 1 0 100 2 1 1 0 000-2zm4-14H8v12h8v-12z" />
+                    </svg>
+                    <div>
+                      <p className="text-[10px] text-stone-500 uppercase tracking-wider font-semibold">Android</p>
+                      <p className="text-sm text-stone-900 font-medium">Get it on Google Play</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Right Image - Small Polaroid Style */}
