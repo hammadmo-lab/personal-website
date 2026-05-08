@@ -317,6 +317,28 @@ export const Travel = () => (
               From the frozen landscapes of Iceland to the ancient souks of the Middle East, I've spent years
               exploring the intersection of culture, history, and human connection.
             </p>
+            <div className="mb-8 space-y-5">
+              <p className="text-stone-600 leading-relaxed text-lg">
+                I built the Passport Trails app because Arabic travelers often have to search through scattered websites,
+                conflicting visa information, and travel content that was never written for their real needs. The app brings
+                the essentials into one focused place, so planning a trip feels clearer from the first step.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  'Visa requirements by nationality and destination',
+                  'Visa type, allowed stay, documents, and key notes',
+                  'Destination discovery with real photos',
+                  'Best time to visit each destination',
+                  'Arabic travel guides and weekly tips',
+                  'Money-saving advice and real travel experiences'
+                ].map((feature) => (
+                  <div key={feature} className="flex items-start gap-3 text-sm text-stone-600">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-amber-500 shrink-0"></span>
+                    <span>{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
             <div className="space-y-5">
               <ButtonPrimary href="https://passporttrails.com">Read the Travel Blog</ButtonPrimary>
               <div>
