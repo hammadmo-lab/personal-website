@@ -48,15 +48,15 @@ export const Layout: React.FC<LayoutProps> = ({
   const isTransparentHeader = !isScrolled && isDarkPage;
 
   const navColor = (isActive: boolean) => {
-    if (isActive) return isTransparentHeader ? 'text-white font-bold' : 'text-stone-900 font-bold';
-    return isTransparentHeader ? 'text-white/70 hover:text-white' : 'text-stone-500 hover:text-stone-900';
+    if (isActive) return isTransparentHeader ? 'text-white font-bold' : 'text-brand-ink font-bold';
+    return isTransparentHeader ? 'text-white/70 hover:text-white' : 'text-brand-taupe hover:text-brand-ink';
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-stone-50" dir={localeConfig[locale].dir}>
+    <div className="min-h-screen flex flex-col bg-brand-ivory" dir={localeConfig[locale].dir}>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-sm py-4'
+          ? 'bg-brand-porcelain/92 backdrop-blur-md shadow-sm py-4'
           : 'bg-transparent py-6'
           }`}
       >
@@ -82,19 +82,19 @@ export const Layout: React.FC<LayoutProps> = ({
                 className={`text-sm uppercase tracking-widest transition-colors relative group ${navColor(activePage === item.id)}`}
               >
                 {copy.nav[item.labelKey]}
-                <span className={`absolute -bottom-2 left-0 h-px transition-all duration-300 ${isTransparentHeader ? 'bg-white' : 'bg-stone-900'
+                <span className={`absolute -bottom-2 left-0 h-px transition-all duration-300 ${isTransparentHeader ? 'bg-white' : 'bg-brand-gold'
                   } ${activePage === item.id ? 'w-full' : 'w-0 group-hover:w-full'
                   }`} />
               </button>
             ))}
-            <div className={`flex items-center gap-1 border px-2 py-1 ${isTransparentHeader ? 'border-white/30 bg-white/10' : 'border-stone-200 bg-white/70'}`}>
+            <div className={`flex items-center gap-1 border px-2 py-1 ${isTransparentHeader ? 'border-white/30 bg-white/10' : 'border-brand-border bg-brand-porcelain/75'}`}>
               {LOCALES.map((item) => (
                 <button
                   key={item}
                   onClick={() => onLocaleChange(item)}
                   className={`px-2 py-1 text-xs uppercase tracking-wider transition-colors ${locale === item
-                    ? (isTransparentHeader ? 'text-white font-bold' : 'text-stone-900 font-bold')
-                    : (isTransparentHeader ? 'text-white/60 hover:text-white' : 'text-stone-500 hover:text-stone-900')
+                    ? (isTransparentHeader ? 'text-white font-bold' : 'text-brand-ink font-bold')
+                    : (isTransparentHeader ? 'text-white/60 hover:text-white' : 'text-brand-taupe hover:text-brand-ink')
                     }`}
                   aria-label={`Switch language to ${localeConfig[item].label}`}
                 >
@@ -105,7 +105,7 @@ export const Layout: React.FC<LayoutProps> = ({
           </nav>
 
           <button
-            className={`lg:hidden z-50 transition-colors ${isTransparentHeader ? 'text-white' : 'text-stone-900'}`}
+            className={`lg:hidden z-50 transition-colors ${isTransparentHeader ? 'text-white' : 'text-brand-ink'}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
           >
@@ -113,13 +113,13 @@ export const Layout: React.FC<LayoutProps> = ({
           </button>
         </div>
 
-        <div className={`fixed inset-0 bg-stone-100 z-40 flex flex-col items-center justify-center space-y-8 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        <div className={`fixed inset-0 bg-brand-ivory z-40 flex flex-col items-center justify-center space-y-8 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}>
           {NAV_ITEMS.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
-              className="text-2xl font-serif text-stone-800 hover:text-stone-500 transition-colors"
+              className="text-2xl font-serif text-brand-ink hover:text-brand-gold transition-colors"
             >
               {copy.nav[item.labelKey]}
             </button>
@@ -133,8 +133,8 @@ export const Layout: React.FC<LayoutProps> = ({
                   setIsMobileMenuOpen(false);
                 }}
                 className={`px-3 py-2 text-sm uppercase tracking-wider border transition-colors ${locale === item
-                  ? 'border-stone-900 text-stone-900'
-                  : 'border-stone-300 text-stone-500'
+                  ? 'border-brand-gold text-brand-ink'
+                  : 'border-brand-border text-brand-taupe'
                   }`}
               >
                 {localeConfig[item].label}
@@ -149,8 +149,8 @@ export const Layout: React.FC<LayoutProps> = ({
       </main>
 
       <footer className={`py-16 transition-colors duration-500 ${activePage === 'radly'
-        ? 'bg-slate-950 text-slate-400 border-t border-slate-800'
-        : 'bg-stone-900 text-stone-400'
+        ? 'bg-radly-ink text-slate-400 border-t border-radly-deep'
+        : 'bg-brand-ink text-brand-border'
         }`}>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="space-y-4">
@@ -160,17 +160,17 @@ export const Layout: React.FC<LayoutProps> = ({
           <div className="space-y-4">
             <h4 className="font-serif text-lg text-white">{copy.footer.quickLinks}</h4>
             <div className="flex flex-col space-y-2 text-sm">
-              <button onClick={() => handleNavClick('radly')} className={`${isRtl ? 'text-right' : 'text-left'} transition-colors ${activePage === 'radly' ? 'hover:text-cyan-400' : 'hover:text-white'}`}>{copy.nav.radly}</button>
-              <button onClick={() => handleNavClick('travel')} className={`${isRtl ? 'text-right' : 'text-left'} transition-colors ${activePage === 'radly' ? 'hover:text-cyan-400' : 'hover:text-white'}`}>Passport Trails</button>
-              <button onClick={() => handleNavClick('books')} className={`${isRtl ? 'text-right' : 'text-left'} transition-colors ${activePage === 'radly' ? 'hover:text-cyan-400' : 'hover:text-white'}`}>{copy.nav.books}</button>
+              <button onClick={() => handleNavClick('radly')} className={`${isRtl ? 'text-right' : 'text-left'} transition-colors ${activePage === 'radly' ? 'hover:text-radly-soft' : 'hover:text-brand-gold'}`}>{copy.nav.radly}</button>
+              <button onClick={() => handleNavClick('travel')} className={`${isRtl ? 'text-right' : 'text-left'} transition-colors ${activePage === 'radly' ? 'hover:text-radly-soft' : 'hover:text-brand-gold'}`}>Passport Trails</button>
+              <button onClick={() => handleNavClick('books')} className={`${isRtl ? 'text-right' : 'text-left'} transition-colors ${activePage === 'radly' ? 'hover:text-radly-soft' : 'hover:text-brand-gold'}`}>{copy.nav.books}</button>
             </div>
           </div>
           <div className="space-y-4">
             <h4 className="font-serif text-lg text-white">{copy.footer.connect}</h4>
             <div className="flex gap-4">
-              <a href="https://radly.app" target="_blank" rel="noopener noreferrer" className={`transition-colors ${activePage === 'radly' ? 'hover:text-cyan-400' : 'hover:text-white'}`}>Radly</a>
-              <a href="https://passporttrails.com" target="_blank" rel="noopener noreferrer" className={`transition-colors ${activePage === 'radly' ? 'hover:text-cyan-400' : 'hover:text-white'}`}>Blog</a>
-              <a href="https://www.amazon.com/Unraveling-INFJ-Enigma-Understanding-Compassionate/dp/B0BS1FNS7F" target="_blank" rel="noopener noreferrer" className={`transition-colors ${activePage === 'radly' ? 'hover:text-cyan-400' : 'hover:text-white'}`}>Amazon</a>
+              <a href="https://radly.app" target="_blank" rel="noopener noreferrer" className={`transition-colors ${activePage === 'radly' ? 'hover:text-radly-soft' : 'hover:text-brand-gold'}`}>Radly</a>
+              <a href="https://passporttrails.com" target="_blank" rel="noopener noreferrer" className={`transition-colors ${activePage === 'radly' ? 'hover:text-radly-soft' : 'hover:text-brand-gold'}`}>Blog</a>
+              <a href="https://www.amazon.com/Unraveling-INFJ-Enigma-Understanding-Compassionate/dp/B0BS1FNS7F" target="_blank" rel="noopener noreferrer" className={`transition-colors ${activePage === 'radly' ? 'hover:text-radly-soft' : 'hover:text-brand-gold'}`}>Amazon</a>
             </div>
             <p className="text-xs pt-4 opacity-50">
               © {new Date().getFullYear()} Mohamed Amin Hammad. {copy.footer.copyright}
