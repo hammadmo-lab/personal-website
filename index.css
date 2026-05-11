@@ -6,6 +6,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Outfit', sans-serif;
 }
 
 /* Custom Font Assignments */
@@ -15,6 +16,19 @@ body {
 
 .font-sans {
   font-family: 'Outfit', sans-serif;
+}
+
+[dir="rtl"] body,
+[dir="rtl"] .font-sans {
+  font-family: 'Cairo', sans-serif;
+}
+
+[dir="rtl"] .font-serif {
+  font-family: 'Cairo', sans-serif;
+}
+
+[dir="rtl"] {
+  text-align: right;
 }
 
 /* Smooth Scrolling */

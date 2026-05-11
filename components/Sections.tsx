@@ -1,47 +1,33 @@
-
 import React from 'react';
-import { ArrowRightIcon, MapPinIcon, GlobeAmericasIcon, BookOpenIcon, HeartIcon, SparklesIcon, CubeIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, MapPinIcon, GlobeAmericasIcon, BookOpenIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import { Locale, Translation } from '../i18n';
 
-// Assets are now referenced directly as URLs in the ASSETS object below
-
-// --- CONFIGURATION ---
-// IMPORTANT: Replace these URLs with the actual links to your uploaded photos.
 const ASSETS = {
-  // Hero portrait for Home section
   heroPortrait: new URL('../assets/hero-portrait.jpg', import.meta.url).href,
-
-  // Professional photo for About section
   aboutProfessional: new URL('../assets/about-professional.jpg', import.meta.url).href,
-
-  // Radly app screenshot
-  radlyApp: "/radly-illustration.jpg",
-
-  // Gallery images with descriptive alt text
+  travelHero: new URL('../assets/travel-hero.jpg', import.meta.url).href,
+  radlyApp: '/radly-illustration.jpg',
   gallery: [
-    {
-      src: new URL('../assets/gallery-columns.jpg', import.meta.url).href,
-      alt: "Architectural columns - Dr. Hammad's photography collection"
-    },
-    {
-      src: "https://placehold.co/800x800/e7e5e4/44403c?text=Gallery+2",
-      alt: "Travel photography from Dr. Hammad's world adventures"
-    },
-    {
-      src: "https://placehold.co/600x400/e7e5e4/44403c?text=Gallery+3",
-      alt: "Cultural exploration moments captured during international travels"
-    },
-    {
-      src: "https://placehold.co/600x800/e7e5e4/44403c?text=Gallery+4",
-      alt: "Scenic landscapes from 100+ countries visited"
-    },
-    {
-      src: "https://placehold.co/600x600/e7e5e4/44403c?text=Gallery+5",
-      alt: "Personal photography collection by Dr. Mohamed Amin Hammad"
-    }
-  ]
+    new URL('../assets/gallery-columns.jpg', import.meta.url).href,
+    'https://placehold.co/800x800/e7e5e4/44403c?text=Gallery+2',
+    'https://placehold.co/600x400/e7e5e4/44403c?text=Gallery+3',
+    'https://placehold.co/600x800/e7e5e4/44403c?text=Gallery+4',
+    'https://placehold.co/600x600/e7e5e4/44403c?text=Gallery+5',
+  ],
 };
 
-// --- SHARED COMPONENTS ---
+type SectionProps = {
+  locale: Locale;
+  copy: Translation;
+  isRtl: boolean;
+};
+
+type HomeProps = SectionProps & {
+  onNavigate: (page: string) => void;
+};
+
+const arrowClass = (isRtl: boolean, className = 'w-4 h-4') =>
+  `${className} ${isRtl ? 'rotate-180' : ''}`;
 
 const SectionTitle = ({ title, subtitle }: { title: string, subtitle?: string }) => (
   <div className="mb-12 md:mb-16 text-center">
@@ -52,144 +38,113 @@ const SectionTitle = ({ title, subtitle }: { title: string, subtitle?: string })
 );
 
 const ButtonPrimary = ({ children, onClick, href }: { children: React.ReactNode, onClick?: () => void, href?: string }) => {
-  const className = "inline-flex items-center px-8 py-3 bg-stone-900 text-white text-sm tracking-widest uppercase hover:bg-stone-800 transition-colors duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-transform";
+  const className = 'inline-flex items-center justify-center px-8 py-3 bg-stone-900 text-white text-sm tracking-widest uppercase hover:bg-stone-800 transition-colors duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-transform';
   if (href) return <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>;
   return <button onClick={onClick} className={className}>{children}</button>;
 };
 
-// --- HOME SECTION ---
-
-export const Home = ({ onNavigate }: { onNavigate: (p: string) => void }) => (
+export const Home = ({ onNavigate, copy, isRtl }: HomeProps) => (
   <>
-    {/* Hero */}
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#fdfbf7]">
-      {/* Organic Background Blobs */}
       <div className="absolute top-0 -left-4 w-72 h-72 bg-stone-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
       <div className="absolute top-0 -right-4 w-72 h-72 bg-amber-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
       <div className="absolute -bottom-8 left-20 w-72 h-72 bg-stone-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
 
       <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-20 lg:pt-0 relative z-10">
-
-        {/* Text Content */}
-        <div className="lg:col-span-7 z-10 text-center lg:text-left order-2 lg:order-1">
+        <div className={`lg:col-span-7 z-10 text-center ${isRtl ? 'lg:text-right' : 'lg:text-left'} order-2 lg:order-1`}>
           <span className="inline-block mb-6 text-sm md:text-base tracking-[0.3em] text-stone-500 uppercase animate-fade-in-up font-medium">
-            Dr. Mohamed Amin Hammad
+            {copy.home.eyebrow}
           </span>
-          <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-stone-900 leading-[0.9] tracking-tighter mb-8 animate-fade-in-up delay-100">
-            Medicine <br />
-            <span className="italic text-stone-600 font-light ml-4">meets</span> <br />
-            Exploration
+          <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-stone-900 leading-[0.9] tracking-normal mb-8 animate-fade-in-up delay-100">
+            {copy.home.titleLine1} <br />
+            <span className={`italic text-stone-600 font-light ${isRtl ? 'mr-4' : 'ml-4'}`}>{copy.home.titleAccent}</span> <br />
+            {copy.home.titleLine2}
           </h1>
           <p className="max-w-2xl lg:mx-0 mx-auto text-lg md:text-xl text-stone-600 font-light leading-relaxed mb-12 animate-fade-in-up delay-200">
-            I'm a radiologist who codes, travels, and writes. Sometimes all three make sense together.
-            Other times, I'm just trying to figure it out like everyone else.
+            {copy.home.intro}
           </p>
-          <div className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4 animate-fade-in-up delay-300">
-            <ButtonPrimary onClick={() => onNavigate('radly')}>Explore Innovation</ButtonPrimary>
+          <div className={`flex flex-col sm:flex-row items-center ${isRtl ? 'lg:justify-end' : 'lg:justify-start'} justify-center gap-4 animate-fade-in-up delay-300`}>
+            <ButtonPrimary onClick={() => onNavigate('radly')}>{copy.home.primaryCta}</ButtonPrimary>
             <button onClick={() => onNavigate('about')} className="px-8 py-3 border border-stone-300 text-stone-600 hover:border-stone-900 hover:text-stone-900 transition-all uppercase text-sm tracking-widest hover:-translate-y-0.5">
-              My Story
+              {copy.home.secondaryCta}
             </button>
           </div>
         </div>
 
-        {/* Hero Image Slot - Mapped to "Sunglasses Selfie" */}
         <div className="lg:col-span-5 relative h-[50vh] lg:h-[80vh] w-full order-1 lg:order-2 animate-fade-in-up delay-200 flex items-center justify-center">
           <div className="relative w-full h-full max-w-md mx-auto">
-            {/* Abstract background shape - Morphing Blob */}
             <div className="absolute inset-0 bg-stone-200 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] animate-blob opacity-50 shadow-inner"></div>
-
-            {/* Image Container */}
             <div className="absolute inset-4 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] overflow-hidden shadow-2xl border-4 border-white bg-stone-100 group transition-all duration-700 hover:rounded-[50%]">
               <img
                 src={ASSETS.heroPortrait}
-                alt="Dr. Mohamed Amin Hammad - Explorer"
+                alt={copy.home.heroAlt}
                 className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
               />
-              {/* Gradient overlay for text readability if needed, slightly warm */}
               <div className="absolute inset-0 bg-gradient-to-t from-stone-900/20 to-transparent pointer-events-none"></div>
             </div>
-
-            {/* Floating Badge */}
-            <div className="absolute bottom-12 -left-8 bg-white/90 backdrop-blur p-6 shadow-xl rounded-lg border-l-4 border-stone-900 animate-bounce-slow hidden md:block transform -rotate-2 hover:rotate-0 transition-transform">
-              <p className="font-serif text-stone-900 text-xl">Global Citizen</p>
-              <p className="text-xs text-stone-500 uppercase tracking-wider mt-1">10+ Countries Visited</p>
+            <div className={`absolute bottom-12 ${isRtl ? '-right-8 border-r-4' : '-left-8 border-l-4'} bg-white/90 backdrop-blur p-6 shadow-xl rounded-lg border-stone-900 animate-bounce-slow hidden md:block transform -rotate-2 hover:rotate-0 transition-transform`}>
+              <p className="font-serif text-stone-900 text-xl">{copy.home.badgeTitle}</p>
+              <p className="text-xs text-stone-500 uppercase tracking-wider mt-1">{copy.home.badgeSubtitle}</p>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    {/* Quick Links Grid */}
     <section className="py-24 bg-white relative z-20 -mt-12">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-        {[
-          { title: 'Radly App', desc: 'AI-Powered Radiology Reporting', icon: SparklesIcon, action: () => onNavigate('radly') },
-          { title: 'Passport Trails', desc: 'Travel Blog & Photography', icon: GlobeAmericasIcon, action: () => onNavigate('travel') },
-          { title: 'Books', desc: 'Psychology & Personality', icon: BookOpenIcon, action: () => onNavigate('books') },
-        ].map((item, idx) => (
-          <div key={idx} onClick={item.action} className="group relative p-10 border border-stone-200 bg-stone-50/30 hover:bg-white hover:border-stone-400 transition-all duration-500 cursor-pointer hover:-translate-y-2 hover:shadow-2xl overflow-hidden rounded-sm">
-            <div className="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-x-4 group-hover:translate-x-0">
-              <ArrowRightIcon className="w-6 h-6 text-stone-300" />
+        {copy.home.quickLinks.map((item, idx) => {
+          const Icon = [SparklesIcon, GlobeAmericasIcon, BookOpenIcon][idx];
+          const page = ['radly', 'travel', 'books'][idx];
+
+          return (
+            <div key={item.title} onClick={() => onNavigate(page)} className="group relative p-10 border border-stone-200 bg-stone-50/30 hover:bg-white hover:border-stone-400 transition-all duration-500 cursor-pointer hover:-translate-y-2 hover:shadow-2xl overflow-hidden rounded-sm">
+              <div className={`absolute top-0 ${isRtl ? 'left-0 -translate-x-4 group-hover:translate-x-0' : 'right-0 translate-x-4 group-hover:translate-x-0'} p-6 opacity-0 group-hover:opacity-100 transition-all duration-500`}>
+                <ArrowRightIcon className={arrowClass(isRtl, 'w-6 h-6 text-stone-300')} />
+              </div>
+              <div className="w-14 h-14 bg-white border border-stone-100 rounded-full flex items-center justify-center mb-8 group-hover:bg-stone-900 group-hover:border-stone-900 transition-colors duration-500 shadow-sm">
+                <Icon className="w-7 h-7 text-stone-400 group-hover:text-white transition-colors duration-500" />
+              </div>
+              <h3 className="font-serif text-2xl text-stone-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">{item.title}</h3>
+              <p className="text-stone-500 leading-relaxed mb-8 group-hover:text-stone-600 transition-colors">{item.desc}</p>
+              <div className="w-12 h-px bg-stone-300 group-hover:w-full group-hover:bg-stone-900 transition-all duration-700"></div>
             </div>
-
-            <div className="w-14 h-14 bg-white border border-stone-100 rounded-full flex items-center justify-center mb-8 group-hover:bg-stone-900 group-hover:border-stone-900 transition-colors duration-500 shadow-sm">
-              <item.icon className="w-7 h-7 text-stone-400 group-hover:text-white transition-colors duration-500" />
-            </div>
-
-            <h3 className="font-serif text-2xl text-stone-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">{item.title}</h3>
-            <p className="text-stone-500 leading-relaxed mb-8 group-hover:text-stone-600 transition-colors">{item.desc}</p>
-
-            <div className="w-12 h-px bg-stone-300 group-hover:w-full group-hover:bg-stone-900 transition-all duration-700"></div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   </>
 );
 
-// --- ABOUT SECTION ---
-
-export const About = () => (
+export const About = ({ copy, isRtl }: SectionProps) => (
   <div className="animate-fade-in-up">
     <section className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6">
-        <SectionTitle title="My Story" subtitle="About Me" />
+        <SectionTitle title={copy.about.title} subtitle={copy.about.subtitle} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Biography Text - Sticky Sidebar Effect */}
-          <div className="prose prose-stone prose-lg text-stone-600 font-light leading-loose lg:sticky lg:top-32">
-            <p className="first-letter:text-5xl first-letter:font-serif first-letter:mr-3 first-letter:float-left first-letter:text-stone-900">
-              <strong>I'm</strong> Dr. Mohamed Amin Hammad, an Egyptian radiologist who ended up creating software and traveling the world when I wasn't planning to do either.
-              Life has a way of revealing paths you didn't know you were looking for. As Head of Radiology at a private hospital, I spend my days helping people find answers through imaging,
-              but I've learned that the real answers often come from asking better questions.
-            </p>
-            <p>
-              Radiology reporting can be painfully repetitive. After writing the same patterns hundreds of times, I couldn't ignore the inefficiency anymore.
-              So I built <strong>Radly</strong>, an AI assistant that handles the repetitive parts so radiologists can focus on the diagnostic thinking that actually matters.
-              It's not about replacing doctors. It's about giving them their time back to do what only humans can do: connect the dots that machines miss.
-            </p>
-            <p>
-              When I'm not at the hospital or coding, I travel. Not the Instagram kind of travel, but the kind where you sit in a café in Dubrovnik or walk through Reykjavik at midnight
-              and realize how much you don't know. Through <strong>Passport Trails</strong>, I share what I've learned across 12 countries with Arabic speakers who want practical guidance, not just pretty pictures.
-              Travel taught me that understanding different perspectives isn't optional if you want to build things that actually help people.
-            </p>
-
-
+          <div className="prose prose-stone prose-lg text-stone-600 font-light leading-loose lg:sticky lg:top-32 max-w-none">
+            {copy.about.paragraphs.map((paragraph, idx) => (
+              <p
+                key={paragraph}
+                className={idx === 0 && !isRtl ? 'first-letter:text-5xl first-letter:font-serif first-letter:mr-3 first-letter:float-left first-letter:text-stone-900' : undefined}
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
 
-          {/* Personal Image Slot - Mapped to "White Coat Selfie" */}
-          <div className="relative pl-0 lg:pl-10">
+          <div className={`relative ${isRtl ? 'lg:pr-10' : 'lg:pl-10'}`}>
             <div className="aspect-[3/4] bg-stone-100 p-4 shadow-2xl transform rotate-1 hover:rotate-0 transition-all duration-500">
               <div className="w-full h-full overflow-hidden border border-stone-200">
                 <img
                   src={ASSETS.aboutProfessional}
-                  alt="Dr. Hammad at Radiology Desk"
+                  alt={copy.about.imageAlt}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
             </div>
-            <p className="text-center font-serif text-stone-400 italic mt-6 text-sm">Diagnostics & Dedication</p>
+            <p className="text-center font-serif text-stone-400 italic mt-6 text-sm">{copy.about.caption}</p>
           </div>
         </div>
       </div>
@@ -197,28 +152,25 @@ export const About = () => (
   </div>
 );
 
-// --- RADLY SECTION ---
-
-export const Radly = () => (
+export const Radly = ({ copy, isRtl }: SectionProps) => (
   <div className="animate-fade-in-up">
     <section className="pt-60 pb-20 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 text-white overflow-hidden relative">
-      {/* Background Grid Pattern Overlay */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
         <div className="order-2 lg:order-1">
-          <span className="text-cyan-400 text-sm tracking-[0.2em] uppercase mb-4 block font-semibold">The Startup</span>
-          <h2 className="font-serif text-5xl mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Radly Assistant</h2>
+          <span className="text-cyan-400 text-sm tracking-[0.2em] uppercase mb-4 block font-semibold">{copy.radly.eyebrow}</span>
+          <h2 className="font-serif text-5xl mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">{copy.radly.title}</h2>
           <p className="text-slate-300 text-lg leading-relaxed mb-8 font-light">
-            After writing my thousandth "no acute findings" report, I had a choice: keep complaining or build something.
-            So I built Radly, an AI assistant that handles the boring parts of radiology reporting. It's not perfect, but it gives radiologists
-            their time back to actually think about the cases that matter.
+            {copy.radly.intro}
           </p>
           <ul className="space-y-4 text-slate-300 mb-10 font-light">
-            <li className="flex items-start"><SparklesIcon className="w-5 h-5 mr-3 text-cyan-400 shrink-0" /> Automated Reporting Workflows</li>
-            <li className="flex items-start"><SparklesIcon className="w-5 h-5 mr-3 text-cyan-400 shrink-0" /> AI-Driven Analysis</li>
-            <li className="flex items-start"><SparklesIcon className="w-5 h-5 mr-3 text-cyan-400 shrink-0" /> Built by a Radiologist, for Radiologists</li>
-            <li className="flex items-start"><SparklesIcon className="w-5 h-5 mr-3 text-cyan-400 shrink-0" /> Available on iOS</li>
+            {copy.radly.features.map((feature) => (
+              <li key={feature} className="flex items-start">
+                <SparklesIcon className={`w-5 h-5 ${isRtl ? 'ml-3' : 'mr-3'} text-cyan-400 shrink-0`} />
+                <span>{feature}</span>
+              </li>
+            ))}
           </ul>
           <div className="flex flex-col gap-4">
             <div className="flex flex-wrap gap-4 items-center">
@@ -230,7 +182,7 @@ export const Radly = () => (
               >
                 <img
                   src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                  alt="Download on the App Store"
+                  alt={copy.radly.appStoreAlt}
                   className="h-12"
                 />
               </a>
@@ -244,8 +196,8 @@ export const Radly = () => (
                   <path d="M17.523 2c.316 0 .573.256.573.573v18.854a.573.573 0 01-.573.573H6.477a.573.573 0 01-.573-.573V2.573c0-.317.256-.573.573-.573h11.046zM12 18.5a1 1 0 100 2 1 1 0 000-2zm4-14H8v12h8v-12z" />
                 </svg>
                 <div>
-                  <p className="text-xs text-emerald-400 uppercase tracking-wider font-semibold">Android</p>
-                  <p className="text-sm text-white font-medium">Get it on Google Play</p>
+                  <p className="text-xs text-emerald-400 uppercase tracking-wider font-semibold">{copy.common.android}</p>
+                  <p className="text-sm text-white font-medium">{copy.common.googlePlay}</p>
                 </div>
               </a>
             </div>
@@ -256,26 +208,22 @@ export const Radly = () => (
               className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-all text-sm uppercase tracking-widest font-medium w-fit group"
               style={{ textShadow: '0 0 20px rgba(34, 211, 238, 0.5)' }}
             >
-              <span className="border-b border-cyan-400/50 group-hover:border-cyan-300 pb-1">Or visit Radly.app</span>
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
+              <span className="border-b border-cyan-400/50 group-hover:border-cyan-300 pb-1">{copy.radly.visit}</span>
+              <span className={`${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'} transition-transform`}>→</span>
             </a>
           </div>
         </div>
 
-        {/* Radly Image Slot - Mapped to Illustration */}
         <div className="relative order-1 lg:order-2 flex justify-center">
           <div className="relative w-full max-w-lg">
-            {/* Illustration Container with Glassmorphism */}
             <div className="rounded-xl overflow-hidden shadow-2xl border border-white/10 relative group bg-white/5 backdrop-blur-md">
               <img
                 src={ASSETS.radlyApp}
-                alt="Radly Illustration"
+                alt={copy.radly.imageAlt}
                 className="w-full h-auto object-contain animate-[float_6s_ease-in-out_infinite]"
               />
-              {/* Reflection/Sheen */}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
             </div>
-            {/* Glow effect - Updated to Cyan/Indigo */}
             <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl -z-10"></div>
             <div className="absolute -top-12 -left-12 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -z-10"></div>
           </div>
@@ -283,331 +231,275 @@ export const Radly = () => (
       </div>
     </section>
     <style>{`
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
     `}</style>
   </div>
 );
 
-
-
-// --- TRAVEL SECTION ---
-
-
-
-export const Travel = () => (
+export const Travel = ({ copy, isRtl }: SectionProps) => (
   <div className="animate-fade-in-up">
-    <section className="py-24 bg-[#fdfbf7] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-
-        {/* Split Hero Section */}
-        <div className="flex flex-col lg:flex-row items-center gap-16 mb-24">
-          {/* Left Content */}
-          <div className="flex-1 text-left">
-            <SectionTitle title="Passport Trails" subtitle="Global Exploration" />
-            <p className="text-2xl font-serif text-stone-800 leading-relaxed mb-8 italic relative z-10">
-              <span className="text-6xl text-amber-200 absolute -top-8 -left-4 -z-10">"</span>
-              Travel is not about escaping life—it's about discovering it in places you've never been,
-              through eyes you've never seen with.
+    <section className="bg-[#f8f4ee] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 pt-20 pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center min-h-[72vh] mb-24">
+          <div className="lg:col-span-6">
+            <span className="block text-sm uppercase tracking-[0.28em] text-amber-700 mb-5">{copy.travel.eyebrow}</span>
+            <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-stone-950 mb-8">
+              {copy.travel.title}
+            </h2>
+            <p className="text-xl md:text-2xl leading-relaxed text-stone-700 font-light max-w-2xl mb-10">
+              {copy.travel.intro}
             </p>
-            <p className="text-stone-600 leading-relaxed mb-8 text-lg">
-              From the frozen landscapes of Iceland to the ancient souks of the Middle East, I've spent years
-              exploring the intersection of culture, history, and human connection.
-            </p>
-            <div className="mb-8 space-y-5">
-              <p className="text-stone-600 leading-relaxed text-lg">
-                I built the Passport Trails app because Arabic travelers often have to search through scattered websites,
-                conflicting visa information, and travel content that was never written for their real needs. The app brings
-                the essentials into one focused place, so planning a trip feels clearer from the first step.
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <ButtonPrimary href="https://passporttrails.com">{copy.travel.primaryCta}</ButtonPrimary>
+              <a
+                href="#passport-trails-app"
+                className="inline-flex items-center justify-center px-8 py-3 border border-stone-300 text-stone-800 text-sm tracking-widest uppercase hover:border-stone-900 hover:text-stone-950 transition-all duration-300"
+              >
+                {copy.travel.helperCta}
+              </a>
+            </div>
+            <div className={`${isRtl ? 'border-r pr-6' : 'border-l pl-6'} border-stone-300 max-w-xl`}>
+              <p className="font-serif text-2xl leading-relaxed text-stone-900">
+                {copy.travel.quote}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  'Visa requirements by nationality and destination',
-                  'Visa type, allowed stay, documents, and key notes',
-                  'Destination discovery with real photos',
-                  'Best time to visit each destination',
-                  'Arabic travel guides and weekly tips',
-                  'Money-saving advice and real travel experiences'
-                ].map((feature) => (
-                  <div key={feature} className="flex items-start gap-3 text-sm text-stone-600">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-amber-500 shrink-0"></span>
-                    <span>{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="space-y-5">
-              <ButtonPrimary href="https://passporttrails.com">Read the Travel Blog</ButtonPrimary>
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-stone-500 mb-3">Get the Passport Trails app</p>
-                <div className="flex flex-wrap gap-3 items-center">
-                  <a
-                    href="https://apps.apple.com/us/app/passport-trails/id6761397513"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block transition-transform hover:scale-105 hover:-translate-y-1 duration-300"
-                  >
-                    <img
-                      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                      alt="Download Passport Trails on the App Store"
-                      className="h-11"
-                    />
-                  </a>
-                  <a
-                    href="https://play.google.com/store/apps/details?id=com.passporttrails.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 h-11 px-4 bg-white border border-stone-200 rounded-lg shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-stone-300 duration-300"
-                  >
-                    <svg className="w-6 h-6 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M17.523 2c.316 0 .573.256.573.573v18.854a.573.573 0 01-.573.573H6.477a.573.573 0 01-.573-.573V2.573c0-.317.256-.573.573-.573h11.046zM12 18.5a1 1 0 100 2 1 1 0 000-2zm4-14H8v12h8v-12z" />
-                    </svg>
-                    <div>
-                      <p className="text-[10px] text-stone-500 uppercase tracking-wider font-semibold">Android</p>
-                      <p className="text-sm text-stone-900 font-medium">Get it on Google Play</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
 
-          {/* Right Image - Small Polaroid Style */}
-          <div className="flex-1 flex justify-center lg:justify-end relative">
-            {/* Decorative blobs */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-100 rounded-full blur-3xl -z-10 opacity-60"></div>
-
-            <div className="relative transform rotate-3 hover:rotate-0 transition-all duration-500 group">
-              <div className="bg-white p-4 pb-16 shadow-2xl max-w-sm transform transition-transform group-hover:scale-105">
-                <div className="overflow-hidden border border-stone-100">
-                  <img
-                    src="/travel-collage.jpg"
-                    alt="Travel Moments"
-                    className="w-full h-auto object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
-                  />
-                </div>
-                <div className="absolute bottom-4 left-0 right-0 text-center font-handwriting text-stone-500 text-xl rotate-[-2deg]">
-                  Memories & Miles
-                </div>
+          <div className="lg:col-span-6">
+            <div className="relative max-w-md lg:max-w-lg mx-auto">
+              <div className="absolute -inset-6 border border-stone-300 hidden sm:block"></div>
+              <div className="relative bg-white p-3 shadow-2xl">
+                <img
+                  src={ASSETS.travelHero}
+                  alt={copy.travel.imageAlt}
+                  className="w-full aspect-[3/4] object-cover object-center"
+                />
               </div>
-              {/* Tape effect */}
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-white/80 backdrop-blur-sm shadow-sm transform -rotate-2"></div>
+              <p className="mt-5 text-xs uppercase tracking-[0.2em] text-stone-500 text-center">
+                {copy.travel.imageCaption}
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Minimal Stats Strip */}
-        <div className="border-y border-stone-200 py-12 mb-24">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: '15+', label: 'Countries' },
-              { number: '3', label: 'Continents' },
-              { number: '100+', label: 'Guides' },
-              { number: '∞', label: 'Stories' }
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl font-serif text-stone-900 mb-1">{stat.number}</div>
-                <div className="text-xs uppercase tracking-widest text-stone-500">{stat.label}</div>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-24">
+          <div className="lg:col-span-4">
+            <span className="text-xs uppercase tracking-[0.25em] text-stone-500">{copy.travel.lensEyebrow}</span>
+            <h3 className="font-serif text-4xl text-stone-900 mt-4 leading-tight">{copy.travel.lensTitle}</h3>
+          </div>
+          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {copy.travel.lensParagraphs.map((paragraph) => (
+              <p key={paragraph} className="text-lg leading-relaxed text-stone-700">
+                {paragraph}
+              </p>
             ))}
           </div>
         </div>
 
-
-        {/* Featured Destinations - Horizontal Scroll Cards */}
         <div className="mb-24">
-          <div className="flex items-end justify-between mb-12">
-            <h3 className="font-serif text-3xl text-stone-900">Countries Explored</h3>
-            <div className="hidden md:flex gap-2 text-stone-400">
-              <span className="text-sm uppercase tracking-wider">12 destinations</span>
-              <ArrowRightIcon className="w-5 h-5" />
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <span className="text-xs uppercase tracking-[0.25em] text-stone-500">{copy.travel.featuredEyebrow}</span>
+              <h3 className="font-serif text-4xl text-stone-900 mt-3">{copy.travel.featuredTitle}</h3>
             </div>
+            <a
+              href="https://passporttrails.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm uppercase tracking-widest text-stone-700 hover:text-stone-950 transition-colors w-fit"
+            >
+              {copy.common.visitPassportTrails} <ArrowRightIcon className={arrowClass(isRtl)} />
+            </a>
           </div>
 
-          <div className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide snap-x">
-            {[
-              {
-                country: 'Egypt',
-                flag: '🇪🇬',
-                desc: 'My homeland, the land of pharaohs. Where the Nile whispers ancient stories and every sunset over the pyramids reminds me of timeless wonder.',
-                color: 'bg-gradient-to-br from-amber-50 to-yellow-50'
-              },
-              {
-                country: 'Iceland',
-                flag: '🇮🇸',
-                desc: 'Fire and ice dance in perfect harmony. Where glaciers meet volcanoes and the Northern Lights paint the sky with magic.',
-                color: 'bg-gradient-to-br from-blue-50 to-cyan-50'
-              },
-              {
-                country: 'Norway',
-                flag: '🇳🇴',
-                desc: 'Majestic fjords and midnight sun. A land where nature\'s grandeur humbles the soul and Viking heritage lives in every stone.',
-                color: 'bg-gradient-to-br from-indigo-50 to-blue-50'
-              },
-              {
-                country: 'Turkey',
-                flag: '🇹🇷',
-                desc: 'Where East meets West in a symphony of cultures. Istanbul\'s call to prayer echoes through millennia of empires and stories.',
-                color: 'bg-gradient-to-br from-red-50 to-rose-50'
-              },
-              {
-                country: 'Spain',
-                flag: '🇪🇸',
-                desc: 'Passionate spirit and endless sunshine. Flamenco rhythms, tapas at twilight, and a joie de vivre that\'s utterly contagious.',
-                color: 'bg-gradient-to-br from-yellow-50 to-orange-50'
-              },
-              {
-                country: 'Italy',
-                flag: '🇮🇹',
-                desc: 'Art, history, and la dolce vita. Every cobblestone street tells a Renaissance tale, every meal a celebration of life.',
-                color: 'bg-gradient-to-br from-green-50 to-emerald-50'
-              },
-              {
-                country: 'Saudi Arabia',
-                flag: '🇸🇦',
-                desc: 'Desert mystique and spiritual depth. From the holy cities to the dunes of the Empty Quarter, a journey into the heart of Arabia.',
-                color: 'bg-gradient-to-br from-emerald-50 to-teal-50'
-              },
-              {
-                country: 'Latvia',
-                flag: '🇱🇻',
-                desc: 'Baltic charm and Art Nouveau elegance. Riga\'s spires pierce the sky while forests whisper ancient Baltic legends.',
-                color: 'bg-gradient-to-br from-rose-50 to-pink-50'
-              },
-              {
-                country: 'Russia',
-                flag: '🇷🇺',
-                desc: 'Vast, enigmatic, and breathtaking. Onion domes, literary souls, and landscapes that stretch beyond imagination.',
-                color: 'bg-gradient-to-br from-blue-50 to-indigo-50'
-              },
-              {
-                country: 'Lithuania',
-                flag: '🇱🇹',
-                desc: 'Medieval castles and resilient spirit. Vilnius\' baroque beauty and the haunting beauty of the Curonian Spit.',
-                color: 'bg-gradient-to-br from-amber-50 to-yellow-50'
-              },
-              {
-                country: 'Croatia',
-                flag: '🇭🇷',
-                desc: 'Adriatic jewel with azure waters. Ancient Dubrovnik walls and island-dotted coastlines that redefine paradise.',
-                color: 'bg-gradient-to-br from-sky-50 to-blue-50'
-              },
-              {
-                country: 'Bosnia & Herzegovina',
-                flag: '🇧🇦',
-                desc: 'Resilience and beauty intertwined. Sarajevo\'s rich tapestry of culture, Mostar\'s iconic bridge spanning history.',
-                color: 'bg-gradient-to-br from-slate-50 to-stone-50'
-              }
-            ].map((dest, i) => (
-              <div key={i} className={`min-w-[280px] md:min-w-[320px] p-6 rounded-lg border border-stone-200 ${dest.color} hover:shadow-xl transition-all snap-center group cursor-default`}>
-                <div className="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">{dest.flag}</div>
-                <h4 className="font-serif text-2xl text-stone-900 mb-3">{dest.country}</h4>
-                <p className="text-stone-600 text-sm leading-relaxed">{dest.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {copy.travel.stories.map((story) => (
+              <a
+                key={story.title}
+                href={story.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-white border border-stone-200 p-7 min-h-[260px] flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
+              >
+                <div>
+                  <span className="text-xs uppercase tracking-[0.22em] text-amber-700">{story.label}</span>
+                  <h4 className="font-serif text-2xl text-stone-900 mt-5 mb-4 leading-tight">{story.title}</h4>
+                  <p className="text-stone-600 leading-relaxed">{story.desc}</p>
+                </div>
+                <div className="mt-8 flex items-center gap-2 text-sm uppercase tracking-widest text-stone-900">
+                  {copy.common.readArticle} <ArrowRightIcon className={`${arrowClass(isRtl)} group-hover:translate-x-1 transition-transform`} />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-24">
+          <div className="lg:col-span-7">
+            <div className="relative overflow-hidden bg-stone-900 shadow-2xl">
+              <img
+                src="/travel-collage.jpg"
+                alt={copy.travel.visualAlt}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+          <div className="lg:col-span-5">
+            <span className="text-xs uppercase tracking-[0.25em] text-stone-500">{copy.travel.visualEyebrow}</span>
+            <h3 className="font-serif text-4xl text-stone-900 mt-4 mb-6 leading-tight">
+              {copy.travel.visualTitle}
+            </h3>
+            {copy.travel.visualParagraphs.map((paragraph, idx) => (
+              <p key={paragraph} className={`${idx === 0 ? 'text-lg text-stone-700 mb-6' : 'text-stone-600'} leading-relaxed`}>
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-24">
+          <div className="max-w-3xl mb-10">
+            <span className="text-xs uppercase tracking-[0.25em] text-stone-500">{copy.travel.destinationsEyebrow}</span>
+            <h3 className="font-serif text-4xl text-stone-900 mt-3">{copy.travel.destinationsTitle}</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-stone-200 border border-stone-200">
+            {copy.travel.destinations.map(([country, flag, desc]) => (
+              <div key={country} className="bg-[#f8f4ee] p-6 md:p-8 min-h-[220px] hover:bg-white transition-colors duration-300">
+                <div className="flex items-center justify-between mb-7">
+                  <span className="text-4xl">{flag}</span>
+                  <MapPinIcon className="w-5 h-5 text-stone-400" />
+                </div>
+                <h4 className="font-serif text-2xl text-stone-900 mb-3">{country}</h4>
+                <p className="text-stone-600 leading-relaxed text-sm">{desc}</p>
               </div>
             ))}
           </div>
         </div>
-        {/* Philosophy - Minimal Text */}
-        <div className="max-w-3xl mx-auto text-center">
-          <h3 className="font-serif text-2xl text-stone-900 mb-6">The Philosophy</h3>
-          <p className="text-stone-600 leading-relaxed text-lg">
-            I don't collect countries. I collect moments where things finally make sense. Through <span className="font-semibold text-stone-900">PassportTrails</span>,
-            I share what actually works when you're trying to navigate a new place, especially for Arabic speakers who want real advice, not influencer content.
-          </p>
-        </div>
 
+        <div id="passport-trails-app" className="bg-stone-950 text-white p-8 md:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7">
+            <span className="text-xs uppercase tracking-[0.25em] text-amber-300">{copy.travel.helperEyebrow}</span>
+            <h3 className="font-serif text-4xl md:text-5xl mt-4 mb-6">{copy.travel.helperTitle}</h3>
+            <p className="text-stone-300 text-lg leading-relaxed mb-8">
+              {copy.travel.helperIntro}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {copy.travel.helperFeatures.map((feature) => (
+                <div key={feature} className="flex items-center gap-3 text-sm text-stone-300">
+                  <SparklesIcon className="w-4 h-4 text-amber-300 shrink-0" />
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lg:col-span-5 lg:justify-self-end">
+            <p className="text-xs uppercase tracking-[0.2em] text-stone-400 mb-4">{copy.travel.getApp}</p>
+            <div className="flex flex-wrap gap-3 items-center">
+              <a
+                href="https://apps.apple.com/us/app/passport-trails/id6761397513"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block transition-transform hover:scale-105 hover:-translate-y-1 duration-300"
+              >
+                <img
+                  src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                  alt={copy.travel.appStoreAlt}
+                  className="h-11"
+                />
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.passporttrails.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 h-11 px-4 bg-white/10 border border-white/15 rounded-lg transition-all hover:-translate-y-1 hover:bg-white/15 duration-300"
+              >
+                <svg className="w-6 h-6 text-emerald-300" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.523 2c.316 0 .573.256.573.573v18.854a.573.573 0 01-.573.573H6.477a.573.573 0 01-.573-.573V2.573c0-.317.256-.573.573-.573h11.046zM12 18.5a1 1 0 100 2 1 1 0 000-2zm4-14H8v12h8v-12z" />
+                </svg>
+                <div>
+                  <p className="text-[10px] text-stone-400 uppercase tracking-wider font-semibold">{copy.common.android}</p>
+                  <p className="text-sm text-white font-medium">{copy.common.googlePlay}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
 );
 
-// --- BOOKS SECTION ---
-
-export const Books = () => (
+export const Books = ({ copy }: SectionProps) => (
   <div className="animate-fade-in-up">
     <section className="py-24 relative overflow-hidden">
-      {/* Paper Texture Background */}
       <div className="absolute inset-0 bg-[#f5f5f0] opacity-100">
         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')]"></div>
       </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
-        <SectionTitle title="Written Works" subtitle="Author" />
+        <SectionTitle title={copy.books.title} subtitle={copy.books.subtitle} />
 
         <div className="max-w-3xl mx-auto mb-16 text-center">
-          <p className="text-stone-600 text-lg leading-relaxed mb-6">
-            I've always been curious about why people are the way they are. As an INFJ, I spent years trying to understand my own patterns before I realized
-            other people might have the same questions. So I wrote about it.
-          </p>
-          <p className="text-stone-600 text-lg leading-relaxed">
-            These books aren't academic. They're what I wish someone had told me when I was trying to figure out personality types, relationships,
-            and why some connections just work. Written for people who think too much and feel too deeply.
-          </p>
+          {copy.books.intro.map((paragraph) => (
+            <p key={paragraph} className="text-stone-600 text-lg leading-relaxed mb-6 last:mb-0">
+              {paragraph}
+            </p>
+          ))}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-          {/* Book 1 */}
-          <div className="flex flex-col items-center text-center group perspective-1000">
-            <div className="w-56 h-80 shadow-2xl mb-10 relative transition-all duration-500 transform-style-3d group-hover:rotate-y-12 group-hover:rotate-x-6 group-hover:scale-105">
-              <img
-                src="/unraveling-infj-enigma.jpg"
-                alt="Unraveling the INFJ Enigma Book Cover"
-                className="w-full h-full object-cover rounded-sm"
-              />
-              {/* Spine Effect */}
-              <div className="absolute left-0 top-0 bottom-0 w-4 bg-white/20 transform -translate-x-full origin-right rotate-y-90"></div>
+          {copy.books.items.map((book, idx) => (
+            <div key={book.title} className="flex flex-col items-center text-center group perspective-1000">
+              <div className={`w-56 h-80 shadow-2xl mb-10 relative transition-all duration-500 transform-style-3d ${idx === 0 ? 'group-hover:rotate-y-12' : 'group-hover:rotate-y-[-12deg]'} group-hover:rotate-x-6 group-hover:scale-105`}>
+                <img
+                  src={idx === 0 ? '/unraveling-infj-enigma.jpg' : '/finding-your-soulmate.jpg'}
+                  alt={book.alt}
+                  className="w-full h-full object-cover rounded-sm"
+                />
+                <div className={`absolute ${idx === 0 ? 'left-0 -translate-x-full origin-right rotate-y-90' : 'right-0 translate-x-full origin-left rotate-y-[-90deg]'} top-0 bottom-0 w-4 bg-white/20 transform`}></div>
+              </div>
+              <h3 className="font-serif text-3xl mb-3 text-stone-900">{book.title}</h3>
+              <p className="text-stone-500 mb-6 max-w-xs leading-relaxed">{book.desc}</p>
+              <a
+                href={idx === 0 ? 'https://www.amazon.com/Unraveling-INFJ-Enigma-Understanding-Compassionate/dp/B0BS1FNS7F' : 'https://www.amazon.com/Finding-Your-Soulmate-Zodiac-Perfect-ebook/dp/B0BRNVWK9Y'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block border-b border-stone-900 pb-1 text-stone-900 hover:text-amber-700 hover:border-amber-700 transition-colors uppercase text-xs tracking-widest"
+              >
+                {copy.common.viewAmazon}
+              </a>
             </div>
-            <h3 className="font-serif text-3xl mb-3 text-stone-900">Unraveling the INFJ Enigma</h3>
-            <p className="text-stone-500 mb-6 max-w-xs leading-relaxed">Understanding the most rare personality type with compassion and depth.</p>
-            <a href="https://www.amazon.com/Unraveling-INFJ-Enigma-Understanding-Compassionate/dp/B0BS1FNS7F" target="_blank" rel="noopener noreferrer" className="inline-block border-b border-stone-900 pb-1 text-stone-900 hover:text-amber-700 hover:border-amber-700 transition-colors uppercase text-xs tracking-widest">View on Amazon</a>
-          </div>
-
-          {/* Book 2 */}
-          <div className="flex flex-col items-center text-center group perspective-1000">
-            <div className="w-56 h-80 shadow-2xl mb-10 relative transition-all duration-500 transform-style-3d group-hover:rotate-y-[-12deg] group-hover:rotate-x-6 group-hover:scale-105">
-              <img
-                src="/finding-your-soulmate.jpg"
-                alt="Finding Your Soulmate Book Cover"
-                className="w-full h-full object-cover rounded-sm"
-              />
-              {/* Spine Effect */}
-              <div className="absolute right-0 top-0 bottom-0 w-4 bg-white/20 transform translate-x-full origin-left rotate-y-[-90deg]"></div>
-            </div>
-            <h3 className="font-serif text-3xl mb-3 text-stone-900">Finding Your Soulmate</h3>
-            <p className="text-stone-500 mb-6 max-w-xs leading-relaxed">Using the Zodiac and Natal Charts to find your perfect match.</p>
-            <a href="https://www.amazon.com/Finding-Your-Soulmate-Zodiac-Perfect-ebook/dp/B0BRNVWK9Y" target="_blank" rel="noopener noreferrer" className="inline-block border-b border-stone-900 pb-1 text-stone-900 hover:text-amber-700 hover:border-amber-700 transition-colors uppercase text-xs tracking-widest">View on Amazon</a>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   </div>
 );
 
-// --- GALLERY SECTION ---
-
-export const Gallery = () => (
+export const Gallery = ({ copy }: SectionProps) => (
   <div className="animate-fade-in-up">
     <section className="pt-60 pb-20 bg-stone-900">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl text-white">Visual Diary</h2>
+          <h2 className="font-serif text-4xl md:text-5xl text-white">{copy.gallery.title}</h2>
           <div className="w-16 h-px bg-stone-700 mx-auto mt-6"></div>
         </div>
 
-        {/* Masonry Grid for Mixed Aspect Ratios */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-          {ASSETS.gallery.map((image, idx) => (
+          {ASSETS.gallery.map((src, idx) => (
             <div
-              key={idx}
+              key={src}
               className="break-inside-avoid relative group overflow-hidden rounded-sm cursor-zoom-in animate-fade-in-up"
               style={{ animationDelay: `${idx * 150}ms` }}
             >
               <img
-                src={image.src}
-                alt={image.alt}
+                src={src}
+                alt={copy.gallery.alts[idx]}
                 className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500"></div>
@@ -619,25 +511,21 @@ export const Gallery = () => (
   </div>
 );
 
-// --- CONTACT SECTION ---
-
-export const Contact = () => (
+export const Contact = ({ copy }: SectionProps) => (
   <div className="animate-fade-in-up">
     <section className="py-20 bg-stone-50">
       <div className="max-w-4xl mx-auto px-6 text-center">
-        <SectionTitle title="Get in Touch" subtitle="Contact" />
+        <SectionTitle title={copy.contact.title} subtitle={copy.contact.subtitle} />
         <p className="text-lg text-stone-600 mb-12 font-light">
-          Whether you're interested in radiology consultation, Radly partnership, or just want to discuss travel and books, I'd love to hear from you.
+          {copy.contact.intro}
         </p>
 
         <div className="bg-white p-8 md:p-16 shadow-2xl border border-stone-100 relative overflow-hidden">
-          {/* Decorative Corner */}
           <div className="absolute top-0 right-0 w-20 h-20 bg-stone-50 rounded-bl-full -mr-10 -mt-10"></div>
 
           <div className="relative z-10 space-y-12">
-            {/* Email CTA */}
             <div className="text-center">
-              <p className="text-stone-500 uppercase tracking-widest text-xs mb-4">Email Me Directly</p>
+              <p className="text-stone-500 uppercase tracking-widest text-xs mb-4">{copy.contact.emailLabel}</p>
               <a
                 href="mailto:contact@m.mohamedhammad.com"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-stone-900 text-white text-sm tracking-[0.15em] uppercase hover:bg-stone-800 transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1 group"
@@ -649,16 +537,13 @@ export const Contact = () => (
               </a>
             </div>
 
-            {/* Divider */}
             <div className="flex items-center gap-4">
               <div className="flex-1 h-px bg-stone-200"></div>
-              <span className="text-stone-400 text-xs uppercase tracking-widest">Or Connect On</span>
+              <span className="text-stone-400 text-xs uppercase tracking-widest">{copy.contact.divider}</span>
               <div className="flex-1 h-px bg-stone-200"></div>
             </div>
 
-            {/* Social Links */}
             <div className="flex justify-center gap-6">
-              {/* LinkedIn */}
               <a
                 href="http://www.linkedin.com/in/mohamed-h-47953589"
                 target="_blank"
@@ -673,7 +558,6 @@ export const Contact = () => (
                 <span className="text-xs text-stone-500 uppercase tracking-wider group-hover:text-stone-900 transition-colors">LinkedIn</span>
               </a>
 
-              {/* X (Twitter) */}
               <a
                 href="https://x.com/thisishammadmo"
                 target="_blank"
@@ -688,7 +572,6 @@ export const Contact = () => (
                 <span className="text-xs text-stone-500 uppercase tracking-wider group-hover:text-stone-900 transition-colors">X / Twitter</span>
               </a>
 
-              {/* Facebook */}
               <a
                 href="https://www.facebook.com/ThisIsHammadMo"
                 target="_blank"
