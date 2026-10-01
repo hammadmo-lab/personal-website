@@ -1,0 +1,19 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  titleLang?: string;
+}
+const { eyebrow, title, titleLang } = Astro.props;
+---
+<header class="page-head wrap">
+  <p class="eyebrow">{eyebrow}</p>
+  <h1 lang={titleLang}>{title}</h1>
+  <slot />
+</header>
+
+<style>
+  .page-head { display: grid; gap: 1.1rem; padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2rem, 4vw, 3rem); }
+  .page-head h1 { font-size: var(--step-4); line-height: 1.02; letter-spacing: -0.02em; max-width: 18ch; }
+  :global([dir='rtl']) .page-head h1 { line-height: 1.35; letter-spacing: 0; }
+</style>

@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import { LINKS, type Locale } from '../../i18n';
+import { copyFor, localePaths } from '../../lib/site';
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.props as { locale: Locale };
+const copy = copyFor(locale);
+const contact = copy.contact;
+const social = [
+  { name: 'LinkedIn', href: LINKS.linkedin, handle: 'Mohamed Hammad' },
+  { name: 'X', href: LINKS.x, handle: '@thisishammadmo' },
+  { name: 'Facebook', href: LINKS.facebook, handle: 'ThisIsHammadMo' },
+];
+---
+<Base locale={locale} page="contact">
+  <PageHead eyebrow={contact.subtitle} title={contact.title}>
+    <p class="lede">{contact.intro}</p>
+  </PageHead>
+
+  <section class="wrap contact">
+    <div class="contact__email">
+      <p class="eyebrow">{contact.emailLabel}</p>
+      <a class="contact__address" href={`mailto:${LINKS.email}`} lang="en">{LINKS.email}</a>
+    </div>
+    <div class="contact__social">
+      <p class="eyebrow">{contact.divider}</p>
+      <ul>
+        {social.map((item) => (
+          <li>
+            <a href={item.href} target="_blank" rel="noopener noreferrer" lang="en">
+              <span class="contact__network">{item.name}</span>
+              <span class="muted">{item.handle}</span>
+              <span class="arrow" aria-hidden="true">→</span>
+              <span class="sr-only"> {copy.common.newTab}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); padding-block: 2.5rem var(--section); border-top: 1px solid var(--line); }
+  .contact__email, .contact__social { display: grid; gap: 1rem; align-content: start; min-width: 0; }
+  .contact__address { font-family: 'Newsreader Variable', Georgia, serif; font-size: var(--step-2); color: var(--wine); overflow-wrap: anywhere; text-decoration-color: var(--gold); }
+  .contact__social ul { list-style: none; margin: 0; padding: 0; }
+  .contact__social a { display: grid; grid-template-columns: 7rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding-block: 1rem; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .contact__social li:first-child a { border-top: 1px solid var(--line); }
+  .contact__social a:hover .contact__network { color: var(--wine); }
+  .contact__network { font-family: 'Newsreader Variable', Georgia, serif; font-size: var(--step-1); }
+  .contact__social .arrow { color: var(--wine); }
+
+  @media (max-width: 48rem) {
+    .contact { grid-template-columns: 1fr; }
+  }
+</style>

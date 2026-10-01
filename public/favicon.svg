@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#5a2126"/>
+  <ellipse cx="32" cy="32" rx="22" ry="27" fill="none" stroke="#f7f6f2" stroke-width="2.2"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="25" fill="#f7f6f2">mh</text>
+</svg>

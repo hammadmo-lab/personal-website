@@ -1,50 +1,41 @@
-# Dr. Mohamed Amin Hammad - Personal Website
+# Dr. Mohamed Amin Hammad: personal website
 
-A modern, elegant personal portfolio website showcasing my work as a radiologist, software creator, author, and world traveler.
+Source for [mohamedhammad.com](https://mohamedhammad.com): radiologist, founder of Radly, author and traveller.
 
-## 🌐 Live Site
+## Stack
 
-[mohamedhammad.com](https://mohamedhammad.com)
+- [Astro](https://astro.build) static site, one real URL per page and language
+- English (`/`), Egyptian Arabic (`/ar/`, right-to-left) and Spanish (`/es/`)
+- Self-hosted fonts: Newsreader, Instrument Sans, Amiri, Noto Naskh Arabic
+- Deployed on Cloudflare Pages (build `npm run build`, output `dist`)
 
-## ✨ Features
+## Where things live
 
-- **Responsive Design** - Beautiful on all devices
-- **Modern Stack** - Built with React, TypeScript, Vite & Tailwind CSS v4
-- **Smooth Animations** - Subtle, professional micro-interactions
-- **Fast Performance** - Optimized for speed
+| What | Where |
+| --- | --- |
+| All page text, in every language | `src/i18n.ts` |
+| Pages | `src/pages/[...lang]/` (`index`, `about`, `radly`, `travel`, `books`, `contact`) |
+| Header, footer, logo | `src/components/` |
+| Colours, type scale, spacing | `src/styles/global.css` |
+| Structured data (Person, Books) | `src/lib/schema.ts` |
+| Sitemap (generated) | `src/pages/sitemap.xml.ts` |
+| Images | `public/images/`, book covers in `public/` |
 
-## 🚀 Sections
+## Brand
 
-- **Home** - Hero introduction
-- **About** - My story and background
-- **Radly App** - AI-powered radiology assistant (iOS app)
-- **Travel** - Passport Trails blog and countries explored
-- **Books** - Published works on psychology and personality
-- **Contact** - Email and social media links
+"Editorial", burgundy edition: page `#F7F6F2`, ink `#1B1C1A`, burgundy `#5A2126`
+(the title colour of *I Swear I'll Find You*), butterfly gold `#CB9E6D`.
+The logo is a lowercase italic "mh" in an oval, like a publisher's colophon.
 
-## 🛠️ Run Locally
+## Run locally
 
-**Prerequisites:** Node.js 18+
+Requires Node 20 or newer.
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
+npm run dev      # http://localhost:4321
+npm run check    # type check
+npm run build    # production build into dist/
 ```
 
-## 📦 Tech Stack
-
-- React 19
-- TypeScript
-- Vite
-- Tailwind CSS v4
-- Heroicons
-
-## 📄 License
-
-© 2026 Mohamed Amin Hammad. All rights reserved.
+© Mohamed Amin Hammad. All rights reserved.

@@ -1,0 +1,152 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPageUrl, type Locale, type Page } from '../../i18n';
+import { absoluteUrl, copyFor, localePaths } from '../../lib/site';
+import { personSchema } from '../../lib/schema';
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.props as { locale: Locale };
+const copy = copyFor(locale);
+const home = copy.home;
+const book = copy.books.featured;
+---
+<Base locale={locale} page="home" structuredData={personSchema(locale, absoluteUrl(locale, 'home'))}>
+  <section class="hero wrap">
+    <div class="hero__copy">
+      <p class="eyebrow">{home.eyebrow}</p>
+      <h1>{home.title}</h1>
+      <p class="lede">{home.intro}</p>
+      <div class="actions">
+        <a class="btn" href={getPageUrl(locale, 'about')}>{home.primaryCta}</a>
+        <a class="text-link" href={getPageUrl(locale, 'radly')}>{home.secondaryCta} <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <figure class="hero__photo photo">
+      <img src="/images/portrait.jpg" alt={home.portraitAlt} width="900" height="1125" fetchpriority="high" />
+    </figure>
+    <dl class="facts hero__facts">
+      {home.facts.map((fact) => (
+        <div>
+          <dt>{fact.term}</dt>
+          <dd>{fact.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="section works" aria-labelledby="works-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="works-title">{home.worksTitle}</h2>
+      </div>
+      <ul class="works__list">
+        {home.works.map((work) => (
+          <li class="work">
+            <p class="eyebrow">{work.label}</p>
+            <h3 lang={work.title === 'Radly' || work.title === 'Passport Trails' ? 'en' : undefined}>{work.title}</h3>
+            <p class="muted">{work.desc}</p>
+            <a class="text-link" href={getPageUrl(locale, work.page as Page)}>{work.cta} <span class="arrow" aria-hidden="true">→</span></a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="book-band" aria-labelledby="home-book-title">
+    <div class="wrap book-band__inner">
+      <img class="book-band__cover" src={book.cover} alt={book.alt} width="1000" height="1600" loading="lazy" />
+      <div class="book-band__copy">
+        <p class="book-band__eyebrow">{book.eyebrow}</p>
+        <h2 id="home-book-title" lang="en">{book.title}</h2>
+        <p class="book-band__tagline">{book.tagline}</p>
+        <div class="actions">
+          {book.links.map((link) => (
+            <a class:list={['btn', link.primary ? 'btn--light' : 'btn--outline-light']} href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.label}<span class="sr-only"> {copy.common.newTab}</span>
+            </a>
+          ))}
+          <a class="book-band__more" href={getPageUrl(locale, 'books')}>{home.bookCta} <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap quote-block">
+    <blockquote>
+      <p>{copy.travel.quote}</p>
+    </blockquote>
+  </section>
+
+  <section class="section rule-top" aria-labelledby="home-contact-title">
+    <div class="wrap contact-teaser">
+      <h2 id="home-contact-title">{home.contactTitle}</h2>
+      <p class="lede">{copy.contact.intro}</p>
+      <a class="btn" href={getPageUrl(locale, 'contact')}>{home.contactCta}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+    padding-block: clamp(3rem, 7vw, 6rem) clamp(3rem, 6vw, 5rem);
+  }
+  .hero__copy { display: grid; gap: 1.5rem; }
+  .hero h1 { font-size: var(--step-4); line-height: 1.02; letter-spacing: -0.02em; max-width: 14ch; }
+  :global([dir='rtl']) .hero h1 { line-height: 1.35; letter-spacing: 0; max-width: 16ch; }
+  .hero .actions { margin-top: 0.5rem; }
+  .hero__photo img { aspect-ratio: 4 / 5; }
+  .hero__photo { position: relative; }
+  .hero__photo::before {
+    content: '';
+    position: absolute;
+    inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+    border: 1px solid var(--gold);
+    z-index: -1;
+  }
+  :global([dir='rtl']) .hero__photo::before { inset: 1.25rem 1.25rem -1.25rem -1.25rem; }
+  .hero__facts { grid-column: 1 / -1; margin-top: clamp(1rem, 3vw, 2rem); }
+
+  .works { background: var(--surface); border-block: 1px solid var(--line); }
+  .works__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .work { display: grid; gap: 0.85rem; align-content: start; padding-inline: clamp(1.25rem, 3vw, 2.5rem); border-inline-start: 1px solid var(--line); }
+  .work:first-child { padding-inline-start: 0; border-inline-start: 0; }
+  .work:last-child { padding-inline-end: 0; }
+  .work h3 { font-size: var(--step-2); }
+  .work .text-link { justify-self: start; margin-top: 0.5rem; }
+
+  .book-band { background: var(--wine); color: var(--page); }
+  .book-band__inner { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; padding-block: clamp(3.5rem, 8vw, 6rem); }
+  .book-band__cover { width: 100%; aspect-ratio: 5 / 8; object-fit: cover; box-shadow: 0 30px 50px -25px rgba(0, 0, 0, 0.6); }
+  .book-band__copy { display: grid; gap: 1.25rem; max-width: 38rem; }
+  .book-band__eyebrow { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+  :global([dir='rtl']) .book-band__eyebrow { letter-spacing: 0; font-size: 0.95rem; }
+  .book-band h2 { font-size: var(--step-3); }
+  .book-band__tagline { font-family: var(--f-display); font-style: italic; font-size: var(--step-2); line-height: 1.35; color: #ead9d3; }
+  .book-band__more { color: var(--page); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(247, 246, 242, 0.5); padding-bottom: 0.1rem; }
+  .book-band__more:hover { border-bottom-color: var(--page); }
+  .book-band :focus-visible { outline-color: var(--gold); }
+
+  .quote-block blockquote { margin: 0; max-width: 52rem; border-inline-start: 2px solid var(--gold); padding-inline-start: clamp(1.25rem, 3vw, 2.5rem); }
+  .quote-block p { font-family: var(--f-display); font-size: var(--step-3); line-height: 1.2; font-style: italic; }
+  :global([dir='rtl']) .quote-block p { font-style: normal; line-height: 1.6; }
+
+  .contact-teaser { display: grid; gap: 1.25rem; justify-items: start; }
+  .contact-teaser h2 { font-size: var(--step-3); }
+
+  @media (max-width: 56rem) {
+    .hero { grid-template-columns: 1fr; }
+    .hero__photo { order: -1; max-width: 26rem; margin-inline-end: 1.25rem; }
+    .works__list { grid-template-columns: 1fr; gap: 2.5rem; }
+    .work, .work:first-child, .work:last-child { padding-inline: 0; border-inline-start: 0; }
+    .work + .work { border-top: 1px solid var(--line); padding-top: 2.5rem; }
+  }
+  @media (max-width: 40rem) {
+    .book-band__inner { grid-template-columns: 1fr; }
+    .book-band__cover { max-width: 11rem; }
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+import Logo from './Logo.astro';
+import { LINKS, PAGES, getPageUrl, type Locale } from '../i18n';
+import { copyFor } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = copyFor(locale);
+const year = new Date().getFullYear();
+const elsewhere = [
+  { label: 'Radly', href: LINKS.radly },
+  { label: 'Passport Trails', href: LINKS.passportTrails },
+  { label: 'Amazon', href: 'https://www.amazon.com/stores/author/B0BRQHPSH9' },
+  { label: 'LinkedIn', href: LINKS.linkedin },
+  { label: 'X', href: LINKS.x },
+  { label: 'Facebook', href: LINKS.facebook },
+];
+---
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__about">
+      <Logo inverse />
+      <p>{copy.footer.bio}</p>
+    </div>
+    <nav aria-label={copy.footer.quickLinks}>
+      <h2>{copy.footer.quickLinks}</h2>
+      <ul>
+        {PAGES.map((page) => (
+          <li><a href={getPageUrl(locale, page)}>{copy.nav[page]}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div>
+      <h2>{copy.footer.connect}</h2>
+      <ul>
+        {elsewhere.map((item) => (
+          <li>
+            <a href={item.href} target="_blank" rel="noopener noreferrer" lang="en">
+              {item.label}<span class="sr-only"> {copy.common.newTab}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="site-footer__base">
+      <p>© {year} <span lang="en">Mohamed Amin Hammad</span>. {copy.footer.copyright}</p>
+      <p><a href={`mailto:${LINKS.email}`} lang="en">{LINKS.email}</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--night); color: var(--night-text); padding-top: clamp(3.5rem, 7vw, 5rem); }
+  .site-footer__grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; padding-bottom: 3rem; }
+  .site-footer__about { display: grid; gap: 1.25rem; align-content: start; }
+  .site-footer__about p { color: var(--night-muted); max-width: 30rem; white-space: pre-line; font-size: 0.95rem; }
+  .site-footer h2 { font-family: var(--f-body); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  :global([dir='rtl']) .site-footer h2 { letter-spacing: 0; font-size: 0.9rem; }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+  .site-footer a { color: var(--night-text); text-decoration: none; font-size: 0.95rem; }
+  .site-footer a:hover { color: var(--gold); }
+  .site-footer :focus-visible { outline-color: var(--gold); }
+  .site-footer__base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem; border-top: 1px solid var(--night-line); padding-block: 1.5rem 2rem; font-size: 0.85rem; color: var(--night-muted); }
+  .site-footer__base a { color: var(--night-muted); font-size: 0.85rem; }
+
+  @media (max-width: 48rem) {
+    .site-footer__grid { grid-template-columns: 1fr 1fr; }
+    .site-footer__about { grid-column: 1 / -1; }
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+import Logo from './Logo.astro';
+import { LOCALES, PAGES, getPageUrl, localeConfig, type Locale, type Page } from '../i18n';
+import { copyFor } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+  page: Page;
+}
+const { locale, page } = Astro.props;
+const copy = copyFor(locale);
+const navPages = PAGES.filter((item) => item !== 'home');
+---
+<header class="site-header" data-open="false">
+  <a class="skip" href="#main">{copy.nav.skip}</a>
+  <div class="wrap site-header__inner">
+    <a class="site-header__brand" href={getPageUrl(locale, 'home')} aria-label={`Mohamed Hammad, ${copy.nav.home}`}>
+      <Logo tagline={copy.nav.tagline} />
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-toggle__open">{copy.nav.menu}</span>
+      <span class="menu-toggle__close">{copy.nav.close}</span>
+    </button>
+
+    <div class="site-nav" id="site-nav">
+      <nav aria-label={copy.nav.menu}>
+        <ul class="site-nav__list">
+          {navPages.map((item) => (
+            <li>
+              <a href={getPageUrl(locale, item)} aria-current={item === page ? 'page' : undefined}>
+                {copy.nav[item]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <ul class="lang" aria-label={copy.nav.language}>
+        {LOCALES.map((item) => (
+          <li>
+            <a
+              href={getPageUrl(item, page)}
+              lang={localeConfig[item].lang}
+              hreflang={localeConfig[item].lang}
+              aria-current={item === locale ? 'true' : undefined}
+              title={localeConfig[item].label}
+            >
+              {localeConfig[item].shortLabel}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle');
+  toggle?.addEventListener('click', () => {
+    const open = header!.dataset.open !== 'true';
+    header!.dataset.open = String(open);
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--page) 94%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.75rem; }
+  .site-header__brand { text-decoration: none; }
+
+  .skip { position: absolute; inset-inline-start: 1rem; top: -4rem; background: var(--wine); color: var(--page); padding: 0.6rem 1rem; z-index: 30; }
+  .skip:focus { top: 0.75rem; }
+
+  .site-nav { display: flex; align-items: center; gap: 2rem; }
+  .site-nav__list, .lang { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
+  .site-nav__list { gap: 1.75rem; }
+  .site-nav__list a {
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: var(--pencil);
+    padding-block: 0.5rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .site-nav__list a:hover { color: var(--ink); }
+  .site-nav__list a[aria-current='page'] { color: var(--wine); border-bottom-color: var(--wine); }
+
+  .lang { gap: 0.15rem; border-inline-start: 1px solid var(--line); padding-inline-start: 1.25rem; }
+  .lang a { text-decoration: none; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--pencil); padding: 0.35rem 0.45rem; }
+  .lang a:hover { color: var(--ink); }
+  .lang a[aria-current='true'] { color: var(--ink); font-weight: 600; }
+  .lang a[lang='ar-EG'] { letter-spacing: 0; font-family: var(--f-ar-body); font-size: 0.9rem; }
+
+  .menu-toggle {
+    display: none;
+    font: inherit;
+    font-size: 0.9rem;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+  }
+  .menu-toggle__close { display: none; }
+
+  @media (max-width: 56rem) {
+    .menu-toggle { display: inline-flex; }
+    .site-nav {
+      display: none;
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+      background: var(--page);
+      border-bottom: 1px solid var(--line);
+      padding: 1rem var(--gutter) 1.5rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+    .site-header[data-open='true'] .site-nav { display: flex; }
+    .site-header[data-open='true'] .menu-toggle__open { display: none; }
+    .site-header[data-open='true'] .menu-toggle__close { display: inline; }
+    .site-nav__list { flex-direction: column; align-items: stretch; gap: 0; }
+    .site-nav__list a { display: block; padding-block: 0.85rem; border-bottom: 1px solid var(--line); font-size: 1.05rem; color: var(--ink); }
+    .site-nav__list a[aria-current='page'] { border-bottom-color: var(--line); }
+    .lang { border-inline-start: 0; padding-inline-start: 0; gap: 0.5rem; }
+    .lang a { border: 1px solid var(--line); padding: 0.45rem 0.8rem; }
+    .lang a[aria-current='true'] { border-color: var(--ink); }
+  }
+</style>
