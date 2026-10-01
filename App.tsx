@@ -10,6 +10,8 @@ import {
   Contact,
 } from './components/Sections';
 import {
+  AMAZON_AUTHOR_URL,
+  BOOKS,
   DEFAULT_LOCALE,
   LOCALES,
   Locale,
@@ -66,7 +68,7 @@ const updateStructuredData = (locale: Locale, activePage: string) => {
       'https://www.linkedin.com/in/hammadmo',
       'https://twitter.com/hammadmo',
       'https://www.facebook.com/hammadmo',
-      'https://www.amazon.com/stores/Mohamed-Amin-Hammad/author/B0DLCXNQND',
+      AMAZON_AUTHOR_URL,
     ],
     knowsAbout: [
       'Radiology',
@@ -84,13 +86,32 @@ const updateStructuredData = (locale: Locale, activePage: string) => {
     author: [
       {
         '@type': 'Book',
-        name: 'Unraveling the INFJ Enigma',
-        url: 'https://www.amazon.com/stores/Mohamed-Amin-Hammad/author/B0DLCXNQND',
+        name: BOOKS.iSwear.title,
+        alternativeHeadline: BOOKS.iSwear.subtitle,
+        author: { '@type': 'Person', name: BOOKS.iSwear.author },
+        url: BOOKS.iSwear.kindle.url,
+        image: `${BASE_URL}${BOOKS.iSwear.cover}`,
+        workExample: [
+          {
+            '@type': 'Book',
+            name: BOOKS.iSwear.title,
+            bookFormat: 'https://schema.org/EBook',
+            url: BOOKS.iSwear.kindle.url,
+            identifier: { '@type': 'PropertyValue', propertyID: 'ASIN', value: BOOKS.iSwear.kindle.asin },
+          },
+          {
+            '@type': 'Book',
+            name: BOOKS.iSwear.title,
+            bookFormat: 'https://schema.org/Paperback',
+            url: BOOKS.iSwear.paperback.url,
+            identifier: { '@type': 'PropertyValue', propertyID: 'ASIN', value: BOOKS.iSwear.paperback.asin },
+          },
+        ],
       },
       {
         '@type': 'Book',
-        name: 'Finding Your Soulmate',
-        url: 'https://www.amazon.com/stores/Mohamed-Amin-Hammad/author/B0DLCXNQND',
+        name: BOOKS.infj.title,
+        url: AMAZON_AUTHOR_URL,
       },
     ],
   });
