@@ -146,18 +146,22 @@ export const translations = {
     },
     home: {
       eyebrow: 'Consultant Radiologist · Head of Radiology',
-      title: 'I spend my days seeing what others miss.',
+      titleLead: 'I spend my days seeing what',
+      titleAccent: 'others miss.',
+      captionName: 'Dr. Mohamed Amin Hammad',
+      captionRole: 'Head of Radiology',
       intro:
         "I'm Dr. Mohamed Amin Hammad, an Egyptian consultant radiologist and Head of Radiology at a private hospital. I built Radly to give radiologists their time back, and outside the reading room I travel and write about the quiet patterns of the human heart.",
       primaryCta: 'Read my story',
       secondaryCta: 'See Radly',
       portraitAlt: 'Portrait of Dr. Mohamed Amin Hammad',
-      facts: [
-        { term: 'Specialty', value: 'Consultant radiologist' },
-        { term: 'Role', value: 'Head of Radiology, private hospital' },
-        { term: 'Founder', value: 'Radly, AI radiology reporting' },
-        { term: 'Author', value: 'Two books on personality and love' },
+      stats: [
+        { value: 'Radiologist', label: 'Consultant' },
+        { value: 'Radly', label: 'Founder' },
+        { value: '2 books', label: 'Author' },
+        { value: '12 countries', label: 'Traveller' },
       ],
+      worksEyebrow: 'What I do',
       worksTitle: 'Beyond the reading room',
       works: [
         {
@@ -182,6 +186,8 @@ export const translations = {
           cta: 'Read the travel writing',
         },
       ],
+      newBook: 'New book',
+      getBook: 'Get the book',
       bookCta: 'About the book',
       contactTitle: "Let's talk",
       contactCta: 'Get in touch',
@@ -401,18 +407,22 @@ export const translations = {
     },
     home: {
       eyebrow: 'استشاري أشعة · رئيس قسم الأشعة',
-      title: 'شغلي إني أشوف اللي غيري مش واخد باله منه.',
+      titleLead: 'شغلي إني أشوف اللي غيري',
+      titleAccent: 'مش واخد باله منه.',
+      captionName: 'د. محمد أمين حماد',
+      captionRole: 'رئيس قسم الأشعة',
       intro:
         'أنا د. محمد أمين حماد، استشاري أشعة مصري ورئيس قسم الأشعة في مستشفى خاص. بنيت Radly عشان أطباء الأشعة يرجعلهم وقتهم، وبرّه غرفة الأشعة بسافر وبكتب عن الأنماط الهادية اللي جوه قلب الإنسان.',
       primaryCta: 'اقرأ الحكاية',
       secondaryCta: 'شوف Radly',
       portraitAlt: 'صورة د. محمد أمين حماد',
-      facts: [
-        { term: 'التخصص', value: 'استشاري أشعة' },
-        { term: 'الشغل', value: 'رئيس قسم الأشعة في مستشفى خاص' },
-        { term: 'مؤسس', value: 'Radly، ذكاء اصطناعي لتقارير الأشعة' },
-        { term: 'كاتب', value: 'كتابين عن الشخصية والحب' },
+      stats: [
+        { value: 'استشاري أشعة', label: 'التخصص' },
+        { value: 'Radly', label: 'مؤسس' },
+        { value: 'كتابين', label: 'كاتب' },
+        { value: '12 بلد', label: 'مسافر' },
       ],
+      worksEyebrow: 'اللي بعمله',
       worksTitle: 'برّه غرفة الأشعة',
       works: [
         {
@@ -437,6 +447,8 @@ export const translations = {
           cta: 'اقرأ كتابات السفر',
         },
       ],
+      newBook: 'كتاب جديد',
+      getBook: 'اشتري الكتاب',
       bookCta: 'عن الكتاب',
       contactTitle: 'يلا نتكلم',
       contactCta: 'تواصل معايا',
@@ -656,18 +668,22 @@ export const translations = {
     },
     home: {
       eyebrow: 'Radiólogo consultor · Jefe de Radiología',
-      title: 'Paso mis días viendo lo que a otros se les escapa.',
+      titleLead: 'Paso mis días viendo lo que',
+      titleAccent: 'a otros se les escapa.',
+      captionName: 'Dr. Mohamed Amin Hammad',
+      captionRole: 'Jefe de Radiología',
       intro:
         'Soy el Dr. Mohamed Amin Hammad, radiólogo consultor egipcio y jefe de Radiología en un hospital privado. Creé Radly para devolverles tiempo a los radiólogos y, fuera de la sala de lectura, viajo y escribo sobre los patrones silenciosos del corazón humano.',
       primaryCta: 'Leer mi historia',
       secondaryCta: 'Ver Radly',
       portraitAlt: 'Retrato del Dr. Mohamed Amin Hammad',
-      facts: [
-        { term: 'Especialidad', value: 'Radiólogo consultor' },
-        { term: 'Cargo', value: 'Jefe de Radiología, hospital privado' },
-        { term: 'Fundador', value: 'Radly, informes radiológicos con IA' },
-        { term: 'Autor', value: 'Dos libros sobre personalidad y amor' },
+      stats: [
+        { value: 'Radiólogo', label: 'Consultor' },
+        { value: 'Radly', label: 'Fundador' },
+        { value: '2 libros', label: 'Autor' },
+        { value: '12 países', label: 'Viajero' },
       ],
+      worksEyebrow: 'Lo que hago',
       worksTitle: 'Más allá de la sala de lectura',
       works: [
         {
@@ -692,6 +708,8 @@ export const translations = {
           cta: 'Leer sobre viajes',
         },
       ],
+      newBook: 'Nuevo libro',
+      getBook: 'Conseguir el libro',
       bookCta: 'Sobre el libro',
       contactTitle: 'Hablemos',
       contactCta: 'Contactar',

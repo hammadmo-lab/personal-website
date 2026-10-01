@@ -11,9 +11,9 @@ const copy = copyFor(locale);
 const travel = copy.travel;
 ---
 <Base locale={locale} page="travel">
-  <section class="wrap travel-hero">
+  <section class="glow"><div class="wrap travel-hero">
     <div class="travel-hero__copy">
-      <p class="eyebrow">{travel.eyebrow}</p>
+      <p class="eyebrow eyebrow--line">{travel.eyebrow}</p>
       <h1 lang="en">{travel.title}</h1>
       <p class="lede">{travel.intro}</p>
       <div class="actions">
@@ -24,20 +24,20 @@ const travel = copy.travel;
       </div>
       <blockquote class="travel-quote"><p>{travel.quote}</p></blockquote>
     </div>
-    <figure class="photo travel-hero__photo">
+    <figure class="framed travel-hero__photo">
       <img src="/images/iceland.jpg" alt={travel.imageAlt} width="768" height="1024" fetchpriority="high" />
       <figcaption>{travel.imageCaption}</figcaption>
     </figure>
-  </section>
+  </div></section>
 
-  <section class="section rule-top">
+  <section class="section light">
     <div class="wrap lens">
       <div class="lens__head">
         <p class="eyebrow">{travel.lensEyebrow}</p>
         <h2>{travel.lensTitle}</h2>
       </div>
       <div class="prose">
-        {travel.lensParagraphs.map((paragraph) => <p class="muted">{paragraph}</p>)}
+        {travel.lensParagraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
     </div>
   </section>
@@ -69,15 +69,17 @@ const travel = copy.travel;
     </div>
   </section>
 
-  <section class="section wrap diary">
-    <p class="eyebrow">{travel.visualEyebrow}</p>
-    <h2>{travel.visualTitle}</h2>
-    <div class="diary__text">
-      {travel.visualParagraphs.map((paragraph) => <p class="muted">{paragraph}</p>)}
+  <section class="section light">
+    <div class="wrap diary">
+      <p class="eyebrow">{travel.visualEyebrow}</p>
+      <h2>{travel.visualTitle}</h2>
+      <div class="diary__text">
+        {travel.visualParagraphs.map((paragraph) => <p class="muted">{paragraph}</p>)}
+      </div>
     </div>
   </section>
 
-  <section class="section rule-top" aria-labelledby="places-title">
+  <section class="section" aria-labelledby="places-title">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">{travel.destinationsEyebrow}</p>
@@ -94,10 +96,10 @@ const travel = copy.travel;
     </div>
   </section>
 
-  <section class="app-band" id="app" aria-labelledby="app-title">
+  <section class="app-band light" id="app" aria-labelledby="app-title">
     <div class="wrap app-band__grid">
       <div class="app-band__copy">
-        <p class="app-band__eyebrow">{travel.helperEyebrow}</p>
+        <p class="eyebrow">{travel.helperEyebrow}</p>
         <h2 id="app-title">{travel.helperTitle}</h2>
         <p class="app-band__intro">{travel.helperIntro}</p>
       </div>
@@ -106,7 +108,7 @@ const travel = copy.travel;
           {travel.helperFeatures.map((feature) => <li>{feature}</li>)}
         </ul>
         <p class="app-band__get">{travel.getApp}</p>
-        <StoreLinks locale={locale} ios={LINKS.passportTrailsIos} android={LINKS.passportTrailsAndroid} appName="Passport Trails" tone="dark" />
+        <StoreLinks locale={locale} ios={LINKS.passportTrailsIos} android={LINKS.passportTrailsAndroid} appName="Passport Trails" />
       </div>
     </div>
   </section>
@@ -116,8 +118,9 @@ const travel = copy.travel;
   .travel-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; padding-block: clamp(3rem, 7vw, 5.5rem); }
   .travel-hero__copy { display: grid; gap: 1.4rem; }
   .travel-hero h1 { font-size: var(--step-4); line-height: 1; letter-spacing: -0.02em; }
+  .travel-hero__photo { justify-self: center; width: min(100%, 25rem); }
   .travel-hero__photo img { aspect-ratio: 3 / 4; }
-  .travel-quote { margin: 1rem 0 0; border-inline-start: 2px solid var(--gold); padding-inline-start: 1.25rem; }
+  .travel-quote { margin: 0.75rem 0 0; border-inline-start: 2px solid var(--gold); padding-inline-start: 1.25rem; }
   .travel-quote p { font-family: var(--f-display); font-style: italic; font-size: var(--step-1); line-height: 1.45; max-width: 34rem; }
   :global([dir='rtl']) .travel-quote p { font-style: normal; }
 
@@ -125,14 +128,15 @@ const travel = copy.travel;
   .lens__head { display: grid; gap: 0.9rem; align-content: start; }
   .lens h2 { font-size: var(--step-3); }
 
-  .stories-section { background: var(--surface); border-block: 1px solid var(--line); }
+  .stories-section { border-bottom: 1px solid var(--line); }
   .stories__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1rem 2rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
   .stories__head .section-head { margin-bottom: 0; }
   .stories { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
-  .story { display: grid; gap: 0.7rem; height: 100%; align-content: start; padding: 1.75rem; border: 1px solid var(--line); background: var(--page); text-decoration: none; transition: border-color 0.2s ease; }
-  .story:hover { border-color: var(--wine); }
+  .story { display: grid; gap: 0.7rem; height: 100%; align-content: start; padding: 1.75rem; border: 1px solid var(--line); background: var(--surface); text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease; }
+  .story:hover { border-color: var(--gold); transform: translateY(-3px); }
   .story__title { font-family: var(--f-display); font-size: var(--step-1); line-height: 1.3; }
-  .story__cta { color: var(--wine); font-weight: 500; margin-top: 0.5rem; }
+  .story__cta { color: var(--accent); font-weight: 600; margin-top: 0.5rem; }
+  .story .muted { color: var(--muted); }
 
   .diary { display: grid; gap: 1.25rem; }
   .diary h2 { font-size: var(--step-3); max-width: 24ch; }
@@ -142,19 +146,17 @@ const travel = copy.travel;
   .place { display: grid; gap: 0.4rem; align-content: start; padding: 1.5rem 1.5rem 1.5rem 0; border-bottom: 1px solid var(--line); }
   :global([dir='rtl']) .place { padding: 1.5rem 0 1.5rem 1.5rem; }
   .place__name { font-family: var(--f-display); font-size: var(--step-1); }
-  .place .muted { font-size: 0.95rem; }
+  .place .muted { font-size: 0.95rem; color: var(--muted); }
 
-  .app-band { background: var(--night); color: var(--night-text); padding-block: clamp(3.5rem, 8vw, 6rem); }
+  .app-band { padding-block: clamp(3.5rem, 8vw, 6rem); }
   .app-band__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
   .app-band__copy { display: grid; gap: 1.25rem; }
-  .app-band__eyebrow { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
-  :global([dir='rtl']) .app-band__eyebrow { letter-spacing: 0; font-size: 0.95rem; }
   .app-band h2 { font-size: var(--step-3); }
-  .app-band__intro { color: var(--night-muted); max-width: 36rem; }
+  .app-band__intro { color: var(--muted); max-width: 36rem; }
   .app-band__side { display: grid; gap: 1.25rem; }
   .app-band__features { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
-  .app-band__features li { padding-bottom: 0.6rem; border-bottom: 1px solid var(--night-line); }
-  .app-band__get { font-size: 0.85rem; color: var(--night-muted); }
+  .app-band__features li { padding-bottom: 0.6rem; border-bottom: 1px solid var(--line); }
+  .app-band__get { font-size: 0.85rem; color: var(--faint); }
 
   @media (max-width: 56rem) {
     .travel-hero, .lens, .app-band__grid { grid-template-columns: 1fr; }

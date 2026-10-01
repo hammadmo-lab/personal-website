@@ -46,13 +46,13 @@ const social = [
 <style>
   .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); padding-block: 2.5rem var(--section); border-top: 1px solid var(--line); }
   .contact__email, .contact__social { display: grid; gap: 1rem; align-content: start; min-width: 0; }
-  .contact__address { font-family: 'Newsreader Variable', Georgia, serif; font-size: var(--step-2); color: var(--wine); overflow-wrap: anywhere; text-decoration-color: var(--gold); }
+  .contact__address { font-family: var(--f-display); font-size: var(--step-2); color: var(--gold); overflow-wrap: anywhere; text-decoration-color: rgba(214, 173, 114, 0.5); text-underline-offset: 0.2em; }
   .contact__social ul { list-style: none; margin: 0; padding: 0; }
   .contact__social a { display: grid; grid-template-columns: 7rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding-block: 1rem; border-bottom: 1px solid var(--line); text-decoration: none; }
   .contact__social li:first-child a { border-top: 1px solid var(--line); }
-  .contact__social a:hover .contact__network { color: var(--wine); }
-  .contact__network { font-family: 'Newsreader Variable', Georgia, serif; font-size: var(--step-1); }
-  .contact__social .arrow { color: var(--wine); }
+  .contact__social a:hover .contact__network { color: var(--gold); }
+  .contact__network { font-family: var(--f-display); font-size: var(--step-1); }
+  .contact__social .arrow { color: var(--gold); }
 
   @media (max-width: 48rem) {
     .contact { grid-template-columns: 1fr; }

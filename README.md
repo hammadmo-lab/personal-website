@@ -6,7 +6,7 @@ Source for [mohamedhammad.com](https://mohamedhammad.com): radiologist, founder 
 
 - [Astro](https://astro.build) static site, one real URL per page and language
 - English (`/`), Egyptian Arabic (`/ar/`, right-to-left) and Spanish (`/es/`)
-- Self-hosted fonts: Newsreader, Instrument Sans, Amiri, Noto Naskh Arabic
+- Self-hosted fonts: Bodoni Moda, Hanken Grotesk, Amiri, Noto Naskh Arabic
 - Deployed on Cloudflare Pages (build `npm run build`, output `dist`)
 
 ## Where things live
@@ -23,9 +23,10 @@ Source for [mohamedhammad.com](https://mohamedhammad.com): radiologist, founder 
 
 ## Brand
 
-"Editorial", burgundy edition: page `#F7F6F2`, ink `#1B1C1A`, burgundy `#5A2126`
-(the title colour of *I Swear I'll Find You*), butterfly gold `#CB9E6D`.
-The logo is a lowercase italic "mh" in an oval, like a publisher's colophon.
+"Night Edition": a dark, cinematic base (`#0F0A0B`) with cream type (`#F5EEE6`), gold details (`#D6AD72`)
+and a burgundy glow (`#7A212D`). Long reading sections switch to cream bands (`#F3EBE0`).
+Headlines are Bodoni Moda (Amiri in Arabic), body text Hanken Grotesk (Noto Naskh Arabic).
+The logo is "Mohamed *Hammad*" with a gold italic surname and an "mh" colophon mark.
 
 ## Run locally
 

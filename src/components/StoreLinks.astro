@@ -7,16 +7,15 @@ interface Props {
   ios: string;
   android: string;
   appName: string;
-  tone?: 'dark' | 'light';
 }
-const { locale, ios, android, appName, tone = 'light' } = Astro.props;
+const { locale, ios, android, appName } = Astro.props;
 const copy = copyFor(locale);
 const stores = [
   { name: copy.common.appStore, href: ios },
   { name: copy.common.googlePlay, href: android },
 ];
 ---
-<ul class:list={['stores', `stores--${tone}`]}>
+<ul class="stores">
   {stores.map((store) => (
     <li>
       <a href={store.href} target="_blank" rel="noopener noreferrer">
@@ -30,13 +29,9 @@ const stores = [
 
 <style>
   .stores { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .stores a { display: grid; min-width: 9.5rem; padding: 0.6rem 1.1rem; text-decoration: none; border: 1px solid; line-height: 1.25; transition: background-color 0.2s ease; }
-  .stores__small { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
-  :global([dir='rtl']) .stores__small { letter-spacing: 0; text-transform: none; font-size: 0.8rem; }
-  .stores__name { font-size: 1.05rem; font-weight: 500; font-family: 'Instrument Sans', Arial, sans-serif; }
-  .stores--light a { border-color: var(--ink); color: var(--ink); }
-  .stores--light a:hover { background: var(--ink); color: var(--page); }
-  .stores--dark a { border-color: rgba(233, 231, 226, 0.4); color: var(--night-text); }
-  .stores--dark a:hover { background: rgba(233, 231, 226, 0.08); border-color: var(--night-text); }
-  .stores--dark a:focus-visible { outline-color: var(--gold); }
+  .stores a { display: grid; min-width: 9.75rem; padding: 0.6rem 1.1rem; text-decoration: none; border: 1px solid var(--outline); color: var(--text); line-height: 1.25; transition: border-color 0.2s ease, background-color 0.2s ease; }
+  .stores a:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .stores__small { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+  :global([dir='rtl']) .stores__small { letter-spacing: 0; text-transform: none; font-size: 0.85rem; }
+  .stores__name { font-size: 1.05rem; font-weight: 600; font-family: 'Hanken Grotesk Variable', Arial, sans-serif; }
 </style>

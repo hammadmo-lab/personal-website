@@ -1,33 +1,29 @@
 ---
 /**
- * The "colophon" mark: a lowercase italic "mh" inside an oval, like a publisher's mark
- * on a book spine, followed by the wordmark.
+ * Wordmark: "Mohamed" in Bodoni with a gold italic "Hammad", led by the "mh" colophon mark.
  */
 interface Props {
   tagline?: string;
-  inverse?: boolean;
 }
-const { tagline, inverse = false } = Astro.props;
+const { tagline } = Astro.props;
 ---
-<span class:list={['logo', { 'logo--inverse': inverse }]}>
+<span class="logo">
   <svg class="logo__mark" viewBox="0 0 56 68" aria-hidden="true" focusable="false">
-    <ellipse cx="28" cy="34" rx="26" ry="32" fill="none" stroke="currentColor" stroke-width="1.6" />
-    <text x="28" y="44" text-anchor="middle" font-family="'Newsreader Variable', Georgia, serif" font-style="italic" font-size="29" fill="currentColor">mh</text>
+    <ellipse cx="28" cy="34" rx="26" ry="32" fill="none" stroke="currentColor" stroke-width="1.5" />
+    <text x="28" y="44" text-anchor="middle" font-family="'Bodoni Moda Variable', Georgia, serif" font-style="italic" font-size="27" fill="currentColor">mh</text>
   </svg>
   <span class="logo__text">
-    <span class="logo__name" lang="en">Mohamed Hammad</span>
+    <span class="logo__name" lang="en">Mohamed <i>Hammad</i></span>
     {tagline && <span class="logo__tagline">{tagline}</span>}
   </span>
 </span>
 
 <style>
-  .logo { display: inline-flex; align-items: center; gap: 0.75rem; color: var(--ink); }
-  .logo__mark { width: 2.1rem; height: auto; color: var(--wine); flex: none; }
+  .logo { display: inline-flex; align-items: center; gap: 0.8rem; color: var(--cream); }
+  .logo__mark { width: 2.1rem; height: auto; color: var(--gold); flex: none; }
   .logo__text { display: grid; line-height: 1.1; }
-  .logo__name { font-family: 'Newsreader Variable', Georgia, serif; font-size: 1.35rem; letter-spacing: -0.01em; white-space: nowrap; }
-  .logo__tagline { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pencil); margin-top: 0.2rem; white-space: nowrap; }
-  :global([dir='rtl']) .logo__tagline { letter-spacing: 0; font-size: 0.8rem; }
-  .logo--inverse { color: var(--page); }
-  .logo--inverse .logo__mark { color: var(--gold); }
-  .logo--inverse .logo__tagline { color: var(--night-muted); }
+  .logo__name { font-family: 'Bodoni Moda Variable', Georgia, serif; font-size: 1.4rem; letter-spacing: 0.01em; white-space: nowrap; }
+  .logo__name i { color: var(--gold); }
+  .logo__tagline { font-family: 'Hanken Grotesk Variable', Arial, sans-serif; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); margin-top: 0.3rem; white-space: nowrap; }
+  :global([dir='rtl']) .logo__tagline { font-family: var(--f-ar-body); letter-spacing: 0; font-size: 0.8rem; }
 </style>
