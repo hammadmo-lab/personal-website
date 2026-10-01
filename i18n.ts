@@ -44,6 +44,26 @@ export const getLocalePath = (locale: Locale) => localeConfig[locale].path;
 export const getPageUrl = (locale: Locale, page: string) =>
   `${getLocalePath(locale)}#${page}`;
 
+export const AMAZON_AUTHOR_URL = 'https://www.amazon.com/stores/author/B0BRQHPSH9';
+
+// Locale-independent book data. Titles stay in English in every locale (published titles).
+export const BOOKS = {
+  iSwear: {
+    title: "I Swear I'll Find You",
+    subtitle:
+      "A Doctor's Journey Through Personality, Astrology, and Love Languages to Find the One, and How You Can Find Yours",
+    author: 'Mohamed Hammad',
+    cover: '/i-swear-ill-find-you.jpg',
+    kindle: { url: 'https://www.amazon.com/dp/B0HLKXP2QW', asin: 'B0HLKXP2QW' },
+    paperback: { url: 'https://www.amazon.com/dp/B0HLKVR7CS', asin: 'B0HLKVR7CS' },
+  },
+  infj: {
+    title: 'Unraveling the INFJ Enigma',
+    cover: '/unraveling-infj-enigma.jpg',
+    amazon: 'https://www.amazon.com/Unraveling-INFJ-Enigma-Understanding-Compassionate/dp/B0BS1FNS7F',
+  },
+} as const;
+
 export const translations = {
   en: {
     meta: {
@@ -51,7 +71,7 @@ export const translations = {
       description:
         'Consultant Radiologist, Founder of Radly AI, World Traveler, and Author. Exploring medicine, technology, and adventure.',
       keywords:
-        'Mohamed Amin Hammad, Dr. Hammad, Radiologist, Radly, AI in Radiology, Medical Technology, World Traveler, Travel Blog, Author, INFJ, Finding Your Soulmate, Medical Innovation',
+        'Mohamed Amin Hammad, Dr. Hammad, Radiologist, Radly, AI in Radiology, Medical Technology, World Traveler, Travel Blog, Author, INFJ, I Swear I\'ll Find You, love languages, astrology compatibility, Medical Innovation',
       ogImageAlt: 'Dr. Mohamed Amin Hammad - Radiologist, Founder & Explorer',
       schemaDescription:
         'Consultant Radiologist, Founder of Radly AI, World Traveler, and Author',
@@ -68,13 +88,12 @@ export const translations = {
       appStoreAlt: 'Download on the App Store',
       android: 'Android',
       googlePlay: 'Get it on Google Play',
-      viewAmazon: 'View on Amazon',
       readArticle: 'Read article',
       visitPassportTrails: 'Visit PassportTrails.com',
     },
     footer: {
       bio:
-        'Radiologist, Founder, Traveler, Author.\nBringing clarity to medicine and life through technology and exploration.',
+        'Radiologist, founder, traveler, author.\nWriting about medicine, technology, travel, and the quiet patterns of the human heart.',
       quickLinks: 'Quick Links',
       connect: 'Connect',
       copyright: 'All rights reserved.',
@@ -112,9 +131,10 @@ export const translations = {
       imageAlt: 'Dr. Hammad at Radiology Desk',
       caption: 'Diagnostics & Dedication',
       paragraphs: [
-        "I'm Dr. Mohamed Amin Hammad, an Egyptian radiologist who ended up creating software and traveling the world when I wasn't planning to do either. Life has a way of revealing paths you didn't know you were looking for. As Head of Radiology at a private hospital, I spend my days helping people find answers through imaging, but I've learned that the real answers often come from asking better questions.",
-        "Radiology reporting can be painfully repetitive. After writing the same patterns hundreds of times, I couldn't ignore the inefficiency anymore. So I built Radly, an AI assistant that handles the repetitive parts so radiologists can focus on the diagnostic thinking that actually matters. It's not about replacing doctors. It's about giving them their time back to do what only humans can do: connect the dots that machines miss.",
-        "When I'm not at the hospital or coding, I travel. Not the Instagram kind of travel, but the kind where you sit in a cafe in Dubrovnik or walk through Reykjavik at midnight and realize how much you don't know. Through Passport Trails, I share what I've learned across 12 countries with Arabic speakers who want practical guidance, not just pretty pictures. Travel taught me that understanding different perspectives isn't optional if you want to build things that actually help people.",
+        "I'm Dr. Mohamed Amin Hammad, an Egyptian consultant radiologist, a builder of software, and a traveler who has learned that the most important things rarely show up on a scan.",
+        "By day, I'm Head of Radiology at a private hospital. After writing the same report patterns hundreds of times, I built Radly, an AI assistant that handles the repetitive parts of radiology reporting, so doctors can get back to the thinking that matters.",
+        "Beyond the hospital, I'm the voice behind Passport Trails, an Arabic travel blog and app that helps Egyptian and Arab travelers navigate visas, budgets, and journeys with honest, practical guidance. I don't travel to collect stamps. I travel to understand what a place does to my inner weather.",
+        "At heart, I'm an INFJ with a lifelong fascination with psychology and the nature of human personality: why people love the way they do, why some connections just work, and why others fall apart no matter how hard two people try. That curiosity became my books, written for readers who think too much and feel too deeply.",
       ],
     },
     radly: {
@@ -212,19 +232,41 @@ export const translations = {
       title: 'Written Works',
       subtitle: 'Author',
       intro: [
-        "I've always been curious about why people are the way they are. As an INFJ, I spent years trying to understand my own patterns before I realized other people might have the same questions. So I wrote about it.",
-        "These books aren't academic. They're what I wish someone had told me when I was trying to figure out personality types, relationships, and why some connections just work. Written for people who think too much and feel too deeply.",
+        "I've always been curious about why people are the way they are. As an INFJ, I spent years trying to understand my own patterns in love, before I realized other people had the same questions. So I wrote about it, honestly, including the parts I got wrong.",
+        "These books aren't academic. They're what I wish someone had handed me at eighteen: personality types, astrology, love languages, and the quiet patterns we repeat without noticing. Written for people who think too much and feel too deeply.",
       ],
+      newTab: '(opens in a new tab)',
+      featured: {
+        ...BOOKS.iSwear,
+        eyebrow: 'New',
+        alt: "I Swear I'll Find You book cover by Mohamed Hammad",
+        tagline: 'I wrote this promise when I was seventeen. It took me twenty years to keep it.',
+        description: [
+          'He loved her for three years. He spoke to her once. He asked her to confirm her own name.',
+          "At seventeen, Mohamed Hammad wrote a poem to a girl who didn't exist yet, and ended it with a promise he had no business making: I swear I'll find you. He just didn't know how many times he'd get it wrong first.",
+          'The silence that cost him the girl in the lecture hall. The marriage he mistook for love. The betrayal that ended it, and the years he stayed anyway. And the long nights of wondering whether the woman in his poems had ever existed outside his head.',
+          'Then a stranger wrote to him first. She signed her letter with a butterfly.',
+          "You won't find a checklist in this book. You'll find a mirror.",
+        ],
+        bullets: [
+          'Why the people you fall for hardest are often the worst for you',
+          'The lie your personality tells you every time a red flag appears',
+          'Why a calm, steady love can feel "boring," and why that feeling is wrong',
+          'How to recognize your person, even if they arrive as a letter from a stranger',
+        ],
+        closing: 'She was out there all along. So is yours.',
+        links: [
+          { label: 'Kindle eBook', href: BOOKS.iSwear.kindle.url, primary: true },
+          { label: 'Paperback', href: BOOKS.iSwear.paperback.url, primary: false },
+        ],
+      },
       items: [
         {
-          title: 'Unraveling the INFJ Enigma',
+          title: BOOKS.infj.title,
           desc: 'Understanding the most rare personality type with compassion and depth.',
           alt: 'Unraveling the INFJ Enigma Book Cover',
-        },
-        {
-          title: 'Finding Your Soulmate',
-          desc: 'Using the Zodiac and Natal Charts to find your perfect match.',
-          alt: 'Finding Your Soulmate Book Cover',
+          cover: BOOKS.infj.cover,
+          links: [{ label: 'View on Amazon', href: BOOKS.infj.amazon }],
         },
       ],
     },
@@ -253,7 +295,7 @@ export const translations = {
       description:
         'الموقع الشخصي لد. محمد أمين حماد: استشاري أشعة، مؤسس Radly، وكاتب سفر في Passport Trails. مساحة عن الطب، التكنولوجيا، السفر، والكتابة.',
       keywords:
-        'محمد أمين حماد, دكتور محمد حماد, استشاري أشعة, Radly, الذكاء الاصطناعي في الأشعة, Passport Trails, سفر, كتب, INFJ',
+        'محمد أمين حماد, دكتور محمد حماد, استشاري أشعة, Radly, الذكاء الاصطناعي في الأشعة, Passport Trails, سفر, كتب, INFJ, I Swear I\'ll Find You, لغات الحب, توافق الأبراج',
       ogImageAlt: 'د. محمد أمين حماد - استشاري أشعة ومؤسس وكاتب سفر',
       schemaDescription:
         'استشاري أشعة، مؤسس Radly، مسافر، وكاتب',
@@ -270,13 +312,12 @@ export const translations = {
       appStoreAlt: 'تحميل من App Store',
       android: 'أندرويد',
       googlePlay: 'متاح على Google Play',
-      viewAmazon: 'شوفه على أمازون',
       readArticle: 'اقرأ المقال',
       visitPassportTrails: 'زور PassportTrails.com',
     },
     footer: {
       bio:
-        'استشاري أشعة، مؤسس، مسافر، وكاتب.\nبحاول أقرّب الوضوح للطب والحياة من خلال التكنولوجيا والسفر.',
+        'استشاري أشعة، مؤسس، مسافر، وكاتب.\nبكتب عن الطب، والتكنولوجيا، والسفر، والأنماط الهادية اللي جوه قلب الإنسان.',
       quickLinks: 'روابط سريعة',
       connect: 'تواصل',
       copyright: 'كل الحقوق محفوظة.',
@@ -314,9 +355,10 @@ export const translations = {
       imageAlt: 'د. حماد في مكان العمل',
       caption: 'تشخيص واهتمام بالتفاصيل',
       paragraphs: [
-        'أنا د. محمد أمين حماد، طبيب أشعة مصري لقيت نفسي ببني برامج وبسافر العالم، من غير ما أكون مخطط إن ده يبقى جزء كبير من الحكاية. الحياة أحيانًا بتفتحلك أبواب ماكنتش واخد بالك إنك بتدور عليها. في شغلي كرئيس قسم أشعة في مستشفى خاص، يومي كله عن إننا نساعد الناس تلاقي إجابات من خلال الصور. بس مع الوقت فهمت إن الإجابات الحقيقية ساعات بتبدأ من سؤال أحسن.',
-        'تقارير الأشعة ممكن تبقى متكررة بشكل مرهق. بعد ما تكتب نفس الجمل ونفس الأنماط مئات المرات، صعب تتجاهل إن في وقت بيتحرق في حاجات ممكن تتعمل أذكى. عشان كده بنيت Radly: مساعد بالذكاء الاصطناعي يشيل الجزء المكرر، ويسيب للدكتور مساحة يفكر في التشخيص نفسه. الفكرة مش استبدال الطبيب. الفكرة إن الطبيب يسترد وقت يقدر يستخدمه في الحاجة اللي البشر لسه بيعملوها أحسن: ربط النقط.',
-        'ولما مبقاش في المستشفى أو قدام الكود، بسافر. مش سفر صور وخلاص، لكن السفر اللي يخليك تقعد في كافيه في دوبروفنيك أو تتمشى في ريكيافيك نص الليل وتكتشف إنك لسه بتتعلم. في Passport Trails بكتب للعرب اللي عايزين معلومة عملية وصادقة، مش بس صورة حلوة. السفر علمني إن فهم وجهات النظر المختلفة مش رفاهية لو عايز تبني حاجة تنفع الناس بجد.',
+        'أنا د. محمد أمين حماد، استشاري أشعة مصري، ببني برامج، ومسافر اتعلّم إن أهم الحاجات نادرًا ما بتبان في أي أشعة.',
+        'بالنهار، أنا رئيس قسم الأشعة في مستشفى خاص. بعد ما كتبت نفس أنماط التقارير مئات المرات، بنيت Radly: مساعد بالذكاء الاصطناعي بيشيل الأجزاء المتكررة من تقارير الأشعة، عشان الدكاترة يرجعوا يركزوا في التفكير اللي فارق بجد.',
+        'وبعيد عن المستشفى، أنا الصوت اللي ورا Passport Trails، مدونة وتطبيق سفر بالعربي بيساعدوا المسافرين المصريين والعرب يعدّوا من لخبطة التأشيرات والميزانيات والرحلات، بنصايح صادقة وعملية. أنا مش بسافر عشان أجمّع أختام على الباسبور. بسافر عشان أفهم المكان بيعمل إيه في الطقس اللي جوايا.',
+        'وفي الأساس، أنا INFJ عندي شغف من زمان بعلم النفس وطبيعة الشخصية البشرية: ليه الناس بتحب بالطريقة اللي بتحب بيها، ليه في علاقات بتمشي كده لوحدها، وليه علاقات تانية بتقع مهما الاتنين حاولوا. الفضول ده هو اللي بقى كتبي، مكتوبة للناس اللي بتفكر كتير وبتحس بعمق.',
       ],
     },
     radly: {
@@ -414,19 +456,41 @@ export const translations = {
       title: 'الكتب',
       subtitle: 'كاتب',
       intro: [
-        'دايمًا كان عندي فضول أفهم الناس بتتصرف ليه بالشكل ده. كـ INFJ، قضيت سنين أحاول أفهم أنماطي أنا قبل ما أكتشف إن في ناس كتير عندها نفس الأسئلة. فكتبت عنها.',
-        'الكتب دي مش أكاديمية. هي أقرب لحاجات كنت أتمنى حد يقولهالي وأنا بحاول أفهم أنماط الشخصية، العلاقات، وليه في علاقات بتحس إنها ماشية من غير شرح كتير. مكتوبة للناس اللي بتفكر كتير وبتحس بعمق.',
+        'دايمًا كان عندي فضول أفهم الناس بتبقى كده ليه. كـ INFJ، قضيت سنين بحاول أفهم أنماطي أنا في الحب، لحد ما اكتشفت إن ناس كتير عندها نفس الأسئلة. فكتبت عن ده، بصراحة، حتى الأجزاء اللي غلطت فيها.',
+        'الكتب دي مش أكاديمية. هي الحاجات اللي كنت أتمنى حد يحطها في إيدي وأنا عندي تمنتاشر سنة: أنماط الشخصية، الأبراج، لغات الحب، والأنماط الهادية اللي بنكررها من غير ما ناخد بالنا. مكتوبة للناس اللي بتفكر كتير وبتحس بعمق.',
       ],
+      newTab: '(بيفتح في تاب جديدة)',
+      featured: {
+        ...BOOKS.iSwear,
+        eyebrow: 'جديد',
+        alt: "غلاف كتاب I Swear I'll Find You لمحمد حماد",
+        tagline: 'كتبت الوعد ده وأنا عندي سبعتاشر سنة. وأخد مني عشرين سنة عشان أوفي بيه.',
+        description: [
+          'حبّها تلات سنين. كلّمها مرة واحدة بس. وفي المرة دي سألها يتأكد من اسمها.',
+          'وهو عنده سبعتاشر سنة، محمد حماد كتب قصيدة لبنت لسه ماكانتش موجودة، وختمها بوعد ماكانش من حقه أصلًا يوعد بيه: أُقسم إني هلاقيكي. بس ماكانش يعرف إنه هيغلط كام مرة الأول.',
+          'السكوت اللي خسّره بنت المدرج. الجواز اللي افتكره حب. الخيانة اللي نهّته، والسنين اللي فضل فيها برضه. والليالي الطويلة اللي كان بيسأل فيها نفسه: هي الست اللي في قصايده كانت موجودة أصلًا برّه دماغه؟',
+          'وبعدين واحدة غريبة كتبتله هي الأول. ومضت رسالتها بفراشة.',
+          'مش هتلاقي في الكتاب ده قايمة شروط. هتلاقي مراية.',
+        ],
+        bullets: [
+          'ليه الناس اللي بتقع في حبهم أوي غالبًا بيبقوا أسوأ حاجة ليك',
+          'الكدبة اللي شخصيتك بتقولهالك كل ما تظهر علامة حمرا',
+          'ليه الحب الهادي والثابت ممكن تحسه "ممل"، وليه الإحساس ده غلط',
+          'إزاي تعرف الشخص بتاعك، حتى لو جه في شكل رسالة من حد غريب',
+        ],
+        closing: 'كانت موجودة طول الوقت. واللي ليك موجود برضه.',
+        links: [
+          { label: 'نسخة Kindle إلكترونية', href: BOOKS.iSwear.kindle.url, primary: true },
+          { label: 'نسخة ورقية', href: BOOKS.iSwear.paperback.url, primary: false },
+        ],
+      },
       items: [
         {
-          title: 'Unraveling the INFJ Enigma',
+          title: BOOKS.infj.title,
           desc: 'فهم أندر أنماط الشخصية بتعاطف وعمق.',
           alt: 'غلاف كتاب Unraveling the INFJ Enigma',
-        },
-        {
-          title: 'Finding Your Soulmate',
-          desc: 'استخدام الأبراج والخرائط الفلكية لفهم التوافق والعلاقات.',
-          alt: 'غلاف كتاب Finding Your Soulmate',
+          cover: BOOKS.infj.cover,
+          links: [{ label: 'شوفه على أمازون', href: BOOKS.infj.amazon }],
         },
       ],
     },
@@ -455,7 +519,7 @@ export const translations = {
       description:
         'Radiólogo consultor, fundador de Radly AI, viajero y autor. Un espacio sobre medicina, tecnología, viajes y escritura.',
       keywords:
-        'Mohamed Amin Hammad, Dr. Hammad, Radiólogo, Radly, IA en radiología, tecnología médica, viajes, autor, INFJ',
+        'Mohamed Amin Hammad, Dr. Hammad, Radiólogo, Radly, IA en radiología, tecnología médica, viajes, autor, INFJ, I Swear I\'ll Find You, lenguajes del amor, compatibilidad astrológica',
       ogImageAlt: 'Dr. Mohamed Amin Hammad - Radiólogo, Fundador y Explorador',
       schemaDescription:
         'Radiólogo consultor, fundador de Radly AI, viajero y autor',
@@ -472,13 +536,12 @@ export const translations = {
       appStoreAlt: 'Descargar en App Store',
       android: 'Android',
       googlePlay: 'Disponible en Google Play',
-      viewAmazon: 'Ver en Amazon',
       readArticle: 'Leer artículo',
       visitPassportTrails: 'Visitar PassportTrails.com',
     },
     footer: {
       bio:
-        'Radiólogo, fundador, viajero y autor.\nBuscando claridad en la medicina y en la vida a través de la tecnología y la exploración.',
+        'Radiólogo, fundador, viajero y autor.\nEscribo sobre medicina, tecnología, viajes y los patrones silenciosos del corazón humano.',
       quickLinks: 'Enlaces rápidos',
       connect: 'Conectar',
       copyright: 'Todos los derechos reservados.',
@@ -516,9 +579,10 @@ export const translations = {
       imageAlt: 'Dr. Hammad en radiología',
       caption: 'Diagnóstico y dedicación',
       paragraphs: [
-        'Soy el Dr. Mohamed Amin Hammad, un radiólogo egipcio que terminó creando software y viajando por el mundo sin haberlo planeado así. La vida a veces revela caminos que no sabías que estabas buscando. Como jefe de radiología en un hospital privado, ayudo a las personas a encontrar respuestas a través de imágenes, pero he aprendido que las respuestas reales suelen venir de hacer mejores preguntas.',
-        'Los informes de radiología pueden ser dolorosamente repetitivos. Después de escribir los mismos patrones cientos de veces, ya no podía ignorar la ineficiencia. Por eso construí Radly, un asistente de IA que se encarga de las partes repetitivas para que los radiólogos puedan concentrarse en el razonamiento diagnóstico. No se trata de reemplazar médicos. Se trata de devolverles tiempo para hacer lo que solo los humanos hacen bien: conectar los puntos.',
-        'Cuando no estoy en el hospital o programando, viajo. No el tipo de viaje de Instagram, sino el que te hace sentarte en un cafe en Dubrovnik o caminar por Reikiavik a medianoche y darte cuenta de cuánto no sabes. En Passport Trails comparto lo aprendido con viajeros árabes que quieren orientación práctica, no solo fotos bonitas.',
+        'Soy el Dr. Mohamed Amin Hammad, radiólogo consultor egipcio, creador de software y viajero, y he aprendido que las cosas más importantes casi nunca aparecen en una imagen.',
+        'De día, soy jefe de Radiología en un hospital privado. Después de escribir cientos de veces los mismos informes, creé Radly, un asistente de inteligencia artificial que se encarga de las partes repetitivas de los informes radiológicos, para que los médicos puedan volver a centrarse en lo que de verdad importa: pensar.',
+        'Fuera del hospital, soy la voz detrás de Passport Trails, un blog y una aplicación de viajes en árabe que ayudan a los viajeros egipcios y árabes a orientarse entre visados, presupuestos e itinerarios, con consejos honestos y prácticos. No viajo para coleccionar sellos. Viajo para entender lo que un lugar le hace a mi clima interior.',
+        'En el fondo, soy un INFJ con una fascinación de toda la vida por la psicología y la naturaleza de la personalidad humana: por qué amamos como amamos, por qué algunas conexiones simplemente funcionan, y por qué otras se derrumban por mucho que dos personas lo intenten. Esa curiosidad se convirtió en mis libros, escritos para lectores que piensan demasiado y sienten demasiado.',
       ],
     },
     radly: {
@@ -616,19 +680,41 @@ export const translations = {
       title: 'Obras escritas',
       subtitle: 'Autor',
       intro: [
-        'Siempre he tenido curiosidad por entender por qué las personas son como son. Como INFJ, pasé años intentando comprender mis propios patrones antes de darme cuenta de que otras personas tenían las mismas preguntas.',
-        'Estos libros no son académicos. Son lo que me habría gustado que alguien me dijera cuando intentaba entender los tipos de personalidad, las relaciones y por qué algunas conexiones simplemente funcionan.',
+        'Siempre he sentido curiosidad por entender por qué las personas son como son. Como INFJ, pasé años intentando comprender mis propios patrones en el amor, hasta que me di cuenta de que otras personas se hacían las mismas preguntas. Así que escribí sobre ello, con honestidad, incluidas las partes en las que me equivoqué.',
+        'Estos libros no son académicos. Son lo que me habría gustado que alguien me pusiera en las manos a los dieciocho: tipos de personalidad, astrología, lenguajes del amor y esos patrones silenciosos que repetimos sin darnos cuenta. Escritos para quienes piensan demasiado y sienten demasiado.',
       ],
+      newTab: '(se abre en una pestaña nueva)',
+      featured: {
+        ...BOOKS.iSwear,
+        eyebrow: 'Nuevo',
+        alt: "Portada de I Swear I'll Find You, de Mohamed Hammad",
+        tagline: 'Escribí esta promesa a los diecisiete años. Tardé veinte en cumplirla.',
+        description: [
+          'La quiso durante tres años. Habló con ella una sola vez. Y fue para pedirle que le confirmara su nombre.',
+          'A los diecisiete, Mohamed Hammad escribió un poema para una chica que todavía no existía, y lo terminó con una promesa que no tenía ningún derecho a hacer: te juro que te encontraré. Lo que no sabía era cuántas veces se equivocaría antes.',
+          'El silencio que le costó a la chica del aula. El matrimonio que confundió con amor. La traición que le puso fin, y los años que se quedó de todos modos. Y las largas noches preguntándose si la mujer de sus poemas había existido alguna vez fuera de su cabeza.',
+          'Hasta que una desconocida le escribió primero. Firmó su carta con una mariposa.',
+          'En este libro no vas a encontrar una lista de requisitos. Vas a encontrar un espejo.',
+        ],
+        bullets: [
+          'Por qué las personas de las que te enamoras con más fuerza suelen ser las que peor te hacen',
+          'La mentira que te cuenta tu personalidad cada vez que aparece una señal de alarma',
+          'Por qué un amor tranquilo y estable puede parecer "aburrido", y por qué esa sensación se equivoca',
+          'Cómo reconocer a tu persona, aunque llegue en forma de carta de alguien desconocido',
+        ],
+        closing: 'Ella siempre estuvo ahí. Tu persona también lo está.',
+        links: [
+          { label: 'eBook Kindle', href: BOOKS.iSwear.kindle.url, primary: true },
+          { label: 'Tapa blanda', href: BOOKS.iSwear.paperback.url, primary: false },
+        ],
+      },
       items: [
         {
-          title: 'Unraveling the INFJ Enigma',
+          title: BOOKS.infj.title,
           desc: 'Comprender el tipo de personalidad más raro con compasión y profundidad.',
           alt: 'Portada de Unraveling the INFJ Enigma',
-        },
-        {
-          title: 'Finding Your Soulmate',
-          desc: 'Usar el zodiaco y las cartas natales para encontrar compatibilidad.',
-          alt: 'Portada de Finding Your Soulmate',
+          cover: BOOKS.infj.cover,
+          links: [{ label: 'Ver en Amazon', href: BOOKS.infj.amazon }],
         },
       ],
     },

@@ -434,52 +434,132 @@ export const Travel = ({ copy, isRtl }: SectionProps) => (
   </div>
 );
 
-export const Books = ({ copy }: SectionProps) => (
-  <div className="animate-fade-in-up">
-    <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-brand-ivory opacity-100">
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')]"></div>
-      </div>
+const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-4 focus-visible:ring-offset-brand-porcelain';
 
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        <SectionTitle title={copy.books.title} subtitle={copy.books.subtitle} />
+export const Books = ({ copy }: SectionProps) => {
+  const featured = copy.books.featured;
 
-        <div className="max-w-3xl mx-auto mb-16 text-center">
-          {copy.books.intro.map((paragraph) => (
-            <p key={paragraph} className="text-brand-muted text-lg leading-relaxed mb-6 last:mb-0">
-              {paragraph}
-            </p>
-          ))}
+  return (
+    <div className="animate-fade-in-up">
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-brand-ivory opacity-100">
+          <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')]"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-          {copy.books.items.map((book, idx) => (
-            <div key={book.title} className="flex flex-col items-center text-center group perspective-1000">
-              <div className={`w-56 h-80 shadow-2xl mb-10 relative transition-all duration-500 transform-style-3d ${idx === 0 ? 'group-hover:rotate-y-12' : 'group-hover:rotate-y-[-12deg]'} group-hover:rotate-x-6 group-hover:scale-105`}>
-                <img
-                  src={idx === 0 ? '/unraveling-infj-enigma.jpg' : '/finding-your-soulmate.jpg'}
-                  alt={book.alt}
-                  className="w-full h-full object-cover rounded-sm"
-                />
-                <div className={`absolute ${idx === 0 ? 'left-0 -translate-x-full origin-right rotate-y-90' : 'right-0 translate-x-full origin-left rotate-y-[-90deg]'} top-0 bottom-0 w-4 bg-white/20 transform`}></div>
-              </div>
-              <h3 className="font-serif text-3xl mb-3 text-brand-ink">{book.title}</h3>
-              <p className="text-brand-taupe mb-6 max-w-xs leading-relaxed">{book.desc}</p>
-              <a
-                href={idx === 0 ? 'https://www.amazon.com/Unraveling-INFJ-Enigma-Understanding-Compassionate/dp/B0BS1FNS7F' : 'https://www.amazon.com/Finding-Your-Soulmate-Zodiac-Perfect-ebook/dp/B0BRNVWK9Y'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block border-b border-brand-ink pb-1 text-brand-ink hover:text-brand-gold hover:border-brand-gold transition-colors uppercase text-xs tracking-widest"
-              >
-                {copy.common.viewAmazon}
-              </a>
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          <SectionTitle title={copy.books.title} subtitle={copy.books.subtitle} />
+
+          <div className="max-w-3xl mx-auto mb-16 text-center">
+            {copy.books.intro.map((paragraph) => (
+              <p key={paragraph} className="text-brand-muted text-lg leading-relaxed mb-6 last:mb-0">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <article
+            aria-labelledby="featured-book-title"
+            className="mb-24 grid grid-cols-1 md:grid-cols-12 bg-brand-porcelain border border-brand-border shadow-2xl rounded-sm overflow-hidden"
+          >
+            <div className="md:col-span-5 bg-brand-border/30 px-8 py-10 md:p-10 flex items-center justify-center">
+              <img
+                src={featured.cover}
+                alt={featured.alt}
+                width={1600}
+                height={2560}
+                className="w-full max-w-[15rem] md:max-w-sm aspect-[5/8] object-cover rounded-sm shadow-2xl transition-transform duration-700 hover:-translate-y-1"
+              />
             </div>
-          ))}
+
+            <div className="md:col-span-7 p-8 md:p-12 text-start">
+              <span className="inline-block px-3 py-1 border border-brand-gold text-brand-gold text-xs uppercase tracking-[0.25em] mb-6">
+                {featured.eyebrow}
+              </span>
+              <h3 id="featured-book-title" lang="en" className="font-serif text-4xl md:text-5xl text-brand-ink leading-tight mb-4">
+                {featured.title}
+              </h3>
+              <p lang="en" className="text-brand-taupe text-base md:text-lg leading-relaxed mb-3">
+                {featured.subtitle}
+              </p>
+              <p lang="en" className="text-xs uppercase tracking-[0.2em] text-brand-muted mb-8">
+                {featured.author}
+              </p>
+
+              <blockquote className="font-serif italic text-xl md:text-2xl text-brand-ink leading-snug border-s-2 border-brand-gold ps-5 mb-8">
+                {featured.tagline}
+              </blockquote>
+
+              {featured.description.map((paragraph) => (
+                <p key={paragraph} className="text-brand-muted leading-relaxed mb-4">
+                  {paragraph}
+                </p>
+              ))}
+
+              <ul className="my-8 space-y-3">
+                {featured.bullets.map((bullet) => (
+                  <li key={bullet} className="flex items-start gap-3 text-brand-ink/90 leading-relaxed">
+                    <span aria-hidden="true" className="mt-2.5 w-1.5 h-1.5 rotate-45 bg-brand-gold shrink-0"></span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="font-serif text-xl text-brand-ink mb-8">{featured.closing}</p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                {featured.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center justify-center px-8 py-3 text-sm tracking-widest uppercase transition-all duration-300 hover:-translate-y-0.5 ${focusRing} ${
+                      link.primary
+                        ? 'bg-brand-ink text-white hover:bg-brand-slate shadow-lg hover:shadow-xl'
+                        : 'border border-brand-ink text-brand-ink hover:border-brand-gold hover:text-brand-gold'
+                    }`}
+                  >
+                    {link.label}
+                    <span className="sr-only"> {copy.books.newTab}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          <div className="flex flex-wrap justify-center gap-20">
+            {copy.books.items.map((book) => (
+              <div key={book.title} className="w-full md:w-[calc(50%-2.5rem)] flex flex-col items-center text-center group perspective-1000">
+                <div className="w-56 h-80 shadow-2xl mb-10 relative transition-all duration-500 transform-style-3d group-hover:rotate-y-12 group-hover:rotate-x-6 group-hover:scale-105">
+                  <img
+                    src={book.cover}
+                    alt={book.alt}
+                    className="w-full h-full object-cover rounded-sm"
+                  />
+                  <div className="absolute left-0 -translate-x-full origin-right rotate-y-90 top-0 bottom-0 w-4 bg-white/20 transform"></div>
+                </div>
+                <h3 lang="en" className="font-serif text-3xl mb-3 text-brand-ink">{book.title}</h3>
+                <p className="text-brand-taupe mb-6 max-w-xs leading-relaxed">{book.desc}</p>
+                {book.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-block border-b border-brand-ink pb-1 text-brand-ink hover:text-brand-gold hover:border-brand-gold transition-colors uppercase text-xs tracking-widest ${focusRing}`}
+                  >
+                    {link.label}
+                    <span className="sr-only"> {copy.books.newTab}</span>
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  </div>
-);
+      </section>
+    </div>
+  );
+};
 
 export const Gallery = ({ copy }: SectionProps) => (
   <div className="animate-fade-in-up">
