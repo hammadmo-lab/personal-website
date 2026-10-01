@@ -56,6 +56,8 @@ export const LINKS = {
   radly: 'https://radly.app',
   radlyIos: 'https://apps.apple.com/app/radly-assistant/id6754604993',
   radlyAndroid: 'https://play.google.com/store/apps/details?id=com.radly.app',
+  /** Radly Telegram bot. Leave empty to hide the button. */
+  radlyTelegram: '' as string,
   passportTrails: 'https://passporttrails.com',
   passportTrailsIos: 'https://apps.apple.com/us/app/passport-trails/id6761397513',
   passportTrailsAndroid: 'https://play.google.com/store/apps/details?id=com.passporttrails.app',
@@ -205,9 +207,20 @@ export const translations = {
       ],
     },
     radly: {
-      eyebrow: 'The Startup',
-      title: 'Radly Assistant',
+      eyebrow: 'Voice-supported reporting',
+      title: 'Radly',
+      titleLead: 'Report drafts in half the time.',
+      titleAccent: 'You dictate. We structure. You sign.',
       intro:
+        'Radly captures your findings by voice, structures them into professional reports, and puts sign-off in your hands, where it belongs.',
+      primaryCta: 'Get started free',
+      secondaryCta: 'See how it works',
+      perks: ['No credit card required', '5 free reports a month'],
+      getOnYourTerms: 'Get Radly on your terms',
+      telegramSmall: 'Chat with',
+      telegramName: 'Telegram Bot',
+      storyTitle: 'Why I built it',
+      story:
         'After writing my thousandth "no acute findings" report, I had a choice: keep complaining or build something. So I built Radly, an AI assistant that handles the boring parts of radiology reporting. It is not perfect, but it gives radiologists their time back to actually think about the cases that matter.',
       features: [
         'Automated Reporting Workflows',
@@ -215,8 +228,8 @@ export const translations = {
         'Built by a Radiologist, for Radiologists',
         'Available on iOS and Android',
       ],
-      visit: 'Or visit Radly.app',
-      imageAlt: 'The Radly app home screen',
+      visit: 'Visit Radly.app',
+      imageAlt: 'A radiologist\'s desk with a CT scan on one screen and a Radly report on the other',
     },
     travel: {
       eyebrow: 'Travel writing for Arabic explorers',
@@ -466,9 +479,20 @@ export const translations = {
       ],
     },
     radly: {
-      eyebrow: 'المشروع',
-      title: 'Radly Assistant',
+      eyebrow: 'تقارير بالصوت',
+      title: 'Radly',
+      titleLead: 'مسودة التقرير في نص الوقت.',
+      titleAccent: 'إنت بتملي. إحنا بننظّم. وإنت بتوقّع.',
       intro:
+        'Radly بياخد الـ findings بصوتك، وبيرتبها في تقرير احترافي، والتوقيع النهائي بيفضل في إيدك، مكانه الطبيعي.',
+      primaryCta: 'ابدأ مجانًا',
+      secondaryCta: 'شوف بيشتغل إزاي',
+      perks: ['من غير كارت ائتمان', '5 تقارير مجانًا كل شهر'],
+      getOnYourTerms: 'استخدم Radly بالطريقة اللي تريحك',
+      telegramSmall: 'كلّم',
+      telegramName: 'Telegram Bot',
+      storyTitle: 'ليه بنيته',
+      story:
         'بعد ما كتبت تقرير "no acute findings" للمرة الألف، كان قدامي اختيارين: أفضل أشتكي أو أبني حاجة. فبنيت Radly، مساعد ذكي يشيل الأجزاء المملة والمتكررة من تقارير الأشعة. هو مش مثالي، بس بيدّي أطباء الأشعة وقتهم يرجع عشان يركزوا في الحالات اللي محتاجة تفكير بجد.',
       features: [
         'سير عمل أسرع لتقارير الأشعة',
@@ -476,8 +500,8 @@ export const translations = {
         'مبني بواسطة طبيب أشعة لأطباء الأشعة',
         'متاح على iOS وAndroid',
       ],
-      visit: 'أو زور Radly.app',
-      imageAlt: 'الشاشة الرئيسية لتطبيق Radly',
+      visit: 'زور Radly.app',
+      imageAlt: 'مكتب طبيب أشعة عليه أشعة مقطعية على شاشة وتقرير Radly على الشاشة التانية',
     },
     travel: {
       eyebrow: 'كتابة سفر للعرب اللي بيحبوا يخططوا صح',
@@ -727,9 +751,20 @@ export const translations = {
       ],
     },
     radly: {
-      eyebrow: 'La startup',
-      title: 'Radly Assistant',
+      eyebrow: 'Informes por voz',
+      title: 'Radly',
+      titleLead: 'Borradores de informes en la mitad de tiempo.',
+      titleAccent: 'Tú dictas. Nosotros estructuramos. Tú firmas.',
       intro:
+        'Radly capta tus hallazgos por voz, los estructura en informes profesionales y deja la firma en tus manos, donde debe estar.',
+      primaryCta: 'Empieza gratis',
+      secondaryCta: 'Cómo funciona',
+      perks: ['Sin tarjeta de crédito', '5 informes gratis al mes'],
+      getOnYourTerms: 'Usa Radly como prefieras',
+      telegramSmall: 'Chatea con',
+      telegramName: 'Telegram Bot',
+      storyTitle: 'Por qué lo creé',
+      story:
         'Después de escribir mi informe número mil de "no acute findings", tenía dos opciones: seguir quejándome o construir algo. Así nació Radly, un asistente de IA que se ocupa de las partes repetitivas de los informes radiológicos. No es perfecto, pero devuelve a los radiólogos tiempo para pensar en los casos que importan.',
       features: [
         'Flujos automatizados de informes',
@@ -737,8 +772,8 @@ export const translations = {
         'Creado por un radiólogo para radiólogos',
         'Disponible en iOS y Android',
       ],
-      visit: 'O visita Radly.app',
-      imageAlt: 'Pantalla principal de la app Radly',
+      visit: 'Visitar Radly.app',
+      imageAlt: 'Escritorio de un radiólogo con una tomografía en una pantalla y un informe de Radly en la otra',
     },
     travel: {
       eyebrow: 'Escritura de viajes para exploradores árabes',

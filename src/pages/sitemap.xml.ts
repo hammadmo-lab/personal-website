@@ -5,7 +5,7 @@ import { SITE_URL, absoluteUrl } from '../lib/site';
 const images: Partial<Record<(typeof PAGES)[number], { loc: string; title: string }[]>> = {
   home: [{ loc: '/images/portrait.jpg', title: 'Dr. Mohamed Amin Hammad' }],
   about: [{ loc: '/images/at-work.jpg', title: 'Dr. Mohamed Amin Hammad at work' }],
-  radly: [{ loc: '/images/radly-app.jpg', title: 'Radly app' }],
+  radly: [{ loc: '/images/radly-desk.jpg', title: 'Radly, voice-supported radiology reporting' }],
   travel: [{ loc: '/images/iceland.jpg', title: 'Iceland, Passport Trails' }],
   books: [
     { loc: BOOKS.iSwear.cover, title: `${BOOKS.iSwear.title} book cover` },
