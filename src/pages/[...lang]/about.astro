@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import { getPageUrl, type Locale } from '../../i18n';
+import { copyFor, localePaths } from '../../lib/site';
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.props as { locale: Locale };
+const copy = copyFor(locale);
+const [lead, ...rest] = copy.about.paragraphs;
+---
+<Base locale={locale} page="about">
+  <PageHead eyebrow={copy.about.subtitle} title={copy.about.title} />
+
+  <section class="light about-band">
+    <div class="wrap about">
+      <div class="about__text">
+        <p class="about__lead">{lead}</p>
+        <div class="prose">
+          {rest.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <div class="actions">
+          <a class="btn" href={getPageUrl(locale, 'books')}>{copy.nav.books}</a>
+          <a class="text-link" href={getPageUrl(locale, 'contact')}>{copy.home.contactCta} <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <figure class="framed about__photo">
+        <img src="/images/at-work.jpg" alt={copy.about.imageAlt} width="677" height="1024" loading="lazy" />
+        <figcaption>{copy.home.captionName}<span>{copy.about.caption}</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <dl class="stats">
+        {copy.home.stats.map((stat) => (
+          <div>
+            <dt>{stat.label}</dt>
+            <dd lang={stat.value === 'Radly' ? 'en' : undefined}>{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about-band { padding-block: clamp(3.5rem, 8vw, 6rem); }
+  .about { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(2.5rem, 7vw, 6rem); align-items: start; }
+  .about__text { display: grid; gap: 2rem; }
+  .about__lead { font-family: var(--f-display); font-size: var(--step-2); line-height: 1.3; max-width: 34rem; }
+  .about .prose { color: var(--muted); }
+  .about__photo { position: sticky; top: 8rem; }
+  .about__photo img { aspect-ratio: 677 / 1024; }
+
+  @media (max-width: 52rem) {
+    .about { grid-template-columns: 1fr; }
+    .about__photo { position: relative; top: auto; width: min(100% - 1.5rem, 20rem); margin-inline-start: 1.1rem; }
+  }
+</style>

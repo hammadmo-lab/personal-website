@@ -1,0 +1,89 @@
+---
+import '@fontsource-variable/bodoni-moda/opsz.css';
+import '@fontsource-variable/bodoni-moda/opsz-italic.css';
+import '@fontsource-variable/hanken-grotesk/wght.css';
+import '@fontsource/herr-von-muellerhoff/400.css';
+import '@fontsource/amiri/400.css';
+import '@fontsource/amiri/700.css';
+import '@fontsource/noto-naskh-arabic/400.css';
+import '@fontsource/noto-naskh-arabic/600.css';
+import '../styles/global.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { DEFAULT_LOCALE, LOCALES, localeConfig, getPageUrl, type Locale, type Page } from '../i18n';
+import { SITE_URL, absoluteUrl, copyFor } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+  page: Page;
+  ogImage?: string;
+  structuredData?: object;
+  /** For pages outside the main navigation (404): own title, no canonical, not indexed. */
+  standalone?: { title: string; description: string };
+}
+const { locale, page, ogImage = '/og-image.jpg', structuredData, standalone } = Astro.props;
+const copy = copyFor(locale);
+const config = localeConfig[locale];
+const meta = standalone ?? copy.pages[page];
+const canonical = absoluteUrl(locale, page);
+const image = `${SITE_URL}${ogImage}`;
+
+// Old single-page links used hashes (/#books). Send them to the new pages.
+const legacyRedirect = page === 'home' && !standalone
+  ? `(function(){var m={${['about', 'radly', 'travel', 'books', 'contact']
+      .map((p) => `"#${p}":"${getPageUrl(locale, p as Page)}"`)
+      .join(',')},"#gallery":"${getPageUrl(locale, 'home')}","#home":"${getPageUrl(locale, 'home')}"};var t=m[location.hash];if(t&&t!==location.pathname)location.replace(t);})();`
+  : '';
+---
+<!doctype html>
+<html lang={config.lang} dir={config.dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <meta name="keywords" content={copy.meta.keywords} />
+    <meta name="author" content="Dr. Mohamed Amin Hammad" />
+    <meta name="theme-color" content="#0f0a0b" />
+    {standalone ? <meta name="robots" content="noindex" /> : (
+      <>
+        <link rel="canonical" href={canonical} />
+        {LOCALES.map((item) => (
+          <link rel="alternate" hreflang={localeConfig[item].lang} href={absoluteUrl(item, page)} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={absoluteUrl(DEFAULT_LOCALE, page)} />
+      </>
+    )}
+
+    <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dr. Mohamed Amin Hammad" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={copy.meta.ogImageAlt} />
+    <meta property="og:locale" content={config.ogLocale} />
+    {LOCALES.filter((item) => item !== locale).map((item) => (
+      <meta property="og:locale:alternate" content={localeConfig[item].ogLocale} />
+    ))}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="twitter:image" content={image} />
+
+    {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+    {legacyRedirect && <script is:inline set:html={legacyRedirect} />}
+  </head>
+  <body>
+    <Header locale={locale} page={page} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

@@ -1,0 +1,155 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPageUrl, type Locale, type Page } from '../../i18n';
+import { absoluteUrl, copyFor, localePaths } from '../../lib/site';
+import { personSchema } from '../../lib/schema';
+
+export const getStaticPaths = localePaths;
+
+const { locale } = Astro.props as { locale: Locale };
+const copy = copyFor(locale);
+const home = copy.home;
+const book = copy.books.featured;
+const englishTitles = new Set(['Radly', 'Passport Trails']);
+---
+<Base locale={locale} page="home" structuredData={personSchema(locale, absoluteUrl(locale, 'home'))}>
+  <section class="glow">
+    <div class="wrap hero">
+      <div class="hero__copy">
+        <p class="eyebrow eyebrow--line">{home.eyebrow}</p>
+        <h1>{home.titleLead} <span class="accent">{home.titleAccent}</span></h1>
+        <p class="lede">{home.intro}</p>
+        <div class="actions">
+          <a class="btn" href={getPageUrl(locale, 'about')}>{home.primaryCta}</a>
+          <a class="btn btn--outline" href={getPageUrl(locale, 'radly')}>{home.secondaryCta}</a>
+        </div>
+      </div>
+      <figure class="framed hero__photo">
+        <img src="/images/portrait.jpg" alt={home.portraitAlt} width="900" height="1125" fetchpriority="high" />
+        <figcaption>{home.captionName}<span>{home.captionRole}</span></figcaption>
+      </figure>
+    </div>
+    <div class="wrap">
+      <dl class="stats">
+        {home.stats.map((stat) => (
+          <div>
+            <dt>{stat.label}</dt>
+            <dd lang={stat.value === 'Radly' ? 'en' : undefined}>{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="light book-band" aria-labelledby="home-book-title">
+    <div class="wrap book-band__inner">
+      <img class="book-band__cover" src={book.cover} alt={book.alt} width="1000" height="1600" loading="lazy" />
+      <div class="book-band__copy">
+        <p class="eyebrow">{home.newBook}</p>
+        <h2 id="home-book-title" lang="en">{book.title}</h2>
+        <p class="book-band__tagline">{book.tagline}</p>
+      </div>
+      <a class="btn book-band__cta" href={getPageUrl(locale, 'books')}>{home.getBook}</a>
+    </div>
+  </section>
+
+  <section class="section works" aria-labelledby="works-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--line">{home.worksEyebrow}</p>
+        <h2 id="works-title">{home.worksTitle}</h2>
+      </div>
+      <ul class="works__list">
+        {home.works.map((work) => (
+          <li>
+            <a class="work" href={getPageUrl(locale, work.page as Page)}>
+              <span class="eyebrow">{work.label}</span>
+              <span class="work__title" lang={englishTitles.has(work.title) ? 'en' : undefined}>{work.title}</span>
+              <span class="work__desc">{work.desc}</span>
+              <span class="work__cta">{work.cta} <span class="arrow" aria-hidden="true">→</span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="quote glow">
+    <div class="wrap">
+      <blockquote>
+        <p>{copy.travel.quote}</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section light" aria-labelledby="home-contact-title">
+    <div class="wrap contact-teaser">
+      <div>
+        <h2 id="home-contact-title">{home.contactTitle}</h2>
+        <p class="lede">{copy.contact.intro}</p>
+      </div>
+      <a class="btn" href={getPageUrl(locale, 'contact')}>{home.contactCta}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+    padding-block: clamp(3rem, 7vw, 6rem) clamp(3.5rem, 6vw, 5rem);
+  }
+  .hero__copy { display: grid; gap: 1.75rem; }
+  .hero h1 { font-size: var(--step-4); line-height: 0.98; letter-spacing: -0.02em; max-width: 13ch; }
+  :global([dir='rtl']) .hero h1 { line-height: 1.3; max-width: 15ch; }
+  .hero .actions { margin-top: 0.25rem; }
+  .hero__photo { justify-self: center; width: min(100%, 27rem); }
+  .hero__photo img { aspect-ratio: 4 / 5; }
+
+  .book-band { border-top: 1px solid var(--gold); }
+  .book-band__inner { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: clamp(1.25rem, 4vw, 3rem); align-items: center; padding-block: clamp(1.75rem, 3vw, 2.5rem); }
+  .book-band__cover { width: clamp(4.5rem, 7vw, 6rem); aspect-ratio: 5 / 8; object-fit: cover; box-shadow: 0 18px 30px -14px rgba(20, 12, 13, 0.55); outline: 1px solid rgba(20, 12, 13, 0.12); }
+  .book-band__copy { display: grid; gap: 0.35rem; }
+  .book-band h2 { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.4rem); }
+  .book-band__tagline { color: var(--muted); font-style: italic; max-width: 44rem; }
+  :global([dir='rtl']) .book-band__tagline { font-style: normal; }
+
+  .works__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .work {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+    height: 100%;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .work:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .work__title { font-family: var(--f-display); font-size: var(--step-2); line-height: 1.1; }
+  .work__desc { color: var(--muted); }
+  .work__cta { color: var(--gold); font-weight: 600; margin-top: 0.5rem; }
+
+  .quote { padding-block: clamp(4rem, 9vw, 7rem); border-block: 1px solid var(--line); }
+  .quote blockquote { margin: 0; max-width: 56rem; display: grid; gap: 1.5rem; }
+  .quote blockquote::before { content: ''; width: 3.5rem; height: 2px; background: var(--gold); }
+  .quote p { font-family: var(--f-display); font-size: var(--step-3); line-height: 1.2; }
+  :global([dir='rtl']) .quote p { line-height: 1.6; }
+
+  .contact-teaser { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 2rem; }
+  .contact-teaser > div { display: grid; gap: 1rem; }
+  .contact-teaser h2 { font-size: var(--step-3); }
+
+  @media (max-width: 56rem) {
+    .hero { grid-template-columns: 1fr; }
+    .hero__photo { order: -1; width: min(100% - 1.5rem, 22rem); margin-top: 1rem; }
+    .works__list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 40rem) {
+    .book-band__inner { grid-template-columns: auto minmax(0, 1fr); }
+    .book-band__cta { grid-column: 1 / -1; }
+  }
+</style>
