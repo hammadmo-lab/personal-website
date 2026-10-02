@@ -6,7 +6,7 @@ Source for [mohamedhammad.com](https://mohamedhammad.com): radiologist, founder 
 
 - [Astro](https://astro.build) static site, one real URL per page and language
 - English (`/`), Egyptian Arabic (`/ar/`, right-to-left) and Spanish (`/es/`)
-- Self-hosted fonts: Bodoni Moda, Hanken Grotesk, Amiri, Noto Naskh Arabic
+- Self-hosted fonts: Bodoni Moda, Hanken Grotesk, Herr Von Muellerhoff (logo), Amiri, Noto Naskh Arabic
 - Deployed on Cloudflare Pages (build `npm run build`, output `dist`)
 
 ## Where things live
@@ -26,7 +26,7 @@ Source for [mohamedhammad.com](https://mohamedhammad.com): radiologist, founder 
 "Night Edition": a dark, cinematic base (`#0F0A0B`) with cream type (`#F5EEE6`), gold details (`#D6AD72`)
 and a burgundy glow (`#7A212D`). Long reading sections switch to cream bands (`#F3EBE0`).
 Headlines are Bodoni Moda (Amiri in Arabic), body text Hanken Grotesk (Noto Naskh Arabic).
-The logo is "Mohamed *Hammad*" with a gold italic surname and an "mh" colophon mark.
+The logo is a gold handwritten signature, "Mohamed Hammad" (Herr Von Muellerhoff); the favicon is "MH" in the same hand.
 
 ## Run locally
 

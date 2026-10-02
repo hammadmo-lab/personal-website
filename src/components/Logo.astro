@@ -1,29 +1,52 @@
 ---
 /**
- * Wordmark: "Mohamed" in Bodoni with a gold italic "Hammad", led by the "mh" colophon mark.
+ * Signature logo: "Mohamed Hammad" handwritten in gold (Herr Von Muellerhoff).
+ * The large variant adds a pen swash and a small-caps line underneath.
  */
 interface Props {
+  size?: 'header' | 'large';
   tagline?: string;
 }
-const { tagline } = Astro.props;
+const { size = 'header', tagline } = Astro.props;
 ---
-<span class="logo">
-  <svg class="logo__mark" viewBox="0 0 56 68" aria-hidden="true" focusable="false">
-    <ellipse cx="28" cy="34" rx="26" ry="32" fill="none" stroke="currentColor" stroke-width="1.5" />
-    <text x="28" y="44" text-anchor="middle" font-family="'Bodoni Moda Variable', Georgia, serif" font-style="italic" font-size="27" fill="currentColor">mh</text>
-  </svg>
-  <span class="logo__text">
-    <span class="logo__name" lang="en">Mohamed <i>Hammad</i></span>
-    {tagline && <span class="logo__tagline">{tagline}</span>}
-  </span>
+<span class:list={['logo', `logo--${size}`]}>
+  <span class="logo__sign" lang="en">Mohamed Hammad</span>
+  {size === 'large' && (
+    <svg class="logo__swash" viewBox="0 0 300 14" aria-hidden="true" focusable="false">
+      <path d="M2 9 C 70 2, 170 2, 238 6 S 290 12, 298 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+    </svg>
+  )}
+  {size === 'large' && tagline && <span class="logo__tagline">{tagline}</span>}
 </span>
 
 <style>
-  .logo { display: inline-flex; align-items: center; gap: 0.8rem; color: var(--cream); }
-  .logo__mark { width: 2.1rem; height: auto; color: var(--gold); flex: none; }
-  .logo__text { display: grid; line-height: 1.1; }
-  .logo__name { font-family: 'Bodoni Moda Variable', Georgia, serif; font-size: 1.4rem; letter-spacing: 0.01em; white-space: nowrap; }
-  .logo__name i { color: var(--gold); }
-  .logo__tagline { font-family: 'Hanken Grotesk Variable', Arial, sans-serif; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); margin-top: 0.3rem; white-space: nowrap; }
-  :global([dir='rtl']) .logo__tagline { font-family: var(--f-ar-body); letter-spacing: 0; font-size: 0.8rem; }
+  .logo { display: inline-grid; justify-items: start; color: var(--gold); }
+  .logo__sign {
+    font-family: 'Herr Von Muellerhoff', 'Snell Roundhand', cursive;
+    font-weight: 400;
+    line-height: 0.9;
+    white-space: nowrap;
+    color: var(--gold);
+    /* Script glyphs overhang their box; keep room so swashes are not clipped. */
+    padding-inline: 0.1em 0.25em;
+    padding-block: 0.12em 0.05em;
+  }
+  .logo--header .logo__sign { font-size: 2.6rem; }
+  .logo--large .logo__sign { font-size: clamp(3rem, 2.2rem + 2.4vw, 4.2rem); }
+  .logo__swash { width: 13rem; height: 0.8rem; margin-top: -0.2rem; color: var(--gold); }
+  .logo__tagline {
+    margin-top: 0.6rem;
+    font-family: 'Hanken Grotesk Variable', Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  :global([dir='rtl']) .logo__tagline { font-family: var(--f-ar-body); letter-spacing: 0; font-size: 0.85rem; }
+  :global([dir='rtl']) .logo { justify-items: end; }
+
+  @media (max-width: 30rem) {
+    .logo--header .logo__sign { font-size: 2.2rem; }
+  }
 </style>
