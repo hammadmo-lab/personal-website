@@ -6,7 +6,10 @@ const images: Partial<Record<(typeof PAGES)[number], { loc: string; title: strin
   home: [{ loc: '/images/portrait.jpg', title: 'Dr. Mohamed Amin Hammad' }],
   about: [{ loc: '/images/at-work.jpg', title: 'Dr. Mohamed Amin Hammad at work' }],
   radly: [{ loc: '/images/radly-desk.jpg', title: 'Radly, voice-supported radiology reporting' }],
-  travel: [{ loc: '/images/iceland.jpg', title: 'Iceland, Passport Trails' }],
+  travel: [
+    { loc: '/images/iceland.jpg', title: 'Iceland, Passport Trails' },
+    { loc: '/images/passport-trails-splash.jpg', title: 'Passport Trails app' },
+  ],
   books: [
     { loc: BOOKS.iSwear.cover, title: `${BOOKS.iSwear.title} book cover` },
     { loc: BOOKS.infj.cover, title: `${BOOKS.infj.title} book cover` },

@@ -293,7 +293,8 @@ export const translations = {
         ['Croatia', '🇭🇷', 'Dubrovnik taught me that popular places can still feel personal if you find your own pace.'],
         ['Bosnia & Herzegovina', '🇧🇦', 'Layered, emotional, and human. Some destinations stay with you because they ask better questions than they answer.'],
       ],
-      helperEyebrow: 'Secondary Helper',
+      helperEyebrow: 'The Passport Trails app',
+      splashAlt: 'Passport Trails app launch screen: a mountain and trail logo with the line "Your travel companion"',
       helperTitle: 'The app handles the planning friction.',
       helperIntro:
         'I built the Passport Trails app for the practical layer: visa requirements, allowed stay, documents, best time to visit, destination basics, and focused Arabic travel tips. The blog gives the judgment; the app keeps the essentials close.',
@@ -565,7 +566,8 @@ export const translations = {
         ['كرواتيا', '🇭🇷', 'دوبروفنيك علمتني إن الأماكن المشهورة ممكن تفضل شخصية لو لقيت إيقاعك الخاص.'],
         ['البوسنة والهرسك', '🇧🇦', 'طبقات كتير، إحساس عالي، وإنسانية واضحة. في أماكن بتفضل معاك لأنها بتسأل أسئلة أحسن من إجاباتها.'],
       ],
-      helperEyebrow: 'مساعد جانبي',
+      helperEyebrow: 'تطبيق Passport Trails',
+      splashAlt: 'شاشة بداية تطبيق Passport Trails: لوجو جبل وطريق، ومكتوب "رفيقك في السفر"',
       helperTitle: 'التطبيق بيشيل احتكاك التخطيط.',
       helperIntro:
         'بنيت تطبيق Passport Trails للجزء العملي: متطلبات التأشيرة، مدة الإقامة، الأوراق، أفضل وقت للزيارة، أساسيات الوجهة، ونصايح سفر عربية مركزة. المدونة بتديك الحكم والخبرة، والتطبيق بيخلي الأساسيات قريبة.',
@@ -837,7 +839,8 @@ export const translations = {
         ['Croacia', '🇭🇷', 'Dubrovnik me enseñó que los lugares populares pueden sentirse personales si encuentras tu propio ritmo.'],
         ['Bosnia y Herzegovina', '🇧🇦', 'Con capas, emoción y humanidad. Algunos destinos se quedan contigo porque hacen mejores preguntas que respuestas.'],
       ],
-      helperEyebrow: 'Ayuda secundaria',
+      helperEyebrow: 'La app de Passport Trails',
+      splashAlt: 'Pantalla de inicio de la app Passport Trails: un logo de montaña y sendero con la frase "Tu compañero de viaje"',
       helperTitle: 'La app reduce la fricción de planificar.',
       helperIntro:
         'Construí la app Passport Trails para la parte práctica: requisitos de visa, estancia permitida, documentos, mejor época para visitar, información básica del destino y consejos de viaje en árabe.',
