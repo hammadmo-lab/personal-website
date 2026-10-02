@@ -57,7 +57,7 @@ export const LINKS = {
   radlyIos: 'https://apps.apple.com/app/radly-assistant/id6754604993',
   radlyAndroid: 'https://play.google.com/store/apps/details?id=com.radly.app',
   /** Radly Telegram bot. Leave empty to hide the button. */
-  radlyTelegram: '' as string,
+  radlyTelegram: 'https://t.me/radly_assistant_bot' as string,
   passportTrails: 'https://passporttrails.com',
   passportTrailsIos: 'https://apps.apple.com/us/app/passport-trails/id6761397513',
   passportTrailsAndroid: 'https://play.google.com/store/apps/details?id=com.passporttrails.app',
