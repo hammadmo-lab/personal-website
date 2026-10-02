@@ -568,7 +568,7 @@ export const translations = {
       ],
       helperEyebrow: 'تطبيق Passport Trails',
       splashAlt: 'شاشة بداية تطبيق Passport Trails: لوجو جبل وطريق، ومكتوب "رفيقك في السفر"',
-      helperTitle: 'التطبيق بيشيل احتكاك التخطيط.',
+      helperTitle: 'التطبيق بيشيل عنك وجع دماغ التخطيط.',
       helperIntro:
         'بنيت تطبيق Passport Trails للجزء العملي: متطلبات التأشيرة، مدة الإقامة، الأوراق، أفضل وقت للزيارة، أساسيات الوجهة، ونصايح سفر عربية مركزة. المدونة بتديك الحكم والخبرة، والتطبيق بيخلي الأساسيات قريبة.',
       helperFeatures: [
