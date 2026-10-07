@@ -7,36 +7,39 @@ const jobTitle: Record<Locale, string> = {
   es: 'Radiólogo consultor',
 };
 
+const bookEntry = (book: (typeof BOOKS)[keyof typeof BOOKS]) => ({
+  '@type': 'Book',
+  name: book.title,
+  alternativeHeadline: book.subtitle,
+  author: { '@type': 'Person', name: book.author },
+  url: book.kindle.url,
+  image: `${SITE_URL}${book.cover}`,
+  workExample: [
+    {
+      '@type': 'Book',
+      name: book.title,
+      bookFormat: 'https://schema.org/EBook',
+      url: book.kindle.url,
+      identifier: { '@type': 'PropertyValue', propertyID: 'ASIN', value: book.kindle.asin },
+    },
+    {
+      '@type': 'Book',
+      name: book.title,
+      bookFormat: 'https://schema.org/Paperback',
+      url: book.paperback.url,
+      identifier: { '@type': 'PropertyValue', propertyID: 'ASIN', value: book.paperback.asin },
+    },
+  ],
+});
+
 export const bookSchema = () => [
   {
-    '@type': 'Book',
-    name: BOOKS.iSwear.title,
-    alternativeHeadline: BOOKS.iSwear.subtitle,
-    author: { '@type': 'Person', name: BOOKS.iSwear.author },
-    url: BOOKS.iSwear.kindle.url,
-    image: `${SITE_URL}${BOOKS.iSwear.cover}`,
-    workExample: [
-      {
-        '@type': 'Book',
-        name: BOOKS.iSwear.title,
-        bookFormat: 'https://schema.org/EBook',
-        url: BOOKS.iSwear.kindle.url,
-        identifier: { '@type': 'PropertyValue', propertyID: 'ASIN', value: BOOKS.iSwear.kindle.asin },
-      },
-      {
-        '@type': 'Book',
-        name: BOOKS.iSwear.title,
-        bookFormat: 'https://schema.org/Paperback',
-        url: BOOKS.iSwear.paperback.url,
-        identifier: { '@type': 'PropertyValue', propertyID: 'ASIN', value: BOOKS.iSwear.paperback.asin },
-      },
-    ],
+    ...bookEntry(BOOKS.lightUnderDoor),
+    description: BOOKS.lightUnderDoor.summary,
+    position: 1,
+    isPartOf: { '@type': 'BookSeries', name: 'Behind the Door' },
   },
-  {
-    '@type': 'Book',
-    name: BOOKS.infj.title,
-    url: AMAZON_AUTHOR_URL,
-  },
+  bookEntry(BOOKS.iSwear),
 ];
 
 export const personSchema = (locale: Locale, url: string) => ({

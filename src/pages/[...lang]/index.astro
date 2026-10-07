@@ -9,7 +9,7 @@ export const getStaticPaths = localePaths;
 const { locale } = Astro.props as { locale: Locale };
 const copy = copyFor(locale);
 const home = copy.home;
-const book = copy.books.featured;
+const book = copy.books.featured[0];
 const englishTitles = new Set(['Radly', 'Passport Trails']);
 ---
 <Base locale={locale} page="home" structuredData={personSchema(locale, absoluteUrl(locale, 'home'))}>
