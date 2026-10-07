@@ -67,6 +67,17 @@ export const AMAZON_AUTHOR_URL = 'https://www.amazon.com/stores/author/B0BRQHPSH
 
 // Locale-independent book data. Titles stay in English in every locale (published titles).
 export const BOOKS = {
+  lightUnderDoor: {
+    title: 'The Light Under the Door',
+    subtitle: 'A Love Story for the INFJ Who Feels Unseen and the Partner Who Wants to See Them',
+    author: 'Mohamed Hammad',
+    series: 'Behind the Door, Book 1',
+    cover: '/the-light-under-the-door.jpg',
+    summary:
+      'One love story, told from both sides of the door. Adam is an INFJ who reads everyone and is read by no one. Maya loves him and keeps misreading his silence. Every chapter shows the same days from his side and from hers, then steps behind the door with a guide for INFJs and the people who love them.',
+    kindle: { url: 'https://www.amazon.com/dp/B0HM2X9ZVS', asin: 'B0HM2X9ZVS' },
+    paperback: { url: 'https://www.amazon.com/dp/B0HM3GQP1J', asin: 'B0HM3GQP1J' },
+  },
   iSwear: {
     title: "I Swear I'll Find You",
     subtitle:
@@ -76,18 +87,13 @@ export const BOOKS = {
     kindle: { url: 'https://www.amazon.com/dp/B0HLKXP2QW', asin: 'B0HLKXP2QW' },
     paperback: { url: 'https://www.amazon.com/dp/B0HLKVR7CS', asin: 'B0HLKVR7CS' },
   },
-  infj: {
-    title: 'Unraveling the INFJ Enigma',
-    cover: '/unraveling-infj-enigma.jpg',
-    amazon: 'https://www.amazon.com/Unraveling-INFJ-Enigma-Understanding-Compassionate/dp/B0BS1FNS7F',
-  },
 } as const;
 
 export const translations = {
   en: {
     meta: {
       keywords:
-        'Mohamed Amin Hammad, Dr. Hammad, Radiologist, Radly, AI in Radiology, Medical Technology, World Traveler, Travel Blog, Author, INFJ, I Swear I\'ll Find You, love languages, astrology compatibility, Medical Innovation',
+        'Mohamed Amin Hammad, Dr. Hammad, Radiologist, Radly, AI in Radiology, Medical Technology, World Traveler, Travel Blog, Author, INFJ, I Swear I\'ll Find You, The Light Under the Door, love languages, astrology compatibility, Medical Innovation',
       ogImageAlt: 'Dr. Mohamed Amin Hammad, consultant radiologist, founder of Radly and author',
       schemaDescription:
         'Consultant Radiologist, Founder of Radly AI, World Traveler, and Author',
@@ -110,8 +116,8 @@ export const translations = {
         description: 'Honest Arabic travel writing and a planning app for Egyptian and Arab travellers.',
       },
       books: {
-        title: "Books: I Swear I'll Find You and more | Dr. Mohamed Amin Hammad",
-        description: "Books on personality, astrology and love languages, including the new I Swear I'll Find You.",
+        title: 'Books: The Light Under the Door and more | Dr. Mohamed Amin Hammad',
+        description: 'Books on personality, astrology and love languages, including the new love story The Light Under the Door.',
       },
       contact: {
         title: 'Contact | Dr. Mohamed Amin Hammad',
@@ -314,37 +320,53 @@ export const translations = {
         "These books aren't academic. They're what I wish someone had handed me at eighteen: personality types, astrology, love languages, and the quiet patterns we repeat without noticing. Written for people who think too much and feel too deeply.",
       ],
       newTab: '(opens in a new tab)',
-      featured: {
-        ...BOOKS.iSwear,
-        eyebrow: 'New',
-        alt: "I Swear I'll Find You book cover by Mohamed Hammad",
-        tagline: 'I wrote this promise when I was seventeen. It took me twenty years to keep it.',
-        description: [
-          'He loved her for three years. He spoke to her once. He asked her to confirm her own name.',
-          "At seventeen, Mohamed Hammad wrote a poem to a girl who didn't exist yet, and ended it with a promise he had no business making: I swear I'll find you. He just didn't know how many times he'd get it wrong first.",
-          'The silence that cost him the girl in the lecture hall. The marriage he mistook for love. The betrayal that ended it, and the years he stayed anyway. And the long nights of wondering whether the woman in his poems had ever existed outside his head.',
-          'Then a stranger wrote to him first. She signed her letter with a butterfly.',
-          "You won't find a checklist in this book. You'll find a mirror.",
-        ],
-        bullets: [
-          'Why the people you fall for hardest are often the worst for you',
-          'The lie your personality tells you every time a red flag appears',
-          'Why a calm, steady love can feel "boring," and why that feeling is wrong',
-          'How to recognize your person, even if they arrive as a letter from a stranger',
-        ],
-        closing: 'She was out there all along. So is yours.',
-        links: [
-          { label: 'Kindle eBook', href: BOOKS.iSwear.kindle.url, primary: true },
-          { label: 'Paperback', href: BOOKS.iSwear.paperback.url, primary: false },
-        ],
-      },
-      items: [
+      featured: [
         {
-          title: BOOKS.infj.title,
-          desc: 'Understanding the most rare personality type with compassion and depth.',
-          alt: 'Unraveling the INFJ Enigma Book Cover',
-          cover: BOOKS.infj.cover,
-          links: [{ label: 'View on Amazon', href: BOOKS.infj.amazon }],
+          ...BOOKS.lightUnderDoor,
+          eyebrow: 'New',
+          alt: 'The Light Under the Door book cover: a closed blue door with warm light underneath',
+          tagline: 'You can tell what everyone in the room needs before they say a word. When did anyone last do that for you?',
+          description: [
+            'Adam is an INFJ. He hears the crack in a single hello. He remembers a soup Maya mentioned once, at two in the morning, and turns up at her door with a pot of it. Then he vanishes for three days after their best evening.',
+            "Maya loves him. She gives him room and leaves honey at his door with a note: No need to reply. She means rest. He hears I don't need you.",
+            'One night, a door closes. Quietly. Politely. Maybe for good.',
+            'Told from both sides, with a guide after every chapter: why INFJs vanish, what "I\'m fine" really means, the quiet climb toward the door slam, and the one thing that can still stop it. Then two questions to answer together.',
+          ],
+          bullets: [
+            "Adam and Maya's story, told from both sides of the door",
+            'A guide after every chapter: what was really happening, and what to do about it',
+            "Field Notes: true moments from the author's own life as an INFJ",
+            'Read Together: two questions after every chapter, for couples',
+            'The Ladder, the Phrasebook, and two letters to write to each other',
+          ],
+          closing: "As long as there's light under the door, it isn't too late.",
+          links: [
+            { label: 'Kindle eBook', href: BOOKS.lightUnderDoor.kindle.url, primary: true },
+            { label: 'Paperback', href: BOOKS.lightUnderDoor.paperback.url, primary: false },
+          ],
+        },
+        {
+          ...BOOKS.iSwear,
+          alt: "I Swear I'll Find You book cover by Mohamed Hammad",
+          tagline: 'I wrote this promise when I was seventeen. It took me twenty years to keep it.',
+          description: [
+            'He loved her for three years. He spoke to her once. He asked her to confirm her own name.',
+            "At seventeen, Mohamed Hammad wrote a poem to a girl who didn't exist yet, and ended it with a promise he had no business making: I swear I'll find you. He just didn't know how many times he'd get it wrong first.",
+            'The silence that cost him the girl in the lecture hall. The marriage he mistook for love. The betrayal that ended it, and the years he stayed anyway. And the long nights of wondering whether the woman in his poems had ever existed outside his head.',
+            'Then a stranger wrote to him first. She signed her letter with a butterfly.',
+            "You won't find a checklist in this book. You'll find a mirror.",
+          ],
+          bullets: [
+            'Why the people you fall for hardest are often the worst for you',
+            'The lie your personality tells you every time a red flag appears',
+            'Why a calm, steady love can feel "boring," and why that feeling is wrong',
+            'How to recognize your person, even if they arrive as a letter from a stranger',
+          ],
+          closing: 'She was out there all along. So is yours.',
+          links: [
+            { label: 'Kindle eBook', href: BOOKS.iSwear.kindle.url, primary: true },
+            { label: 'Paperback', href: BOOKS.iSwear.paperback.url, primary: false },
+          ],
         },
       ],
     },
@@ -360,7 +382,7 @@ export const translations = {
   ar: {
     meta: {
       keywords:
-        'محمد أمين حماد, دكتور محمد حماد, استشاري أشعة, Radly, الذكاء الاصطناعي في الأشعة, Passport Trails, سفر, كتب, INFJ, I Swear I\'ll Find You, لغات الحب, توافق الأبراج',
+        'محمد أمين حماد, دكتور محمد حماد, استشاري أشعة, Radly, الذكاء الاصطناعي في الأشعة, Passport Trails, سفر, كتب, INFJ, I Swear I\'ll Find You, The Light Under the Door, لغات الحب, توافق الأبراج',
       ogImageAlt: 'د. محمد أمين حماد - استشاري أشعة ومؤسس وكاتب سفر',
       schemaDescription:
         'استشاري أشعة، مؤسس Radly، مسافر، وكاتب',
@@ -383,8 +405,8 @@ export const translations = {
         description: 'كتابة سفر صادقة بالعربي وتطبيق تخطيط للمسافرين المصريين والعرب.',
       },
       books: {
-        title: "الكتب: I Swear I'll Find You وغيره | د. محمد أمين حماد",
-        description: "كتب عن الشخصية والأبراج ولغات الحب، ومنها الكتاب الجديد I Swear I'll Find You.",
+        title: 'الكتب: The Light Under the Door وغيره | د. محمد أمين حماد',
+        description: 'كتب عن الشخصية والأبراج ولغات الحب، ومنها قصة الحب الجديدة The Light Under the Door.',
       },
       contact: {
         title: 'تواصل | د. محمد أمين حماد',
@@ -587,37 +609,53 @@ export const translations = {
         'الكتب دي مش أكاديمية. هي الحاجات اللي كنت أتمنى حد يحطها في إيدي وأنا عندي تمنتاشر سنة: أنماط الشخصية، الأبراج، لغات الحب، والأنماط الهادية اللي بنكررها من غير ما ناخد بالنا. مكتوبة للناس اللي بتفكر كتير وبتحس بعمق.',
       ],
       newTab: '(بيفتح في تاب جديدة)',
-      featured: {
-        ...BOOKS.iSwear,
-        eyebrow: 'جديد',
-        alt: "غلاف كتاب I Swear I'll Find You لمحمد حماد",
-        tagline: 'كتبت الوعد ده وأنا عندي سبعتاشر سنة. وأخد مني عشرين سنة عشان أوفي بيه.',
-        description: [
-          'حبّها تلات سنين. كلّمها مرة واحدة بس. وفي المرة دي سألها يتأكد من اسمها.',
-          'وهو عنده سبعتاشر سنة، محمد حماد كتب قصيدة لبنت لسه ماكانتش موجودة، وختمها بوعد ماكانش من حقه أصلًا يوعد بيه: أُقسم إني هلاقيكي. بس ماكانش يعرف إنه هيغلط كام مرة الأول.',
-          'السكوت اللي خسّره بنت المدرج. الجواز اللي افتكره حب. الخيانة اللي نهّته، والسنين اللي فضل فيها برضه. والليالي الطويلة اللي كان بيسأل فيها نفسه: هي الست اللي في قصايده كانت موجودة أصلًا برّه دماغه؟',
-          'وبعدين واحدة غريبة كتبتله هي الأول. ومضت رسالتها بفراشة.',
-          'مش هتلاقي في الكتاب ده قايمة شروط. هتلاقي مراية.',
-        ],
-        bullets: [
-          'ليه الناس اللي بتقع في حبهم أوي غالبًا بيبقوا أسوأ حاجة ليك',
-          'الكدبة اللي شخصيتك بتقولهالك كل ما تظهر علامة حمرا',
-          'ليه الحب الهادي والثابت ممكن تحسه "ممل"، وليه الإحساس ده غلط',
-          'إزاي تعرف الشخص بتاعك، حتى لو جه في شكل رسالة من حد غريب',
-        ],
-        closing: 'كانت موجودة طول الوقت. واللي ليك موجود برضه.',
-        links: [
-          { label: 'نسخة Kindle إلكترونية', href: BOOKS.iSwear.kindle.url, primary: true },
-          { label: 'نسخة ورقية', href: BOOKS.iSwear.paperback.url, primary: false },
-        ],
-      },
-      items: [
+      featured: [
         {
-          title: BOOKS.infj.title,
-          desc: 'فهم أندر أنماط الشخصية بتعاطف وعمق.',
-          alt: 'غلاف كتاب Unraveling the INFJ Enigma',
-          cover: BOOKS.infj.cover,
-          links: [{ label: 'شوفه على أمازون', href: BOOKS.infj.amazon }],
+          ...BOOKS.lightUnderDoor,
+          eyebrow: 'جديد',
+          alt: 'غلاف كتاب The Light Under the Door: باب أزرق مقفول وتحته نور دافي',
+          tagline: 'إنت بتعرف كل واحد في الأوضة محتاج إيه قبل ما يتكلم. إمتى آخر مرة حد عمل كده معاك؟',
+          description: [
+            'آدم شخصيته INFJ. بيسمع الشرخ في كلمة "أهلًا" لوحدها. فاكر شوربة مايا جابت سيرتها مرة واحدة، والساعة اتنين بالليل بيظهر على بابها ومعاه حلّة منها. وبعدين بيختفي تلات أيام بعد أحلى سهرة قضّوها مع بعض.',
+            'مايا بتحبه. بتسيبله مساحته، وبتسيب عسل على بابه ومعاه ورقة: مش لازم ترد. هي قصدها ارتاح. وهو سمعها: أنا مش محتاجالك.',
+            'وفي ليلة، باب بيتقفل. بهدوء. بأدب. ويمكن للأبد.',
+            'الحكاية متحكية من الناحيتين، وبعد كل فصل دليل: ليه الـ INFJ بيختفوا، يعني إيه "أنا كويس" بجد، الطريق الهادي اللي بيوصل لقفلة الباب، والحاجة الوحيدة اللي لسه ممكن توقفها. وبعدين سؤالين تجاوبوا عليهم مع بعض.',
+          ],
+          bullets: [
+            'حكاية آدم ومايا، من الناحيتين من الباب',
+            'دليل بعد كل فصل: إيه اللي كان بيحصل فعلًا، وتعمل إيه فيه',
+            'Field Notes: مواقف حقيقية من حياة الكاتب نفسه كـ INFJ',
+            'Read Together: سؤالين بعد كل فصل، للشريكين',
+            'The Ladder، والـ Phrasebook، وجوابين تكتبوهم لبعض',
+          ],
+          closing: 'طول ما فيه نور تحت الباب، لسه مافاتش الأوان.',
+          links: [
+            { label: 'نسخة Kindle إلكترونية', href: BOOKS.lightUnderDoor.kindle.url, primary: true },
+            { label: 'نسخة ورقية', href: BOOKS.lightUnderDoor.paperback.url, primary: false },
+          ],
+        },
+        {
+          ...BOOKS.iSwear,
+          alt: "غلاف كتاب I Swear I'll Find You لمحمد حماد",
+          tagline: 'كتبت الوعد ده وأنا عندي سبعتاشر سنة. وأخد مني عشرين سنة عشان أوفي بيه.',
+          description: [
+            'حبّها تلات سنين. كلّمها مرة واحدة بس. وفي المرة دي سألها يتأكد من اسمها.',
+            'وهو عنده سبعتاشر سنة، محمد حماد كتب قصيدة لبنت لسه ماكانتش موجودة، وختمها بوعد ماكانش من حقه أصلًا يوعد بيه: أُقسم إني هلاقيكي. بس ماكانش يعرف إنه هيغلط كام مرة الأول.',
+            'السكوت اللي خسّره بنت المدرج. الجواز اللي افتكره حب. الخيانة اللي نهّته، والسنين اللي فضل فيها برضه. والليالي الطويلة اللي كان بيسأل فيها نفسه: هي الست اللي في قصايده كانت موجودة أصلًا برّه دماغه؟',
+            'وبعدين واحدة غريبة كتبتله هي الأول. ومضت رسالتها بفراشة.',
+            'مش هتلاقي في الكتاب ده قايمة شروط. هتلاقي مراية.',
+          ],
+          bullets: [
+            'ليه الناس اللي بتقع في حبهم أوي غالبًا بيبقوا أسوأ حاجة ليك',
+            'الكدبة اللي شخصيتك بتقولهالك كل ما تظهر علامة حمرا',
+            'ليه الحب الهادي والثابت ممكن تحسه "ممل"، وليه الإحساس ده غلط',
+            'إزاي تعرف الشخص بتاعك، حتى لو جه في شكل رسالة من حد غريب',
+          ],
+          closing: 'كانت موجودة طول الوقت. واللي ليك موجود برضه.',
+          links: [
+            { label: 'نسخة Kindle إلكترونية', href: BOOKS.iSwear.kindle.url, primary: true },
+            { label: 'نسخة ورقية', href: BOOKS.iSwear.paperback.url, primary: false },
+          ],
         },
       ],
     },
@@ -633,7 +671,7 @@ export const translations = {
   es: {
     meta: {
       keywords:
-        'Mohamed Amin Hammad, Dr. Hammad, Radiólogo, Radly, IA en radiología, tecnología médica, viajes, autor, INFJ, I Swear I\'ll Find You, lenguajes del amor, compatibilidad astrológica',
+        'Mohamed Amin Hammad, Dr. Hammad, Radiólogo, Radly, IA en radiología, tecnología médica, viajes, autor, INFJ, I Swear I\'ll Find You, The Light Under the Door, lenguajes del amor, compatibilidad astrológica',
       ogImageAlt: 'Dr. Mohamed Amin Hammad - Radiólogo, Fundador y Explorador',
       schemaDescription:
         'Radiólogo consultor, fundador de Radly AI, viajero y autor',
@@ -656,8 +694,8 @@ export const translations = {
         description: 'Escritura de viajes honesta en árabe y una app de planificación para viajeros egipcios y árabes.',
       },
       books: {
-        title: "Libros: I Swear I'll Find You y más | Dr. Mohamed Amin Hammad",
-        description: "Libros sobre personalidad, astrología y lenguajes del amor, incluido el nuevo I Swear I'll Find You.",
+        title: 'Libros: The Light Under the Door y más | Dr. Mohamed Amin Hammad',
+        description: 'Libros sobre personalidad, astrología y lenguajes del amor, incluida la nueva historia de amor The Light Under the Door.',
       },
       contact: {
         title: 'Contacto | Dr. Mohamed Amin Hammad',
@@ -860,37 +898,53 @@ export const translations = {
         'Estos libros no son académicos. Son lo que me habría gustado que alguien me pusiera en las manos a los dieciocho: tipos de personalidad, astrología, lenguajes del amor y esos patrones silenciosos que repetimos sin darnos cuenta. Escritos para quienes piensan demasiado y sienten demasiado.',
       ],
       newTab: '(se abre en una pestaña nueva)',
-      featured: {
-        ...BOOKS.iSwear,
-        eyebrow: 'Nuevo',
-        alt: "Portada de I Swear I'll Find You, de Mohamed Hammad",
-        tagline: 'Escribí esta promesa a los diecisiete años. Tardé veinte en cumplirla.',
-        description: [
-          'La quiso durante tres años. Habló con ella una sola vez. Y fue para pedirle que le confirmara su nombre.',
-          'A los diecisiete, Mohamed Hammad escribió un poema para una chica que todavía no existía, y lo terminó con una promesa que no tenía ningún derecho a hacer: te juro que te encontraré. Lo que no sabía era cuántas veces se equivocaría antes.',
-          'El silencio que le costó a la chica del aula. El matrimonio que confundió con amor. La traición que le puso fin, y los años que se quedó de todos modos. Y las largas noches preguntándose si la mujer de sus poemas había existido alguna vez fuera de su cabeza.',
-          'Hasta que una desconocida le escribió primero. Firmó su carta con una mariposa.',
-          'En este libro no vas a encontrar una lista de requisitos. Vas a encontrar un espejo.',
-        ],
-        bullets: [
-          'Por qué las personas de las que te enamoras con más fuerza suelen ser las que peor te hacen',
-          'La mentira que te cuenta tu personalidad cada vez que aparece una señal de alarma',
-          'Por qué un amor tranquilo y estable puede parecer "aburrido", y por qué esa sensación se equivoca',
-          'Cómo reconocer a tu persona, aunque llegue en forma de carta de alguien desconocido',
-        ],
-        closing: 'Ella siempre estuvo ahí. Tu persona también lo está.',
-        links: [
-          { label: 'eBook Kindle', href: BOOKS.iSwear.kindle.url, primary: true },
-          { label: 'Tapa blanda', href: BOOKS.iSwear.paperback.url, primary: false },
-        ],
-      },
-      items: [
+      featured: [
         {
-          title: BOOKS.infj.title,
-          desc: 'Comprender el tipo de personalidad más raro con compasión y profundidad.',
-          alt: 'Portada de Unraveling the INFJ Enigma',
-          cover: BOOKS.infj.cover,
-          links: [{ label: 'Ver en Amazon', href: BOOKS.infj.amazon }],
+          ...BOOKS.lightUnderDoor,
+          eyebrow: 'Nuevo',
+          alt: 'Portada de The Light Under the Door: una puerta azul cerrada con luz cálida por debajo',
+          tagline: 'Sabes lo que necesita cada persona en la sala antes de que diga una palabra. ¿Cuándo fue la última vez que alguien hizo eso por ti?',
+          description: [
+            'Adam es INFJ. Oye la grieta en un simple hola. Recuerda una sopa que Maya mencionó una sola vez y, a las dos de la madrugada, aparece en su puerta con una olla. Después desaparece tres días tras su mejor noche juntos.',
+            'Maya lo quiere. Le da espacio y le deja miel en la puerta con una nota: No hace falta que respondas. Ella quiere decir descansa. Él oye no te necesito.',
+            'Una noche, una puerta se cierra. En silencio. Con educación. Quizá para siempre.',
+            'Contada desde los dos lados, con una guía después de cada capítulo: por qué los INFJ desaparecen, qué significa de verdad "estoy bien", la lenta escalada hacia el portazo y lo único que todavía puede detenerlo. Y después, dos preguntas para responder juntos.',
+          ],
+          bullets: [
+            'La historia de Adam y Maya, contada desde los dos lados de la puerta',
+            'Una guía después de cada capítulo: qué estaba pasando de verdad y qué hacer al respecto',
+            'Field Notes: momentos reales de la vida del autor como INFJ',
+            'Read Together: dos preguntas después de cada capítulo, para parejas',
+            'The Ladder, el Phrasebook y dos cartas para escribirse el uno al otro',
+          ],
+          closing: 'Mientras haya luz bajo la puerta, no es demasiado tarde.',
+          links: [
+            { label: 'eBook Kindle', href: BOOKS.lightUnderDoor.kindle.url, primary: true },
+            { label: 'Tapa blanda', href: BOOKS.lightUnderDoor.paperback.url, primary: false },
+          ],
+        },
+        {
+          ...BOOKS.iSwear,
+          alt: "Portada de I Swear I'll Find You, de Mohamed Hammad",
+          tagline: 'Escribí esta promesa a los diecisiete años. Tardé veinte en cumplirla.',
+          description: [
+            'La quiso durante tres años. Habló con ella una sola vez. Y fue para pedirle que le confirmara su nombre.',
+            'A los diecisiete, Mohamed Hammad escribió un poema para una chica que todavía no existía, y lo terminó con una promesa que no tenía ningún derecho a hacer: te juro que te encontraré. Lo que no sabía era cuántas veces se equivocaría antes.',
+            'El silencio que le costó a la chica del aula. El matrimonio que confundió con amor. La traición que le puso fin, y los años que se quedó de todos modos. Y las largas noches preguntándose si la mujer de sus poemas había existido alguna vez fuera de su cabeza.',
+            'Hasta que una desconocida le escribió primero. Firmó su carta con una mariposa.',
+            'En este libro no vas a encontrar una lista de requisitos. Vas a encontrar un espejo.',
+          ],
+          bullets: [
+            'Por qué las personas de las que te enamoras con más fuerza suelen ser las que peor te hacen',
+            'La mentira que te cuenta tu personalidad cada vez que aparece una señal de alarma',
+            'Por qué un amor tranquilo y estable puede parecer "aburrido", y por qué esa sensación se equivoca',
+            'Cómo reconocer a tu persona, aunque llegue en forma de carta de alguien desconocido',
+          ],
+          closing: 'Ella siempre estuvo ahí. Tu persona también lo está.',
+          links: [
+            { label: 'eBook Kindle', href: BOOKS.iSwear.kindle.url, primary: true },
+            { label: 'Tapa blanda', href: BOOKS.iSwear.paperback.url, primary: false },
+          ],
         },
       ],
     },

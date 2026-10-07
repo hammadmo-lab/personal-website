@@ -11,8 +11,8 @@ const images: Partial<Record<(typeof PAGES)[number], { loc: string; title: strin
     { loc: '/images/passport-trails-splash.jpg', title: 'Passport Trails app' },
   ],
   books: [
+    { loc: BOOKS.lightUnderDoor.cover, title: `${BOOKS.lightUnderDoor.title} book cover` },
     { loc: BOOKS.iSwear.cover, title: `${BOOKS.iSwear.title} book cover` },
-    { loc: BOOKS.infj.cover, title: `${BOOKS.infj.title} book cover` },
   ],
 };
 

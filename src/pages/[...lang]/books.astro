@@ -11,66 +11,53 @@ const { locale } = Astro.props as { locale: Locale };
 const copy = copyFor(locale);
 const books = copy.books;
 const featured = books.featured;
+const newest = featured[0];
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': bookSchema(),
   url: absoluteUrl(locale, 'books'),
 };
 ---
-<Base locale={locale} page="books" ogImage={featured.cover} structuredData={structuredData}>
+<Base locale={locale} page="books" ogImage={newest.cover} structuredData={structuredData}>
   <PageHead eyebrow={books.subtitle} title={books.title}>
     <div class="intro prose">
       {books.intro.map((paragraph) => <p class="lede">{paragraph}</p>)}
     </div>
   </PageHead>
 
-  <article class="featured light" aria-labelledby="featured-title">
-    <div class="wrap featured__grid">
-      <div class="featured__cover">
-        <img src={featured.cover} alt={featured.alt} width="1000" height="1600" fetchpriority="high" />
-      </div>
-      <div class="featured__body">
-        <p class="eyebrow">{featured.eyebrow}</p>
-        <h2 id="featured-title" lang="en">{featured.title}</h2>
-        <p class="featured__subtitle" lang="en">{featured.subtitle}</p>
-        <p class="featured__author" lang="en">{featured.author}</p>
-        <blockquote class="featured__tagline"><p>{featured.tagline}</p></blockquote>
-        <div class="prose">
-          {featured.description.map((paragraph) => <p>{paragraph}</p>)}
+  {featured.map((book, index) => (
+    <article class="featured light" aria-labelledby={`featured-title-${index}`}>
+      <div class="wrap featured__grid">
+        <div class="featured__cover">
+          {index === 0
+            ? <img src={book.cover} alt={book.alt} width="1000" height="1600" fetchpriority="high" />
+            : <img src={book.cover} alt={book.alt} width="1000" height="1600" loading="lazy" />}
         </div>
-        <ul class="featured__bullets">
-          {featured.bullets.map((bullet) => <li>{bullet}</li>)}
-        </ul>
-        <p class="featured__closing">{featured.closing}</p>
-        <div class="actions">
-          {featured.links.map((link) => (
-            <a class:list={['btn', { 'btn--outline': !link.primary }]} href={link.href} target="_blank" rel="noopener noreferrer">
-              {link.label}<span class="sr-only"> {books.newTab}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <section class="section wrap" aria-label={books.items[0]?.title}>
-    <ul class="shelf">
-      {books.items.map((book) => (
-        <li class="shelf__item">
-          <img src={book.cover} alt={book.alt} width="640" height="1024" loading="lazy" />
-          <div class="shelf__body">
-            <h2 lang="en">{book.title}</h2>
-            <p class="muted">{book.desc}</p>
+        <div class="featured__body">
+          {'eyebrow' in book && <p class="eyebrow">{book.eyebrow}</p>}
+          <h2 id={`featured-title-${index}`} lang="en">{book.title}</h2>
+          <p class="featured__subtitle" lang="en">{book.subtitle}</p>
+          <p class="featured__author" lang="en">{book.author}</p>
+          {'series' in book && <p class="featured__author" lang="en">{book.series}</p>}
+          <blockquote class="featured__tagline"><p>{book.tagline}</p></blockquote>
+          <div class="prose">
+            {book.description.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+          <ul class="featured__bullets">
+            {book.bullets.map((bullet) => <li>{bullet}</li>)}
+          </ul>
+          <p class="featured__closing">{book.closing}</p>
+          <div class="actions">
             {book.links.map((link) => (
-              <a class="text-link" href={link.href} target="_blank" rel="noopener noreferrer">
-                {link.label} <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> {books.newTab}</span>
+              <a class:list={['btn', { 'btn--outline': !link.primary }]} href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label}<span class="sr-only"> {books.newTab}</span>
               </a>
             ))}
           </div>
-        </li>
-      ))}
-    </ul>
-  </section>
+        </div>
+      </div>
+    </article>
+  ))}
 </Base>
 
 <style>
@@ -91,18 +78,8 @@ const structuredData = {
   .featured__bullets li::before { content: ''; flex: none; width: 0.45rem; height: 0.45rem; background: var(--wine); transform: rotate(45deg) translateY(-0.2em); }
   .featured__closing { font-family: var(--f-display); font-size: var(--step-2); }
 
-  .shelf { list-style: none; margin: 0; padding: 0; display: grid; gap: 2rem; }
-  .shelf__item { display: grid; grid-template-columns: minmax(0, 10rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; max-width: 46rem; }
-  .shelf__item img { width: 100%; aspect-ratio: 5 / 8; object-fit: cover; box-shadow: 0 24px 40px -20px rgba(0, 0, 0, 0.8); }
-  .shelf__body { display: grid; gap: 0.85rem; justify-items: start; }
-  .shelf__body h2 { font-size: var(--step-3); }
-  .shelf__body .muted { color: var(--muted); }
-
   @media (max-width: 52rem) {
     .featured__grid { grid-template-columns: 1fr; }
     .featured__cover { position: static; max-width: 15rem; }
-  }
-  @media (max-width: 30rem) {
-    .shelf__item { grid-template-columns: 7rem minmax(0, 1fr); }
   }
 </style>
