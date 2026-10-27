@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
 import { getPageUrl, type Locale } from '../../i18n';
-import { copyFor, localePaths } from '../../lib/site';
+import { aboutSchema } from '../../lib/schema';
+import { absoluteUrl, copyFor, localePaths } from '../../lib/site';
 
 export const getStaticPaths = localePaths;
 
@@ -10,7 +11,13 @@ const { locale } = Astro.props as { locale: Locale };
 const copy = copyFor(locale);
 const [lead, ...rest] = copy.about.paragraphs;
 ---
-<Base locale={locale} page="about">
+<Base
+  locale={locale}
+  page="about"
+  ogImage="/images/at-work.jpg"
+  ogImageAlt={copy.about.imageAlt}
+  schema={aboutSchema(locale, absoluteUrl(locale, 'about'))}
+>
   <PageHead eyebrow={copy.about.subtitle} title={copy.about.title} />
 
   <section class="light about-band">

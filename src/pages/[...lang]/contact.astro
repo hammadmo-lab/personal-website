@@ -1,8 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
-import { LINKS, type Locale } from '../../i18n';
-import { copyFor, localePaths } from '../../lib/site';
+import { AMAZON_AUTHOR_URL, LINKS, type Locale } from '../../i18n';
+import { contactSchema } from '../../lib/schema';
+import { absoluteUrl, copyFor, localePaths } from '../../lib/site';
 
 export const getStaticPaths = localePaths;
 
@@ -13,9 +14,12 @@ const social = [
   { name: 'LinkedIn', href: LINKS.linkedin, handle: 'Mohamed Hammad' },
   { name: 'X', href: LINKS.x, handle: '@thisishammadmo' },
   { name: 'Facebook', href: LINKS.facebook, handle: 'ThisIsHammadMo' },
+  { name: 'Radly', href: LINKS.radly, handle: 'radly.app' },
+  { name: 'Passport Trails', href: LINKS.passportTrails, handle: 'passporttrails.com' },
+  { name: 'Amazon Author', href: AMAZON_AUTHOR_URL, handle: 'amazon.com' },
 ];
 ---
-<Base locale={locale} page="contact">
+<Base locale={locale} page="contact" schema={contactSchema(locale, absoluteUrl(locale, 'contact'))}>
   <PageHead eyebrow={contact.subtitle} title={contact.title}>
     <p class="lede">{contact.intro}</p>
   </PageHead>
@@ -23,7 +27,20 @@ const social = [
   <section class="wrap contact">
     <div class="contact__email">
       <p class="eyebrow">{contact.emailLabel}</p>
-      <a class="contact__address" href={`mailto:${LINKS.email}`} lang="en">{LINKS.email}</a>
+      <div class="contact__email-row">
+        <a class="contact__address" href={`mailto:${LINKS.email}`} lang="en">{LINKS.email}</a>
+        <button
+          type="button"
+          class="copy-email"
+          data-copy-email={LINKS.email}
+          data-label-copy={contact.copyEmail}
+          data-label-copied={contact.copiedEmail}
+          aria-label={`${contact.copyEmail} ${LINKS.email}`}
+        >
+          {contact.copyEmail}
+        </button>
+        <span class="sr-only" data-copy-status aria-live="polite"></span>
+      </div>
     </div>
     <div class="contact__social">
       <p class="eyebrow">{contact.divider}</p>
@@ -46,9 +63,26 @@ const social = [
 <style>
   .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); padding-block: 2.5rem var(--section); border-top: 1px solid var(--line); }
   .contact__email, .contact__social { display: grid; gap: 1rem; align-content: start; min-width: 0; }
+  .contact__email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; }
   .contact__address { font-family: var(--f-display); font-size: var(--step-2); color: var(--gold); overflow-wrap: anywhere; text-decoration-color: rgba(214, 173, 114, 0.5); text-underline-offset: 0.2em; }
+  .copy-email {
+    appearance: none;
+    border: 1px solid var(--outline);
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.85rem;
+    min-height: 2.4rem;
+    cursor: pointer;
+  }
+  :global([dir='rtl']) .copy-email { letter-spacing: 0; text-transform: none; font-size: 0.95rem; }
+  .copy-email:hover, .copy-email:focus-visible { border-color: var(--gold); color: var(--gold); }
   .contact__social ul { list-style: none; margin: 0; padding: 0; }
-  .contact__social a { display: grid; grid-template-columns: 7rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding-block: 1rem; border-bottom: 1px solid var(--line); text-decoration: none; }
+  .contact__social a { display: grid; grid-template-columns: minmax(7.5rem, max-content) minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding-block: 1rem; border-bottom: 1px solid var(--line); text-decoration: none; }
   .contact__social li:first-child a { border-top: 1px solid var(--line); }
   .contact__social a:hover .contact__network { color: var(--gold); }
   .contact__network { font-family: var(--f-display); font-size: var(--step-1); }
@@ -58,3 +92,42 @@ const social = [
     .contact { grid-template-columns: 1fr; }
   }
 </style>
+
+<script>
+  function fallbackCopy(text: string) {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.top = '0';
+    area.style.left = '-9999px';
+    document.body.appendChild(area);
+    area.select();
+    const ok = document.execCommand('copy');
+    area.remove();
+    if (!ok) throw new Error('copy failed');
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const email = button.dataset.copyEmail ?? '';
+      const idle = button.dataset.labelCopy ?? 'Copy';
+      const copied = button.dataset.labelCopied ?? 'Copied!';
+      const status = button.parentElement?.querySelector('[data-copy-status]');
+      try {
+        if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(email);
+        else fallbackCopy(email);
+        button.textContent = copied;
+        button.setAttribute('aria-label', copied);
+        if (status) status.textContent = copied;
+        window.setTimeout(() => {
+          button.textContent = idle;
+          button.setAttribute('aria-label', `${idle} ${email}`);
+          if (status) status.textContent = '';
+        }, 2000);
+      } catch {
+        button.textContent = idle;
+      }
+    });
+  });
+</script>

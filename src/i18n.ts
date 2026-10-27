@@ -65,6 +65,22 @@ export const LINKS = {
 
 export const AMAZON_AUTHOR_URL = 'https://www.amazon.com/stores/author/B0BRQHPSH9';
 
+/** 2026 Passport Trails guides, in the same order as each locale's destination cards. */
+export const DESTINATION_GUIDES = [
+  'https://passporttrails.com/%D8%A7%D9%84%D8%B3%D9%8A%D8%A7%D8%AD%D8%A9-%D9%81%D9%8A-%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9/',
+  'https://passporttrails.com/%D9%81%D9%8A%D8%B2%D8%A7-%D8%A3%D9%8A%D8%B3%D9%84%D9%86%D8%AF%D8%A7-%D9%84%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D9%8A%D9%86-2026/',
+  'https://passporttrails.com/%D8%AA%D9%83%D9%84%D9%81%D8%A9-%D8%A7%D9%84%D8%B3%D9%81%D8%B1-%D8%A5%D9%84%D9%89-%D8%A7%D9%84%D9%86%D8%B1%D9%88%D9%8A%D8%AC-2026/',
+  'https://passporttrails.com/%D8%AA%D9%83%D9%84%D9%81%D8%A9-%D8%A7%D9%84%D8%B3%D9%81%D8%B1-%D8%A5%D9%84%D9%89-%D8%AA%D8%B1%D9%83%D9%8A%D8%A7-2026/',
+  'https://passporttrails.com/%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC-%D8%B3%D9%8A%D8%A7%D8%AD%D9%8A-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7-2026/',
+  'https://passporttrails.com/%D8%AA%D9%83%D9%84%D9%81%D8%A9-%D8%A7%D9%84%D8%B3%D9%81%D8%B1-%D8%A5%D9%84%D9%89-%D8%A5%D9%8A%D8%B7%D8%A7%D9%84%D9%8A%D8%A7-2026/',
+  'https://passporttrails.com/%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D8%B9%D9%85%D8%B1%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%BA%D8%B1%D8%A9-2026/',
+  'https://passporttrails.com/%D8%A7%D9%84%D8%B3%D9%8A%D8%A7%D8%AD%D8%A9-%D9%81%D9%8A-%D8%B1%D9%8A%D8%AC%D8%A7-%D9%84%D8%A7%D8%AA%D9%81%D9%8A%D8%A7-2026/',
+  'https://passporttrails.com/%D8%AA%D9%83%D9%84%D9%81%D8%A9-%D8%A7%D9%84%D8%B3%D9%81%D8%B1-%D8%A5%D9%84%D9%89-%D8%B1%D9%88%D8%B3%D9%8A%D8%A7/',
+  'https://passporttrails.com/%D8%AA%D9%83%D9%84%D9%81%D8%A9-%D8%A7%D9%84%D8%B3%D9%81%D8%B1-%D8%A5%D9%84%D9%89-%D9%84%D9%8A%D8%AA%D9%88%D8%A7%D9%86%D9%8A%D8%A7/',
+  'https://passporttrails.com/%D8%AD%D8%AF%D9%8A%D9%82%D8%A9-%D8%A8%D8%AD%D9%8A%D8%B1%D8%A7%D8%AA-%D8%A8%D9%84%D9%8A%D8%AA%D9%81%D9%8A%D8%AA%D8%B3%D8%A7-%D9%81%D9%8A-%D9%83%D8%B1%D9%88%D8%A7%D8%AA%D9%8A%D8%A7-2026/',
+  'https://passporttrails.com/%D8%A7%D9%84%D8%B3%D9%8A%D8%A7%D8%AD%D8%A9-%D9%81%D9%8A-%D8%A7%D9%84%D8%A8%D9%88%D8%B3%D9%86%D8%A9-%D9%88%D8%A7%D9%84%D9%87%D8%B1%D8%B3%D9%83/',
+] as const;
+
 // Locale-independent book data. Titles stay in English in every locale (published titles).
 export const BOOKS = {
   lightUnderDoor: {
@@ -76,7 +92,7 @@ export const BOOKS = {
     summary:
       'One love story, told from both sides of the door. Adam is an INFJ who reads everyone and is read by no one. Maya loves him and keeps misreading his silence. Every chapter shows the same days from his side and from hers, then steps behind the door with a guide for INFJs and the people who love them.',
     kindle: { url: 'https://www.amazon.com/dp/B0HM2X9ZVS', asin: 'B0HM2X9ZVS' },
-    paperback: { url: 'https://www.amazon.com/dp/B0HM3GQP1J', asin: 'B0HM3GQP1J' },
+    paperback: { url: 'https://www.amazon.com/dp/B0HM3GQP1J', asin: 'B0HM3GQP1J', isbn: '979-8160291598' },
   },
   iSwear: {
     title: "I Swear I'll Find You",
@@ -84,8 +100,10 @@ export const BOOKS = {
       "A Doctor's Journey Through Personality, Astrology, and Love Languages to Find the One, and How You Can Find Yours",
     author: 'Mohamed Hammad',
     cover: '/i-swear-ill-find-you.jpg',
+    description:
+      "A doctor's journey through personality, astrology, and love languages to find the one, and how you can find yours.",
     kindle: { url: 'https://www.amazon.com/dp/B0HLKXP2QW', asin: 'B0HLKXP2QW' },
-    paperback: { url: 'https://www.amazon.com/dp/B0HLKVR7CS', asin: 'B0HLKVR7CS' },
+    paperback: { url: 'https://www.amazon.com/dp/B0HLKVR7CS', asin: 'B0HLKVR7CS', isbn: '979-8177906720' },
   },
 } as const;
 
@@ -197,6 +215,7 @@ export const translations = {
       newBook: 'New book',
       getBook: 'Get the book',
       bookCta: 'About the book',
+      secondBookLabel: 'Also by Mohamed Hammad',
       contactTitle: "Let's talk",
       contactCta: 'Get in touch',
     },
@@ -356,6 +375,9 @@ export const translations = {
         "These books aren't academic. They're what I wish someone had handed me at eighteen: personality types, astrology, love languages, and the quiet patterns we repeat without noticing. Written for people who think too much and feel too deeply.",
       ],
       newTab: '(opens in a new tab)',
+      trailerLabel: 'Official Book Trailer',
+      amazonLead: 'Follow Dr. Mohamed on Amazon for new books and editions.',
+      amazonCta: 'Amazon Author Page',
       featured: [
         {
           ...BOOKS.lightUnderDoor,
@@ -412,6 +434,8 @@ export const translations = {
       intro:
         "Whether you're interested in radiology consultation, Radly partnership, or just want to discuss travel and books, I'd love to hear from you.",
       emailLabel: 'Email Me Directly',
+      copyEmail: 'Copy',
+      copiedEmail: 'Copied!',
       divider: 'Or Connect On',
     },
   },
@@ -522,6 +546,7 @@ export const translations = {
       newBook: 'كتاب جديد',
       getBook: 'اشتري الكتاب',
       bookCta: 'عن الكتاب',
+      secondBookLabel: 'وكمان لمحمد حماد',
       contactTitle: 'يلا نتكلم',
       contactCta: 'تواصل معايا',
     },
@@ -681,6 +706,9 @@ export const translations = {
         'الكتب دي مش أكاديمية. هي الحاجات اللي كنت أتمنى حد يحطها في إيدي وأنا عندي تمنتاشر سنة: أنماط الشخصية، الأبراج، لغات الحب، والأنماط الهادية اللي بنكررها من غير ما ناخد بالنا. مكتوبة للناس اللي بتفكر كتير وبتحس بعمق.',
       ],
       newTab: '(بيفتح في تاب جديدة)',
+      trailerLabel: 'الإعلان التشويقي الرسمي للرواية',
+      amazonLead: 'تابع د. محمد على أمازون عشان تعرف الكتب والإصدارات الجديدة.',
+      amazonCta: 'صفحة المؤلف على أمازون',
       featured: [
         {
           ...BOOKS.lightUnderDoor,
@@ -737,6 +765,8 @@ export const translations = {
       intro:
         'سواء مهتم باستشارة أشعة، شراكة مع Radly، أو حتى حابب نتكلم عن السفر والكتب، هيبسطني جدًا أسمع منك.',
       emailLabel: 'ابعتلي إيميل مباشرة',
+      copyEmail: 'انسخ',
+      copiedEmail: 'تم النسخ!',
       divider: 'أو تواصل على',
     },
   },
@@ -847,6 +877,7 @@ export const translations = {
       newBook: 'Nuevo libro',
       getBook: 'Conseguir el libro',
       bookCta: 'Sobre el libro',
+      secondBookLabel: 'También de Mohamed Hammad',
       contactTitle: 'Hablemos',
       contactCta: 'Contactar',
     },
@@ -1006,6 +1037,9 @@ export const translations = {
         'Estos libros no son académicos. Son lo que me habría gustado que alguien me pusiera en las manos a los dieciocho: tipos de personalidad, astrología, lenguajes del amor y esos patrones silenciosos que repetimos sin darnos cuenta. Escritos para quienes piensan demasiado y sienten demasiado.',
       ],
       newTab: '(se abre en una pestaña nueva)',
+      trailerLabel: 'Tráiler oficial del libro',
+      amazonLead: 'Sigue al Dr. Mohamed en Amazon para ver libros y ediciones nuevas.',
+      amazonCta: 'Página de autor en Amazon',
       featured: [
         {
           ...BOOKS.lightUnderDoor,
@@ -1062,6 +1096,8 @@ export const translations = {
       intro:
         'Si te interesa una consulta de radiología, una colaboración con Radly o simplemente hablar de viajes y libros, me encantará saber de ti.',
       emailLabel: 'Escríbeme directamente',
+      copyEmail: 'Copiar',
+      copiedEmail: '¡Copiado!',
       divider: 'O conecta en',
     },
   },

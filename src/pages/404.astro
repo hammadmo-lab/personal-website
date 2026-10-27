@@ -5,15 +5,58 @@ import { getPageUrl } from '../i18n';
 <Base locale="en" page="home" standalone={{ title: 'Page not found | Dr. Mohamed Amin Hammad', description: 'This page does not exist.' }}>
   <section class="wrap not-found">
     <p class="eyebrow">404</p>
-    <h1>This page isn't here.</h1>
-    <p class="lede">The link may be old or mistyped. Start again from the home page:</p>
+    <h1 data-404="heading">This page isn't here.</h1>
+    <p class="lede" data-404="lede">The link may be old or mistyped. Start again from the home page:</p>
     <div class="actions">
-      <a class="btn" href={getPageUrl('en', 'home')}>Home</a>
+      <a class="btn" data-404="cta" href={getPageUrl('en', 'home')}>Home</a>
       <a class="text-link" href={getPageUrl('ar', 'home')} lang="ar" dir="rtl">الصفحة الرئيسية</a>
       <a class="text-link" href={getPageUrl('es', 'home')} lang="es">Inicio</a>
     </div>
   </section>
 </Base>
+
+<script is:inline>
+(function () {
+  var path = window.location.pathname;
+  var ar = path === '/ar' || path.indexOf('/ar/') === 0;
+  var es = path === '/es' || path.indexOf('/es/') === 0;
+  if (!ar && !es) return;
+  var copy = ar
+    ? {
+        lang: 'ar-EG',
+        dir: 'rtl',
+        title: 'الصفحة غير موجودة | د. محمد أمين حماد',
+        heading: 'الصفحة دي مش موجودة.',
+        lede: 'يمكن الرابط قديم أو فيه غلطة في الكتابة. ابدأ تاني من الصفحة الرئيسية:',
+        cta: 'الصفحة الرئيسية',
+        home: '/ar/',
+        ctaLang: 'ar',
+      }
+    : {
+        lang: 'es',
+        dir: 'ltr',
+        title: 'Página no encontrada | Dr. Mohamed Amin Hammad',
+        heading: 'Esta página no está aquí.',
+        lede: 'Puede que el enlace sea antiguo o esté mal escrito. Empieza de nuevo desde el inicio:',
+        cta: 'Inicio',
+        home: '/es/',
+        ctaLang: 'es',
+      };
+  document.documentElement.lang = copy.lang;
+  document.documentElement.dir = copy.dir;
+  document.title = copy.title;
+  var heading = document.querySelector('[data-404="heading"]');
+  var lede = document.querySelector('[data-404="lede"]');
+  var cta = document.querySelector('[data-404="cta"]');
+  if (heading) heading.textContent = copy.heading;
+  if (lede) lede.textContent = copy.lede;
+  if (cta) {
+    cta.textContent = copy.cta;
+    cta.setAttribute('href', copy.home);
+    cta.setAttribute('lang', copy.ctaLang);
+  }
+})();
+</script>
 
 <style>
   .not-found { display: grid; gap: 1.25rem; justify-items: start; padding-block: clamp(4rem, 12vw, 9rem); }

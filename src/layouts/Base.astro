@@ -18,16 +18,21 @@ interface Props {
   locale: Locale;
   page: Page;
   ogImage?: string;
+  ogImageAlt?: string;
+  /** JSON-LD for this page. `structuredData` remains as an alias. */
+  schema?: object;
   structuredData?: object;
   /** For pages outside the main navigation (404): own title, no canonical, not indexed. */
   standalone?: { title: string; description: string };
 }
-const { locale, page, ogImage = '/og-image.jpg', structuredData, standalone } = Astro.props;
+const { locale, page, ogImage = '/og-image.jpg', ogImageAlt, schema, structuredData, standalone } = Astro.props;
 const copy = copyFor(locale);
 const config = localeConfig[locale];
 const meta = standalone ?? copy.pages[page];
 const canonical = absoluteUrl(locale, page);
 const image = `${SITE_URL}${ogImage}`;
+const imageAlt = ogImageAlt ?? copy.meta.ogImageAlt;
+const jsonLd = schema ?? structuredData;
 
 // Old single-page links used hashes (/#books). Send them to the new pages.
 const legacyRedirect = page === 'home' && !standalone
@@ -66,17 +71,19 @@ const legacyRedirect = page === 'home' && !standalone
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:image" content={image} />
-    <meta property="og:image:alt" content={copy.meta.ogImageAlt} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content={config.ogLocale} />
     {LOCALES.filter((item) => item !== locale).map((item) => (
       <meta property="og:locale:alternate" content={localeConfig[item].ogLocale} />
     ))}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@thisishammadmo" />
+    <meta name="twitter:creator" content="@thisishammadmo" />
     <meta name="twitter:title" content={meta.title} />
     <meta name="twitter:description" content={meta.description} />
     <meta name="twitter:image" content={image} />
 
-    {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     {legacyRedirect && <script is:inline set:html={legacyRedirect} />}
   </head>
   <body>
