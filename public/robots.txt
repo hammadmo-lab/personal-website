@@ -6,6 +6,3 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://mohamedhammad.com/sitemap.xml
-
-# Crawl-delay (optional, helps manage server load)
-Crawl-delay: 1

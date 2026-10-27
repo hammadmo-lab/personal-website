@@ -4,15 +4,18 @@ import { getPageUrl, type Locale, type Page } from '../../i18n';
 import { absoluteUrl, copyFor, localePaths } from '../../lib/site';
 import { personSchema } from '../../lib/schema';
 
+
 export const getStaticPaths = localePaths;
 
 const { locale } = Astro.props as { locale: Locale };
 const copy = copyFor(locale);
 const home = copy.home;
 const book = copy.books.featured[0];
+const secondBook = copy.books.featured[1];
+const booksUrl = getPageUrl(locale, 'books');
 const englishTitles = new Set(['Radly', 'Passport Trails']);
 ---
-<Base locale={locale} page="home" structuredData={personSchema(locale, absoluteUrl(locale, 'home'))}>
+<Base locale={locale} page="home" schema={personSchema(locale, absoluteUrl(locale, 'home'))}>
   <section class="glow">
     <div class="wrap hero">
       <div class="hero__copy">
@@ -46,8 +49,12 @@ const englishTitles = new Set(['Radly', 'Passport Trails']);
       <img class="book-band__cover" src={book.cover} alt={book.alt} width="1000" height="1600" loading="lazy" />
       <div class="book-band__copy">
         <p class="eyebrow">{home.newBook}</p>
-        <h2 id="home-book-title" lang="en">{book.title}</h2>
+        <h2 id="home-book-title" lang="en"><a href={booksUrl}>{book.title}</a></h2>
         <p class="book-band__tagline">{book.tagline}</p>
+        <p class="book-band__also">
+          {home.secondBookLabel}
+          <a href={`${booksUrl}#i-swear-ill-find-you`} lang="en">{secondBook.title}</a>
+        </p>
       </div>
       <a class="btn book-band__cta" href={getPageUrl(locale, 'books')}>{home.getBook}</a>
     </div>
@@ -113,7 +120,12 @@ const englishTitles = new Set(['Radly', 'Passport Trails']);
   .book-band__cover { width: clamp(4.5rem, 7vw, 6rem); aspect-ratio: 5 / 8; object-fit: cover; box-shadow: 0 18px 30px -14px rgba(20, 12, 13, 0.55); outline: 1px solid rgba(20, 12, 13, 0.12); }
   .book-band__copy { display: grid; gap: 0.35rem; }
   .book-band h2 { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.4rem); }
+  .book-band h2 a { text-decoration: none; }
+  .book-band h2 a:hover { color: var(--gold-deep); }
   .book-band__tagline { color: var(--muted); font-style: italic; max-width: 44rem; }
+  .book-band__also { color: var(--muted); margin-top: 0.35rem; }
+  .book-band__also a { color: var(--text); font-weight: 600; margin-inline-start: 0.35rem; }
+  .book-band__also a:hover { color: var(--gold-deep); }
   :global([dir='rtl']) .book-band__tagline { font-style: normal; }
 
   .works__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }

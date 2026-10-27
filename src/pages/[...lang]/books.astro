@@ -1,9 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
-import { type Locale } from '../../i18n';
+import { AMAZON_AUTHOR_URL, BOOKS, type Locale } from '../../i18n';
 import { absoluteUrl, copyFor, localePaths } from '../../lib/site';
-import { bookSchema } from '../../lib/schema';
+import { booksSchema } from '../../lib/schema';
 
 export const getStaticPaths = localePaths;
 
@@ -12,13 +12,9 @@ const copy = copyFor(locale);
 const books = copy.books;
 const featured = books.featured;
 const newest = featured[0];
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@graph': bookSchema(),
-  url: absoluteUrl(locale, 'books'),
-};
+const booksUrl = absoluteUrl(locale, 'books');
 ---
-<Base locale={locale} page="books" ogImage={newest.cover} structuredData={structuredData}>
+<Base locale={locale} page="books" ogImage={newest.cover} schema={booksSchema(booksUrl)}>
   <PageHead eyebrow={books.subtitle} title={books.title}>
     <div class="intro prose">
       {books.intro.map((paragraph) => <p class="lede">{paragraph}</p>)}
@@ -26,7 +22,11 @@ const structuredData = {
   </PageHead>
 
   {featured.map((book, index) => (
-    <article class="featured light" aria-labelledby={`featured-title-${index}`}>
+    <article
+      class="featured light"
+      id={book.title === BOOKS.iSwear.title ? 'i-swear-ill-find-you' : undefined}
+      aria-labelledby={`featured-title-${index}`}
+    >
       <div class="wrap featured__grid">
         <div class="featured__cover">
           {index === 0
@@ -40,6 +40,21 @@ const structuredData = {
           <p class="featured__author" lang="en">{book.author}</p>
           {'series' in book && <p class="featured__author" lang="en">{book.series}</p>}
           <blockquote class="featured__tagline"><p>{book.tagline}</p></blockquote>
+          {book.title === BOOKS.lightUnderDoor.title && (
+            <figure class="trailer">
+              <div class="trailer__frame">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/l21uSBvPd6k"
+                  title="The Light Under the Door — Official Book Trailer"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                  referrerpolicy="strict-origin-when-cross-origin"
+                ></iframe>
+              </div>
+              <figcaption>{books.trailerLabel}</figcaption>
+            </figure>
+          )}
           <div class="prose">
             {book.description.map((paragraph) => <p>{paragraph}</p>)}
           </div>
@@ -58,6 +73,15 @@ const structuredData = {
       </div>
     </article>
   ))}
+
+  <section class="section author-amazon" aria-label={books.amazonCta}>
+    <div class="wrap author-amazon__inner">
+      <p class="lede">{books.amazonLead}</p>
+      <a class="btn" href={AMAZON_AUTHOR_URL} target="_blank" rel="noopener noreferrer">
+        {books.amazonCta}<span class="sr-only"> {books.newTab}</span>
+      </a>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -77,6 +101,29 @@ const structuredData = {
   .featured__bullets li { display: flex; gap: 0.85rem; align-items: baseline; }
   .featured__bullets li::before { content: ''; flex: none; width: 0.45rem; height: 0.45rem; background: var(--wine); transform: rotate(45deg) translateY(-0.2em); }
   .featured__closing { font-family: var(--f-display); font-size: var(--step-2); }
+
+  .trailer { display: grid; gap: 0.65rem; margin: 0.25rem 0 0.5rem; }
+  .trailer__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--night);
+    border: 1px solid var(--gold);
+    box-shadow: 0 24px 40px -28px rgba(20, 12, 13, 0.55);
+  }
+  .trailer__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .trailer figcaption {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    font-weight: 600;
+  }
+  :global([dir='rtl']) .trailer figcaption { letter-spacing: 0; text-transform: none; font-size: 1rem; }
+
+  .author-amazon { border-top: 1px solid var(--line); }
+  .author-amazon__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; }
+  .author-amazon .lede { max-width: 36rem; }
 
   @media (max-width: 52rem) {
     .featured__grid { grid-template-columns: 1fr; }
