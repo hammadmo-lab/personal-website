@@ -14,6 +14,11 @@ const TRAILER = {
   embedUrl: 'https://www.youtube.com/embed/l21uSBvPd6k',
   contentUrl: 'https://www.youtube.com/watch?v=l21uSBvPd6k',
   thumbnailUrl: 'https://i.ytimg.com/vi/l21uSBvPd6k/hqdefault.jpg',
+  // YouTube watch page (watch?v=l21uSBvPd6k) microdata itemprop="uploadDate",
+  // identical to itemprop="datePublished" and player publishDate.
+  uploadDate: '2026-10-13T04:37:07-07:00',
+  // Same watch page, player lengthSeconds "65".
+  duration: 'PT1M5S',
 } as const;
 
 const jobTitle: Record<Locale, string> = {
@@ -70,6 +75,8 @@ export const bookTrailerSchema = () => ({
   name: TRAILER.name,
   description: BOOKS.lightUnderDoor.summary,
   thumbnailUrl: TRAILER.thumbnailUrl,
+  uploadDate: TRAILER.uploadDate,
+  duration: TRAILER.duration,
   embedUrl: TRAILER.embedUrl,
   contentUrl: TRAILER.contentUrl,
   publisher: { '@id': PERSON_ID },
