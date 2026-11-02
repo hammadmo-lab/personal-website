@@ -124,7 +124,8 @@ const englishTitles = new Set(['Radly', 'Passport Trails']);
   .book-band h2 a:hover { color: var(--gold-deep); }
   .book-band__tagline { color: var(--muted); font-style: italic; max-width: 44rem; }
   .book-band__also { color: var(--muted); margin-top: 0.35rem; }
-  .book-band__also a { color: var(--text); font-weight: 600; margin-inline-start: 0.35rem; }
+  /* inline-block keeps the title together: it wraps to its own line rather than breaking after "I". */
+  .book-band__also a { display: inline-block; color: var(--text); font-weight: 600; }
   .book-band__also a:hover { color: var(--gold-deep); }
   :global([dir='rtl']) .book-band__tagline { font-style: normal; }
 
