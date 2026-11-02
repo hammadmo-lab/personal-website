@@ -19,7 +19,8 @@ Source for [mohamedhammad.com](https://mohamedhammad.com): radiologist, founder 
 | Colours, type scale, spacing | `src/styles/global.css` |
 | Structured data (Person, Books) | `src/lib/schema.ts` |
 | Sitemap (generated) | `src/pages/sitemap.xml.ts` |
-| Images | `public/images/`, book covers in `public/` |
+| Images shown on pages | `src/assets/` (optimised at build time to AVIF/WebP in several sizes, see `src/lib/images.ts`) |
+| Images at fixed URLs (social cards, JSON-LD, image sitemap) | `public/images/`, book covers in `public/`; replace a photo in both places |
 
 ## Brand
 

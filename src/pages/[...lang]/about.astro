@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import { IMAGES, PICTURE_FORMATS } from '../../lib/images';
 import PageHead from '../../components/PageHead.astro';
 import { getPageUrl, type Locale } from '../../i18n';
 import { aboutSchema } from '../../lib/schema';
@@ -33,7 +35,7 @@ const [lead, ...rest] = copy.about.paragraphs;
         </div>
       </div>
       <figure class="framed about__photo">
-        <img src="/images/at-work.jpg" alt={copy.about.imageAlt} width="677" height="1024" loading="lazy" />
+        <Picture src={IMAGES.atWork} alt={copy.about.imageAlt} formats={PICTURE_FORMATS} widths={[370, 560, 677]} sizes="370px" />
         <figcaption>{copy.home.captionName}<span>{copy.about.caption}</span></figcaption>
       </figure>
     </div>

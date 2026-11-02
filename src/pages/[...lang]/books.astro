@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import { PICTURE_FORMATS, coverImage } from '../../lib/images';
 import PageHead from '../../components/PageHead.astro';
 import { AMAZON_AUTHOR_URL, BOOKS, type Locale } from '../../i18n';
 import { absoluteUrl, copyFor, localePaths } from '../../lib/site';
@@ -13,6 +15,8 @@ const books = copy.books;
 const featured = books.featured;
 const newest = featured[0];
 const booksUrl = absoluteUrl(locale, 'books');
+const COVER_WIDTHS = [240, 400, 600, 800];
+const COVER_SIZES = '(max-width: 63.99rem) 240px, 373px';
 ---
 <Base locale={locale} page="books" ogImage={newest.cover} schema={booksSchema(booksUrl)}>
   <PageHead eyebrow={books.subtitle} title={books.title}>
@@ -30,8 +34,8 @@ const booksUrl = absoluteUrl(locale, 'books');
       <div class="wrap featured__grid">
         <div class="featured__cover">
           {index === 0
-            ? <img src={book.cover} alt={book.alt} width="1000" height="1600" fetchpriority="high" />
-            : <img src={book.cover} alt={book.alt} width="1000" height="1600" loading="lazy" />}
+            ? <Picture src={coverImage(book.cover)} alt={book.alt} formats={PICTURE_FORMATS} widths={COVER_WIDTHS} sizes={COVER_SIZES} loading="eager" fetchpriority="high" />
+            : <Picture src={coverImage(book.cover)} alt={book.alt} formats={PICTURE_FORMATS} widths={COVER_WIDTHS} sizes={COVER_SIZES} />}
         </div>
         <div class="featured__body">
           {'eyebrow' in book && <p class="eyebrow">{book.eyebrow}</p>}
