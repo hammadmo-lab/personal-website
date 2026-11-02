@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import { IMAGES, PICTURE_FORMATS } from '../../lib/images';
 import StoreLinks from '../../components/StoreLinks.astro';
 import { DESTINATION_GUIDES, LINKS, type Locale } from '../../i18n';
 import { travelSchema } from '../../lib/schema';
@@ -40,7 +42,7 @@ const APP_ICONS = [
       <blockquote class="travel-quote"><p>{travel.quote}</p></blockquote>
     </div>
     <figure class="framed travel-hero__photo">
-      <img src="/images/iceland.jpg" alt={travel.imageAlt} width="768" height="1024" fetchpriority="high" />
+      <Picture src={IMAGES.iceland} alt={travel.imageAlt} formats={PICTURE_FORMATS} widths={[400, 600, 768]} sizes="400px" loading="eager" fetchpriority="high" />
       <figcaption>{travel.imageCaption}</figcaption>
     </figure>
   </div></section>
@@ -139,7 +141,7 @@ const APP_ICONS = [
       </div>
       <figure class="phone">
         <div class="phone__body">
-          <img src="/images/passport-trails-splash.jpg" alt={travel.splashAlt} width="600" height="1299" loading="lazy" />
+          <Picture src={IMAGES.passportTrailsSplash} alt={travel.splashAlt} formats={PICTURE_FORMATS} widths={[300, 600]} sizes="290px" />
         </div>
       </figure>
     </div>

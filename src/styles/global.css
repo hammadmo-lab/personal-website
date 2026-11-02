@@ -93,6 +93,10 @@ body {
 [dir='rtl'] body { line-height: 1.9; font-size: 1.1rem; }
 
 img { max-width: 100%; height: auto; display: block; }
+/* <Picture> wraps each optimised <img>; keep the wrapper and its <source>s out of layout so img styles
+   and grids behave as if the <img> were a direct child (a grid would otherwise give each <source> a cell). */
+picture { display: contents; }
+picture > source { display: none; }
 
 h1, h2, h3, h4 {
   font-family: var(--f-display);

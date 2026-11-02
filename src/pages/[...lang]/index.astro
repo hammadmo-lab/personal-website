@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import { IMAGES, PICTURE_FORMATS, coverImage } from '../../lib/images';
 import { getPageUrl, type Locale, type Page } from '../../i18n';
 import { absoluteUrl, copyFor, localePaths } from '../../lib/site';
 import { personSchema } from '../../lib/schema';
@@ -28,7 +30,7 @@ const englishTitles = new Set(['Radly', 'Passport Trails']);
         </div>
       </div>
       <figure class="framed hero__photo">
-        <img src="/images/portrait.jpg" alt={home.portraitAlt} width="900" height="1125" fetchpriority="high" />
+        <Picture src={IMAGES.portrait} alt={home.portraitAlt} formats={PICTURE_FORMATS} widths={[440, 660, 900]} sizes="(max-width: 56rem) 352px, 432px" loading="eager" fetchpriority="high" />
         <figcaption>{home.captionName}<span>{home.captionRole}</span></figcaption>
       </figure>
     </div>
@@ -46,7 +48,7 @@ const englishTitles = new Set(['Radly', 'Passport Trails']);
 
   <section class="light book-band" aria-labelledby="home-book-title">
     <div class="wrap book-band__inner">
-      <img class="book-band__cover" src={book.cover} alt={book.alt} width="1000" height="1600" loading="lazy" />
+      <Picture class="book-band__cover" src={coverImage(book.cover)} alt={book.alt} formats={PICTURE_FORMATS} widths={[96, 192, 288]} sizes="96px" />
       <div class="book-band__copy">
         <p class="eyebrow">{home.newBook}</p>
         <h2 id="home-book-title" lang="en"><a href={booksUrl}>{book.title}</a></h2>

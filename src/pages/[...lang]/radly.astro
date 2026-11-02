@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import { IMAGES, PICTURE_FORMATS } from '../../lib/images';
 import StoreLinks from '../../components/StoreLinks.astro';
 import { LINKS, getPageUrl, type Locale } from '../../i18n';
 import { radlySchema } from '../../lib/schema';
@@ -32,7 +34,7 @@ const newTab = copy.common.newTab;
       <p class="radly__intro">{radly.intro}</p>
 
       <figure class="radly__shot">
-        <img src="/images/radly-desk.jpg" alt={radly.imageAlt} width="1316" height="536" fetchpriority="high" />
+        <Picture src={IMAGES.radlyDesk} alt={radly.imageAlt} formats={PICTURE_FORMATS} widths={[400, 700, 1000, 1316]} sizes="(max-width: 63.99rem) calc(100vw - 2rem), 992px" loading="eager" fetchpriority="high" />
       </figure>
 
       <div class="radly__ctas">
