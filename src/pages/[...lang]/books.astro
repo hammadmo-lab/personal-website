@@ -13,12 +13,11 @@ const { locale } = Astro.props as { locale: Locale };
 const copy = copyFor(locale);
 const books = copy.books;
 const featured = books.featured;
-const newest = featured[0];
 const booksUrl = absoluteUrl(locale, 'books');
 const COVER_WIDTHS = [240, 400, 600, 800];
 const COVER_SIZES = '(max-width: 63.99rem) 240px, 373px';
 ---
-<Base locale={locale} page="books" ogImage={newest.cover} schema={booksSchema(booksUrl)}>
+<Base locale={locale} page="books" schema={booksSchema(booksUrl)}>
   <PageHead eyebrow={books.subtitle} title={books.title}>
     <div class="intro prose">
       {books.intro.map((paragraph) => <p class="lede">{paragraph}</p>)}

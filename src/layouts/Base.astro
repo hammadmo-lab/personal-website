@@ -17,6 +17,7 @@ import { SITE_URL, absoluteUrl, copyFor } from '../lib/site';
 interface Props {
   locale: Locale;
   page: Page;
+  /** Social card path. Defaults to the generated card for this page and language (scripts/og-cards.mjs). */
   ogImage?: string;
   ogImageAlt?: string;
   /** JSON-LD for this page. `structuredData` remains as an alias. */
@@ -25,13 +26,17 @@ interface Props {
   /** For pages outside the main navigation (404): own title, no canonical, not indexed. */
   standalone?: { title: string; description: string };
 }
-const { locale, page, ogImage = '/og-image.jpg', ogImageAlt, schema, structuredData, standalone } = Astro.props;
+const { locale, page, ogImage, ogImageAlt, schema, structuredData, standalone } = Astro.props;
 const copy = copyFor(locale);
 const config = localeConfig[locale];
 const meta = standalone ?? copy.pages[page];
 const canonical = absoluteUrl(locale, page);
-const image = `${SITE_URL}${ogImage}`;
-const imageAlt = ogImageAlt ?? copy.meta.ogImageAlt;
+// Every page has a 1200x630 card per language in public/og/ (regenerate with `npm run og`);
+// pages outside the main navigation (404) use the general card.
+const cardPath = ogImage ?? (standalone ? '/og-image.jpg' : `/og/${locale}-${page}.jpg`);
+const image = `${SITE_URL}${cardPath}`;
+const imageAlt = ogImageAlt ?? (standalone ? copy.meta.ogImageAlt : meta.title);
+const isCard = !ogImage;
 const jsonLd = schema ?? structuredData;
 
 // Old single-page links used hashes (/#books). Send them to the new pages.
@@ -72,6 +77,13 @@ const legacyRedirect = page === 'home' && !standalone
     <meta property="og:description" content={meta.description} />
     <meta property="og:image" content={image} />
     <meta property="og:image:alt" content={imageAlt} />
+    {isCard && (
+      <>
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+      </>
+    )}
     <meta property="og:locale" content={config.ogLocale} />
     {LOCALES.filter((item) => item !== locale).map((item) => (
       <meta property="og:locale:alternate" content={localeConfig[item].ogLocale} />
@@ -82,6 +94,7 @@ const legacyRedirect = page === 'home' && !standalone
     <meta name="twitter:title" content={meta.title} />
     <meta name="twitter:description" content={meta.description} />
     <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     {legacyRedirect && <script is:inline set:html={legacyRedirect} />}
